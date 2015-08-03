@@ -47,6 +47,10 @@ html, body {
     padding: 20px 0 10px 0;
     width: $nav-width;
 
+    .link-list {
+        margin-left: 100px;
+    }
+
     .link-list li {
         display: block;
         height: 19px;
@@ -64,20 +68,16 @@ html, body {
 
     }
 
-    .link-list li.facebook a {
-        background-image: url("../images/facebook.png");
-    }
-
-    .link-list li.twitter a {
-        background-image: url("../images/twitter.png");
-    }
-
     .link-list li.github a {
         background-image: url("../images/github.png");
     }
 
     .link-list li.cielo a {
         background-image: url("../images/cielo.png");
+    }
+
+    .link-list li.desenvolvedores a {
+        background-image: url("../images/cielo-desenvolvedores.png");
     }
 }
 
