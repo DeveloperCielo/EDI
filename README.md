@@ -1,2 +1,0 @@
-Manual integração com EDI
-==============
