@@ -115,7 +115,9 @@ Cada venda é registrada em um comprovante de venda.
 * Deve ser submetido header, detalhe e trailler para cada maquineta e para cada resumo de operação (RO)
 * O arquivo deve ser formatado com 1 único lote (RO) de vendas parceladas por maquineta e 1 lote de venda (RO) à vista por maquineta.
 
-# Layout de Arquivos para Remessa e/ou Retorno de Vendas
+# Arquivos para Remessa e/ou Retorno de Vendas
+
+Layout de Arquivos para Remessa e/ou Retorno de Vendas
 
 ## Registro Header
 
@@ -199,9 +201,9 @@ O cancelamento de qualquer transação só será aceito se houver saldo disponí
     * **Transações Parcelado Loja**: não permite cancelamento parcial da mesma transação no mesmo dia.
 * Cancelamentos de transações autorizadas por meio do canal EDI, só podem ser solicitados após o recebimento do arquivo retorno da transação de autorização (até 48 horas após o envio do arquivo).
 
-# Layout de Arquivos de Remessa e Retorno de Cancelamentos ( Não PCI )
+# Arquivos de Remessa e Retorno de Cancelamentos
 
-Layout utilizado para cancelamentos de transações por meio do canal EDI, por exemplo: transações recorrentes.
+Layout de Arquivos de Remessa e Retorno de Cancelamentos ( Não PCI ) utilizado para cancelamentos de transações por meio do canal EDI, por exemplo: transações recorrentes.
 
 ## Chave sem certificação PCI:
 
