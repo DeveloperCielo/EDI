@@ -25,8 +25,8 @@ under the License.
 ////////////////////
 //$nav-bg: #00aeef;
 $nav-bg: #28292d;
-$examples-bg: #393939;
-$code-bg: #292929;
+$examples-bg: #303137;
+$code-bg: #28292d;
 $code-annotation-bg: #1c1c1c;
 $nav-subitem-bg: #303137;
 $nav-active-bg: #00aeef;
@@ -77,6 +77,7 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 
 %header-font {
   @extend %default-font;
+  font-family: "museo300", "museo-sans", Helvetica, Arial, sans-serif;
   font-weight: bold;
   color: $main-title;
 }
