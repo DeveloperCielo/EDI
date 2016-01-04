@@ -4,7 +4,7 @@ title: Manual de desenvolvimento Extrato EDI
 search: true
 
 toc_footers:
-  - <a href='/index.html'>Manual de Integração EDI</a>
+  - <a href='index.html'>Manual de Integração EDI</a>
 ---
 
 # Introdução
