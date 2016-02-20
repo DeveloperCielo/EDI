@@ -149,9 +149,9 @@ File layout for Shipping and/or Sales Return
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies EDI|
 |---|-----------|---|---|---|--------|-----------------|
 |001|Record type|1|2|N|Identifies the detail record type|Consistencies EDI|Only accepted if equal to "01"|
-|002|N. of the sales receipt (SR)|3|7|N|It is a sequential number assigned by the establishment, identifies the transaction within the batch|Required field; Must be numeric; It can not be duplicated on the lot.|
-|003|Card number|10|19|N|N. aligned right card, with leading zeros.|Required field Must be between 16 and 19 digits.|
-|004|Authorization Code|29|6|X|The delivery, fill with zeros. In return, return with the authorization code.|No consistency in the time of shipment.|
+|002|N. of the sales receipt (SR)|3|7|N|It is a sequential number assigned by the establishment, identifies the transaction within the batch|Required field; Must be numeric; It can not be duplicated on the lot|
+|003|Card number|10|19|N|N. aligned right card, with leading zeros|Required field Must be between 16 and 19 digits|
+|004|Authorization Code|29|6|X|The delivery, fill with zeros. In return, return with the authorization code|No consistency in the time of shipment|
 |005|Date of sale|35|8|N|DDMMYYYY format|Only accept the specified format required field|
 |006|Option sale|43|1|N|'0' - the sight, '2' - Installment shopkeeper, '4' - shopkeeper Installment - Cia Aerea|Within the same batch all transactions must have the same put option.|
 |007|Sale value *|44|15|N|Cash sale => the sale. Sale parceled => total amount of installments + value + shipment entry fee|Required field - has to adhere to the "put option" - can not be less than zero / non-numeric|
