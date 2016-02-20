@@ -51,7 +51,7 @@ The EDI capture solution includes a Service Island to support, responsible for:
 ![Card issuers](images/edi-bandeiras.png)
 
 |Product|Service|Batch authorization|Batch cancellation|IATA Submission|Base 2|IATA Cancellation|
-|---------------|-------------------|------------------|---------------|------|-----------------|
+|-------|-------|-------------------|------------------|---------------|------|-----------------|
 |Debt|No|Yes|No|Yes*|
 |Credit View|Yes|Yes|Yes|Yes|
 |Shop installments|Yes|Yes|Yes|
@@ -123,7 +123,7 @@ File layout for Shipping and/or Sales Return
 ## Header record
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
-|---|-----------|---|---|---|--------|-----------------|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Header identifies the type of record|Necessarily equal to "00"|
 |002|Date of filing|3|8|N|Data generation and transmission of movement|Required field format should be YYYYMMDD|
 |003|Operational summary of the number (OS)|11|7|N|Informed by the establishment, identifies the batch of transactions|Required field. Do not send the same lot in a 30-day period of the previous submission|
