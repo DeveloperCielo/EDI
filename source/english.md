@@ -50,11 +50,11 @@ The EDI capture solution includes a Service Island to support, responsible for:
 
 ![Card issuers](images/edi-bandeiras.png)
 
-|Product|Service|Batch authorization|Batch cancellation|IATA Submission|Base 2|IATA Cancellation|
-|-------|-------|-------------------|------------------|---------------|------|-----------------|
+|Product/Service|Batch authorization|Batch cancellation|IATA Submission Base2|IATA Cancellation|
+|-------|-------|-------------------|------------------|---------------------|-----------------|
 |Debt|No|Yes|No|Yes*|
 |Credit View|Yes|Yes|Yes|Yes|
-|Shop installments|Yes|Yes|Yes|
+|Shop installments|Yes|Yes|Yes|Yes|
 
 ### Exceptions
 
