@@ -22,10 +22,10 @@ This channel is indicated for:
 There is no restriction for using this channel. However, the client's business needs may or may not enable the use of the capture channel.
 As described above, some features are necessary:
 
-•	Transaction authorization: suitable for customers with the need to authorize large transaction volumes, especially recurring transactions (academies, insurance, subscriptions, etc.).
-•	Transaction cancellation: suitable for guests in need to withdraw large volumes of transactions in an automated manner.
-•	Transactions IATA: International Air Cias used by that part of the IATA and GDS.
-•	Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.
+*	Transaction authorization: suitable for customers with the need to authorize large transaction volumes, especially recurring transactions (academies, insurance, subscriptions, etc.).
+*	Transaction cancellation: suitable for guests in need to withdraw large volumes of transactions in an automated manner.
+*	Transactions IATA: International Air Cias used by that part of the IATA and GDS.
+*	Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.
 
 ## EDI in 4 steps
 
@@ -69,35 +69,35 @@ EDI - Electronic Data Interchange, it is a capture channel and batch transaction
 
 ## What is it for?
 
-•	Authorize card not present transactions, especially recurring transactions, ex .: Publishing, Insurance, Academies, etc.
-•	Cancel card transactions, present or not present, independent of the channel where the commitment was made: Machine, TEF, E-Commerce or EDI.
-•	Transactions IATA: International Air Cias used by that part of the IATA and GDS.
-•	Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.
+*	Authorize card not present transactions, especially recurring transactions, ex .: Publishing, Insurance, Academies, etc.
+*	Cancel card transactions, present or not present, independent of the channel where the commitment was made: Machine, TEF, E-Commerce or EDI.
+*	Transactions IATA: International Air Cias used by that part of the IATA and GDS.
+*	Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.
 
 ## How it works?
 
-•	The customer, after accreditation in Cielo, requests the integration of documents and the creation of a mailbox for sending EDI files.
-•	Develops the integration of their management systems, back office and business automation to format transactions according to the layout EDI (transaction file).
-•	The Island Care EDI and Cielo partner (VAN), providing the customer supports needed during the integration phase.
-•	The client sends the transaction files in the format (layout) specific EDI for the electronic mailbox. Exception: IATA transactions have their own layout.
-•	These transactions are sent to the systems of Cielo, which will hold the Monday to Saturday processing and sending of these transactions to their card brands, for approval or cancellation thereof.
-•	Cielo returns the customer file within 2 days, with the result of processing all transactions (approved or denied with their reasons).
+*	The customer, after accreditation in Cielo, requests the integration of documents and the creation of a mailbox for sending EDI files.
+*	Develops the integration of their management systems, back office and business automation to format transactions according to the layout EDI (transaction file).
+*	The Island Care EDI and Cielo partner (VAN), providing the customer supports needed during the integration phase.
+*	The client sends the transaction files in the format (layout) specific EDI for the electronic mailbox. Exception: IATA transactions have their own layout.
+*	These transactions are sent to the systems of Cielo, which will hold the Monday to Saturday processing and sending of these transactions to their card brands, for approval or cancellation thereof.
+*	Cielo returns the customer file within 2 days, with the result of processing all transactions (approved or denied with their reasons).
 
 # General considerations
 
-•	The return file will be available to the merchant within 48 hours, using the same layout.
-•	The Sales or Cancellation Remittance file submitted by 12:00 will be returned in D + 1.Files submitted after 12:00 will be considered as later day of the movement and his return will be on T + 2.
-•	The movements are processed from Monday to Saturday. No processing on Sundays.
-•	Banners credit card transactions can be sent: Visa, MasterCard, ELO (except IATA mode) and Diners.
-•	Transaction Cias files. Via IATA airlines are not covered in this manual. They have specific layout.
-•	**We have no homologation environment for this service.**
+*	The return file will be available to the merchant within 48 hours, using the same layout.
+*	The Sales or Cancellation Remittance file submitted by 12:00 will be returned in D + 1.Files submitted after 12:00 will be considered as later day of the movement and his return will be on T + 2.
+*	The movements are processed from Monday to Saturday. No processing on Sundays.
+*	Banners credit card transactions can be sent: Visa, MasterCard, ELO (except IATA mode) and Diners.
+*	Transaction Cias files. Via IATA airlines are not covered in this manual. They have specific layout.
+*	**We have no homologation environment for this service.**
 
 ## Names of files returns:
 
-•	By submitting Cancellation submission file, the system can return two types of files: "Retmov" or "Visa error".
-•	"Retmov": return file with all transactions (approved or denied).
-•	"Visa Error": transactions were not carried out due to the uploaded file structure problem, and all uncommitted transactions.
-•	Possible typos, as well as the file structure, are the customer's responsibility.
+*	By submitting Cancellation submission file, the system can return two types of files: "Retmov" or "Visa error".
+*	"Retmov": return file with all transactions (approved or denied).
+*	"Visa Error": transactions were not carried out due to the uploaded file structure problem, and all uncommitted transactions.
+*	Possible typos, as well as the file structure, are the customer's responsibility.
 
 # Tips for formatting EDI files
 
@@ -109,12 +109,12 @@ Identifies the batch number, sales transactions group.
 
 Each sale is recorded in a sales voucher.
 
-•	Each Operating Summary (RO) can contain up to 9,999 vouchers for sale (HP).
-•	Transactions should be grouped by type of transaction (cash or in installments store), and one should create a specific RO for each of them.
-•	For each transaction group (batch / RO) must be generated header containing a movement, detail (s) and trailer.
-•	For each number of dobby all the above rules should be applied.
-•	Must undergo header, detail and trailer for each contraption and each transaction summary (RO)
-•	The file must be formatted with one single lot (RO) of installment sales for dobby and the first batch of sale (RO) cash for Dobby.
+* Each Operating Summary (RO) can contain up to 9,999 vouchers for sale (HP).
+* Transactions should be grouped by type of transaction (cash or in installments store), and one should create a specific RO for each of them.
+*	For each transaction group (batch / RO) must be generated header containing a movement, detail (s) and trailer.
+*	For each number of dobby all the above rules should be applied.
+* Must undergo header, detail and trailer for each contraption and each transaction summary (RO)
+*	The file must be formatted with one single lot (RO) of installment sales for dobby and the first batch of sale (RO) cash for Dobby.
 
 # Files for Shipping and/or Sales Return
 
@@ -180,15 +180,20 @@ Registration Detail
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
 |---|---------|---|---|---|-----------|-----------------|
-|001|Tipo de registro|1|2|N|Identifica o tipo de registro detalhe trailler|Obrigatório o uso do código “99”|
-|002|Quantidade de registros|3|7|N|Inclusive header e trailler|Rejeição se <0 ou não numérico|
-|003|Valor total bruto (*)|10|15|N|Informado pelo estabelecimento – Valor total do lote, somatória do campo 007 do registro detalhe.|Rejeição se <0 ou não numérico. Rejeita se valor diferente da somatória do campo 07|
-|004|Valor total aceito (*)|25|15|N|Na remessa preencher com zeros; No retorno, será formatado pela Cielo com o valor total aceito.|Sem verificações|
-|005|Valor totalliquido (*)|40|15|N|Na remessa preencher com zeros; No retorno, será formatado pela Cielo com o valor total líquido.|Sem verificações|
-|006|Data prevista de crédito|55|8|N|Na remessa preencher com zeros; No retorno, será formatado pela Cielo com a data prevista de pagamento.|Sem verificações|
-|007|Não utilizar|63|188|X|Constante = brancos|Não lido|
+|001|Record type|1|2|N|Identifies the type of record detail trailer|Consistencies EDI|Mandatory use of the code "99"|
+|002|Number of records|3|7|N|Including header and trailer|Rejeição se <0 ou não numérico|
+|003|Total gross amount (*)|10|15|N|Informed by the establishment - Total value of the lot, the sum of the field 007 Detail record.|Rejection is <0 or non-numeric. Rejects different value if the sum of the field 07|
+|004|Total value accept (*)|25|15|N|The delivery complete with zeros; In return, will be formatted by Cielo with the amount accepted.|No checks|
+|005|Total net value(*)|40|15|N|The delivery complete with zeros; In return, will be formatted by Cielo with total net value.|No checks|
+|006|Expected date of credit|55|8|N|In return, will be formatted by Cielo with the expected payment date.|No checks|
+|007|Do not use|63|188|X|Constant = white|Not read|
 
 <aside class="notice">( * )These fields should be considered with two (2) decimal places, without commas, periods, or any other character to separate numbers.</aside>
+
+* Other sales on cancellation rules
+
+The cancellation of any transaction will only be accepted if there is available balance on the Financial Schedule Commercial Establishment to cover the value of the requested cancellation.
+
 
 
 
