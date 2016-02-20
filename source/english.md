@@ -273,162 +273,152 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 
 # Attachments
 
-ANNEX I - Return Codes Table
+## ANNEX I - Return Codes Table
 
-Rejection code	Occurrence Description
+|Rejection code|Occurrence Description|
+|00|Transaction ok (transaction accepted)|
+|01|Error in file|
+|02|Invalid authorization code|
+|03|Invalid property|
+|04|Mixed batch|
+|05|Invalid number of installments|
+|06|Difference in value in RO|
+|07|RO invalid number (BH record)|
+|08|Invalid input value|
+|09|Invalid shipping rate value|
+|10|Invalid share value|
+|11|Invalid transaction code|
+|12|Invalid transaction|
+|13|Invalid value|
+|14|Not applicable|
+|15|Invalid cancellation value|
+|16|Not located the original transaction (for cancellation)|
+|17|Number of items reported in the RO not compatible with CVs|
+|18|Invalid number of reference|
+|20|Cancellation for transaction installments already canceled|
+|21|Cancellation of value greater than the value of the sale|
+|22|Cancellation of value greater than allowed (heave)|
+|23|Number of invalid original RO (I2 record)|
+|42|Card canceled|
+|54|You may not partial cancellation of an installment plan that is being disputed by the carrier.|
+|56|Invalid card type of plan|
+|59|Invalid card type 60 Invalid Data|
+|71|Transaction rejected by the issuing bank|
+|72|Transaction rejected by the issuing bank|
+|73|Card problem - retain the card|
+|74|Denied authorization|
+|75|Error|
+|76|Transaction rejected by the issuing bank|
+|77|Syntax error - redo the transaction|
+|78|There was no authorization issuer|
+|79|Card canceled|
+|80|Card canceled|
+|81|Insufficient funds|
+|82|Expired card or expiration date wrong|
+|87|Card not allowed|
+|88|Exceeded the number of transactions in the period|
+|89|Message differs from the original message|
+|92|Issuing bank without communication|
+|93|Cancellation more than 365 days|
+|94|Duplication of airlines|
+|95|No outstanding balance|
+|99|Other reasons|
 
-00	OK Transaction (transaction accepted)
-01	Error in file
-02	Invalid authorization code
-03	Invalid property
-04	Mixed batch
-05	Invalid number of installments
-06	Difference in value in RO
-07	RO invalid number (BH record)
-08	Invalid input value
-09	Invalid shipping rate value
-10	Invalid share value
-11	Invalid transaction code
-12	Invalid transaction
-13	Invalid value
-14	Not applicable
-15	Invalid cancellation value
-16	Not located the original transaction (for cancellation)
-17	Number of items reported in the RO not compatible with CVs
-18	Invalid number of reference
-20	Cancellation for transaction installments already canceled
-21	Cancellation of value greater than the value of the sale
-22	Cancellation of value greater than allowed (heave)
-23	Number of invalid original RO (I2 record)
-42	Card canceled
-54	You may not partial cancellation of an installment plan that is being disputed by the carrier.
-56	Invalid card type of plan
-59	Invalid card type 60 Invalid Data
-71	Transaction rejected by the issuing bank
-72	Transaction rejected by the issuing bank
-73	Card problem - retain the card
-74	Denied authorization
-75	Error
-76	Transaction rejected by the issuing bank
-77	Syntax error - redo the transaction
-78	There was no authorization issuer
-79	Card canceled
-80	Card canceled
-81	Insufficient funds
-82	Expired card or expiration date wrong
-87	Card not allowed
-88	Exceeded the number of transactions in the period
-89	Message differs from the original message
-92	Issuing bank without communication
-93	Cancellation more than 365 days
-94	Duplication of airlines
-95	No outstanding balance
-99	Other reasons
-ANNEX II - Detailed error status for Sale Set in the countryside 23
-CODE	Complement Error	EC action
-E001	Lot exceeded number of records	Review file structure
-E001	Structure of incorrect batch	Review file structure
-E001	Invalid transmission medium	Contact Cielo
-E002	Review card data	Redo the transaction with valid data
-E005	Establishment number not found	Check the data of the Establishment Cielo
-E005	Problem in your registration in Cielo	Contact Cielo
-E010	Problem in your registration in Cielo	Contact Cielo
-E023	Problem in your registration in Cielo	Contact Cielo
-E024	Card Type not allowed in this channel	Contact your customer
-E044	Transaction date does not give	Reviewing data from the original transaction
-E045	Authorization code not found	Check the transaction data
-E048	Incorrect card expiration date	Contact your customer
-E054	Structure of incorrect batch	Review your file
-E055	Installment amount invalidates	Check the amount of installments
-E056	Transaction not allowed to Register	Not resubmit the transaction
-E057	Card canceled	Contact your customer
-E061	Review card data	Redo the transaction with valid data
-E094	Transaction not permitted for International card	Not resubmit the transaction
-E095	Transaction not permitted for Debit Card	Not resubmit the transaction
-E097	Installments with less than R $ 5.00	Retrace adjusting the amount of parcels
-E101	Transaction rejected by the Issuing bank	Contact your customer
-E102	Transaction rejected by the Issuing bank	Contact your customer
-E103	Problem in your registration in Cielo	Contact Cielo
-E104	Card canceled	Contact your customer
-E105	Transaction rejected by the Issuing bank	Contact your customer
-E107	Transaction rejected by the Issuing bank	Contact your customer
-E112	Transaction not allowed on this channel	Contact Cielo
-E112	Transaction currency dollar not allowed.	Not resubmit the transaction
-E112	Transaction without authorization code	Redo including the authorization code
-E112	Transaction not allowed to Register Applicant	Contact Cielo
-E112	Previously authorized transaction	Not resubmit the transaction
-E112	Card not allowed to Registration Dollar	Not resubmit the transaction
-E112	Transaction parceled Not Allowed	Not resubmit the transaction
-E112	Problem in your registration in Cielo	Contact Cielo
-E112	Transaction not allowed	Not resubmit the transaction
-E112	Transaction not allowed to Register	Not resubmit the transaction
-E112	International transaction card not allowed to Register	Not resubmit the transaction
-E112	Invalid transaction data	Review transaction data
-E114	Review card data	Redo the transaction with valid data
-E141	Card canceled	Contact your customer
-E143	Card canceled	Contact your customer
-E151	Unauthorized transaction by the Issuer bank	Contact your customer
-E154	Incorrect card expiration date	Contact your customer
-E157	Card canceled	Contact your customer
-E158	Card Type not allowed in this channel	Contact Cielo
-E162	Card not allowed for this transaction	Contact your customer
-E180	Transaction date does not give	Reviewing data from the original transaction
-E182	Security code invalid card	Review transaction data / Contact your customer
-E191	Issuing Bank without communication	Contact Cielo
-E192	Applicable for air companies	Applicable for air companies
-E205	Review card data	Redo the transaction with valid data
-E207	Lot number invalid	Review the Lot number
-E207	Batch field is not numeric	Review the Lot number
-E207	Number of duplicate Lot	Review the Lot number
-E209	Applicable for air companies	Review the value
-E210	Installment amount invalidates	Field zeroed number of installments
-E210	Installment amount invalidates	Number of plots exceeded limit
-E210	Product not authorized for your property	Contact Cielo
-E210	Larger amount of shares permitted	Contact Cielo to change registration installments
-E211	Applicable for air companies	Review the value
-E212	Applicable for air companies	Review the value
-E213	Cancellation value not allowed	Review the transaction data
-E214	Not located Transaction	Review the transaction data
-E215	Transaction already canceled	Contact Cielo
-E216	Transaction previously canceled	Not resubmit the transaction
-E217	Cancellation value higher sales	Review transaction data
-E218	Cancellation not allowed in this channel	Contact Cielo
-E219	Not located RO Number	Review the transaction data
-E220	Period exceeded to cancel transaction	Not resubmit the transaction
-E900	Record Type Invalid	Review file structure
-E901	Header date of the deposit Invalid	Review the transaction data
-E902	Operations Summary Number (RO) of the Header Invalid	Operations Review Summary Number (RO)
-E903	Header Establishment number Invalid	Review the number of Establishment / Contact Cielo
-E904	Currency Header Invalid	Review the structure of Header
-E905	Header Test Invalid Indicator	Review the structure of Header
-E906	Selling indicator Invalid Header	Review the structure of Header
-E911	Sales Receipt Number (CV) Invalid	Review the transaction data
-E912	Date of Sale Invalid	Review the transaction data
-E913	Option Sale Invalid	Review the transaction data
-E914	Card Number Invalid	Review the transaction data / Contact Your Customer
-E915	Invalid value Sale	Review the transaction data
-E916	Invalid number of plots	Review the transaction data
-E917	Invalid value Funded	Review the transaction data
-E918	Input value Invalid	Review the transaction data
-E919	Rate value Invalid Boarding	Applicable for air companies
-E920	Portion of value Invalid	Review the transaction data
-E921	Operations Summary Number (RO) Invalid	Operations Review Summary Number (RO)
-E922	Invalid Establishment Number	Review the number of Establishment / Contact Cielo
-E923	Validity of Invalid Card	Contact your customer
-E924	Operations Summary Number (RO) Original Invalid	Operations Review Summary Number (RO)
-E925	Invalid refund of value	Review the transaction data
-E926	Number of Invalid Reference	Review the transaction data
-E930	Trailer Records of quantity does not confer	Review the number of records
-E931	Total gross amount does not confer	Review the transaction data
+## ANNEX II - Detailed error status for Sale Set in the countryside 23
 
-
-
-
-
-
-
-
-
-
-
+|CODE|Complement|Error|EC action|
+|E001|Lot exceeded number of records	Review file structure|
+|E001|Structure of incorrect batch	Review file structure|
+|E001|Invalid transmission medium	Contact Cielo|
+|E002|Review card data	Redo the transaction with valid data|
+|E005|Establishment number not found	Check the data of the Establishment Cielo|
+|E005|Problem in your registration in Cielo	Contact Cielo|
+|E010|Problem in your registration in Cielo	Contact Cielo|
+|E023|Problem in your registration in Cielo	Contact Cielo|
+|E024|Card Type not allowed in this channel	Contact your customer|
+|E044|Transaction date does not give	Reviewing data from the original transaction|
+|E045|Authorization code not found	Check the transaction data|
+|E048|Incorrect card expiration date	Contact your customer|
+|E054|Structure of incorrect batch	Review your file|
+|E055|Installment amount invalidates	Check the amount of installments|
+|E056|Transaction not allowed to Register	Not resubmit the transaction|
+|E057|Card canceled	Contact your customer|
+|E061|Review card data	Redo the transaction with valid data|
+|E094|Transaction not permitted for International card	Not resubmit the transaction|
+|E095|Transaction not permitted for Debit Card	Not resubmit the transaction|
+|E097|Installments with less than R $ 5.00	Retrace adjusting the amount of parcels|
+|E101|Transaction rejected by the Issuing bank	Contact your customer|
+|E102|Transaction rejected by the Issuing bank	Contact your customer|
+|E103|Problem in your registration in Cielo	Contact Cielo|
+|E104|Card canceled	Contact your customer|
+|E105|Transaction rejected by the Issuing bank	Contact your customer|
+|E107|Transaction rejected by the Issuing bank	Contact your customer|
+|E112|Transaction not allowed on this channel	Contact Cielo|
+|E112|Transaction currency dollar not allowed.	Not resubmit the transaction|
+|E112|Transaction without authorization code	Redo including the authorization code|
+|E112|Transaction not allowed to Register Applicant	Contact Cielo|
+|E112|Previously authorized transaction	Not resubmit the transaction|
+|E112|Card not allowed to Registration Dollar	Not resubmit the transaction|
+|E112|Transaction parceled Not Allowed	Not resubmit the transaction|
+|E112|Problem in your registration in Cielo	Contact Cielo|
+|E112|Transaction not allowed	Not resubmit the transaction|
+|E112|Transaction not allowed to Register	Not resubmit the transaction|
+|E112|International transaction card not allowed to Register	Not resubmit the transaction|
+|E112|Invalid transaction data	Review transaction data|
+|E114|Review card data	Redo the transaction with valid data|
+|E141|Card canceled	Contact your customer|
+|E143|Card canceled	Contact your customer|
+|E151|Unauthorized transaction by the Issuer bank	Contact your customer|
+|E154|Incorrect card expiration date	Contact your customer|
+|E157|Card canceled	Contact your customer|
+|E158|Card Type not allowed in this channel	Contact Cielo|
+|E162|Card not allowed for this transaction	Contact your customer|
+|E180|Transaction date does not give	Reviewing data from the original transaction|
+|E182|Security code invalid card	Review transaction data/Contact your customer|
+|E191|Issuing Bank without communication	Contact Cielo|
+|E192|Applicable for air companies	Applicable for air companies|
+|E205|Review card data	Redo the transaction with valid data|
+|E207|Lot number invalid	Review the Lot number|
+|E207|Batch field is not numeric	Review the Lot number|
+|E207|Number of duplicate Lot	Review the Lot number|
+|E209|Applicable for air companies	Review the value|
+|E210|Installment amount invalidates	Field zeroed number of installments|
+|E210|Installment amount invalidates	Number of plots exceeded limit|
+|E210|Product not authorized for your property	Contact Cielo|
+|E210|Larger amount of shares permitted	Contact Cielo to change registration installments|
+|E211|Applicable for air companies	Review the value|
+|E212|Applicable for air companies	Review the value|
+|E213|Cancellation value not allowed	Review the transaction data|
+|E214|Not located Transaction	Review the transaction data|
+|E215|Transaction already canceled	Contact Cielo|
+|E216|Transaction previously canceled	Not resubmit the transaction|
+|E217|Cancellation value higher sales	Review transaction data|
+|E218|Cancellation not allowed in this channel	Contact Cielo|
+|E219|Not located RO Number	Review the transaction data|
+|E220|Period exceeded to cancel transaction	Not resubmit the transaction|
+|E900|Record Type Invalid	Review file structure|
+|E901|Header date of the deposit Invalid	Review the transaction data|
+|E902|Operations Summary Number (RO) of the Header Invalid	Operations Review Summary Number (RO)|
+|E903|Header Establishment number Invalid	Review the number of Establishment / Contact Cielo|
+|E904|Currency Header Invalid	Review the structure of Header|
+|E905|Header Test Invalid Indicator	Review the structure of Header|
+|E906|Selling indicator Invalid Header	Review the structure of Header|
+|E911|Sales Receipt Number (CV) Invalid	Review the transaction data|
+|E912|Date of Sale Invalid	Review the transaction data|
+|E913|Option Sale Invalid	Review the transaction data|
+|E914|Card Number Invalid	Review the transaction data/Contact Your Customer|
+|E915|Invalid value Sale	Review the transaction data|
+|E916|Invalid number of plots	Review the transaction data|
+|E917|Invalid value Funded	Review the transaction data|
+|E918|Input value Invalid	Review the transaction data|
+|E919|Rate value Invalid Boarding	Applicable for air companies|
+|E920|Portion of value Invalid	Review the transaction data|
+|E921|Operations Summary Number (RO) Invalid	Operations Review Summary Number (RO)|
+|E922|Invalid Establishment Number	Review the number of Establishment / Contact Cielo|
+|E923|Validity of Invalid Card	Contact your customer|
+|E924|Operations Summary Number (RO) Original Invalid	Operations Review Summary Number (RO)|
+|E925|Invalid refund of value	Review the transaction data|
+|E926|Number of Invalid Reference	Review the transaction data|
+|E930|Trailer Records of quantity does not confer	Review the number of records|
+|E931|Total gross amount does not confer	Review the transaction data|
 
