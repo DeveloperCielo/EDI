@@ -51,7 +51,7 @@ The EDI capture solution includes a Service Island to support, responsible for:
 ![Card issuers](images/edi-bandeiras.png)
 
 |Product|Service|Batch authorization|Batch cancellation|IATA Submission|Base 2|IATA Cancellation|
-|---------------|-------------------|--------------------|---------------------|---------------|
+|---------------|-------------------|------------------|---------------|------|-----------------|
 |Debt|No|Yes|No|Yes*|
 |Credit View|Yes|Yes|Yes|Yes|
 |Shop installments|Yes|Yes|Yes|
@@ -123,7 +123,7 @@ File layout for Shipping and/or Sales Return
 ## Header record
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
-|---|---------|---|---|---|-----------|-----------------|
+|---|-----------|---|---|---|--------|-----------------|
 |001|Record type|1|2|N|Header identifies the type of record|Necessarily equal to "00"|
 |002|Date of filing|3|8|N|Data generation and transmission of movement|Required field format should be YYYYMMDD|
 |003|Operational summary of the number (OS)|11|7|N|Informed by the establishment, identifies the batch of transactions|Required field. Do not send the same lot in a 30-day period of the previous submission|
@@ -147,7 +147,7 @@ File layout for Shipping and/or Sales Return
 Registration Detail
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
-|---|---------|---|---|---|-----------|-----------------|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Identifies the detail record type|Consistencies EDI|Only accepted if equal to "01"|
 |002|N. of the sales receipt (SR)|3|7|N|It is a sequential number assigned by the establishment, identifies the transaction within the batch.|Required field; Must be numeric; It can not be duplicated on the lot.|
 |003|Card number|10|19|N|N. aligned right card, with leading zeros.|Required field; Must be between 16 and 19 digits.|
@@ -179,7 +179,7 @@ Registration Detail
 ## Trailler register
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
-|---|---------|---|---|---|-----------|-----------------|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Identifies the type of record detail trailer|Consistencies EDI|Mandatory use of the code "99"|
 |002|Number of records|3|7|N|Including header and trailer|Rejeição se <0 ou não numérico|
 |003|Total gross amount (*)|10|15|N|Informed by the establishment - Total value of the lot, the sum of the field 007 Detail record.|Rejection is <0 or non-numeric. Rejects different value if the sum of the field 07|
@@ -216,6 +216,7 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 ## Header registry
 
 |SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Header identifies the type of record	Must be "00"|
 |002|Date of filing|3|8|N|Data generation and transmission of movement Required field.|Format should be YYYYMMDD|
 |003|Operational summary of the number (RO)|11|7|N|Informed by the establishment, identifies the batch of transactions.	Required field.|Do not send the same lot in a 30-day period of the previous submission|
@@ -229,7 +230,8 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 
 ## Registration Detail
 
-|SEQ|DESCRIPTION|POS|TAM|FOR	COMMENTS|Consistencies EDI|
+|SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Identifies the detail record type	Only accepted if equal to "01"|
 |002|No. sale receipt (CV)|3|7|N|It is a sequential number assigned by the establishment, identifies the transaction within the batch.	Required field; Must be numeric; It can not be duplicated on the lot.|
 |003|card number|10|19|N|No. aligned right card, with leading zeros	Required field; must be between 16 and 19 digits.|
@@ -260,7 +262,8 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 
 ## Trailler record
 
-|SEQ|DESCRIPTION|POS|TAM|FOR	COMMENTS|Consistencies EDI|
+|SEQ|DESCRIPTION|POS|TAM|FOR|COMMENTS|Consistencies|EDI|
+|---|-----------|---|---|---|--------|-------------|---|
 |001|Record type|1|2|N|Identifies the type of record detail trailer	Mandatory use of the code "99"|
 |002|Number of records|3|7|N|Including header and trailer	Rejection is <0 or non-numeric|
 |003|Total gross amount (*)	10	15	N	Informed by the establishment - the total value of the lot, the sum of the field 007 Detail record	Rejection is <0 or non-numeric. Rejects different value if the sum of the field 07|
@@ -276,6 +279,7 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 ## ANNEX I - Return Codes Table
 
 |Rejection code|Occurrence Description|
+|--------------|----------------------|
 |00|Transaction ok (transaction accepted)|
 |01|Error in file|
 |02|Invalid authorization code|
@@ -327,6 +331,7 @@ Remittance File layout and Cancellations Return (not PCI) used for transaction c
 ## ANNEX II - Detailed error status for Sale Set in the countryside 23
 
 |CODE|Complement|Error|EC action|
+|----|----------|-----|---------|
 |E001|Lot exceeded number of records	Review file structure|
 |E001|Structure of incorrect batch	Review file structure|
 |E001|Invalid transmission medium	Contact Cielo|
