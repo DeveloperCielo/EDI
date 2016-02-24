@@ -1,0 +1,1929 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Manual of EDI Integration</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <link href="https://www.cielo.com.br/wps/contenthandler/!ut/p/digest!3SvhW8ACOLyj_90YHxPhKQ/war/cielo-tema/themes/estatico/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="javascripts/all.js" type="text/javascript"></script>
+
+    <script async src='//www.google-analytics.com/analytics.js'></script>
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+    ga('create', 'UA-8516386-7', {'cookieDomain': 'auto', 'alwaysSendReferrer': true});
+    ga('create', 'UA-31855766-1', {'name': 'iMasters', 'cookieDomain': 'auto', 'alwaysSendReferrer': true});
+
+    ga("set", "transport", "beacon");
+    ga('send', 'pageview');
+    </script>
+</head>
+
+<body class="english">
+    <a href="#" id="nav-button">
+        <span>
+            NAV
+            <img src="images/navbar.png" />
+        </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+        <div class="search">
+            <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+        <div id="toc">
+        </div>
+        <h2 class="toc-footer-title">Materiais complementares</h2>
+        <ul class="toc-footer">
+            <li><a href='extrato-edi.html'>EDI Manual Statement</a></li>
+        </ul>
+        <div class="links-footer">
+            <ul class="link-list">
+                <li class="cielo"><a href="https://www.cielo.com.br/ecommerce">Cielo</a></li>
+                <li class="github"><a href="https://github.com/developercielo">Cielo</a></li>
+                <li class="desenvolvedores"><a href="https://www.cielo.com.br/desenvolvedores">Cielo</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-wrapper">
+            <div class="content no-dark-box">
+                <h1 id="introduction">Introduction</h1>
+
+<p>EDI - Electronic Data Interchange is a capture channel and processing large volumes of batch transactions through the exchange of files between the client, the file transmission partner (VANs) and Cielo.
+This channel is indicated for:</p>
+
+<ul>
+<li>Authorize Credit and Installment transactions mainly recorrent transactions, ex .: Publishing, Insurance, Academies, etc. </li>
+<li>Cancel transactions Credit, Debit Installment and independent of authorization channel: Machine / TEF / E-commerce / Mobile or EDI.</li>
+<li>Catch for processing in Base II, the transactions of air companies, sent by IATA (International Air Transport Association).</li>
+<li>Transmission of electronic statement (of specific integration manual)</li>
+</ul>
+
+<h1 id="audience">Audience</h1>
+
+<p>There is no restriction for using this channel. However, the client&rsquo;s business needs may or may not enable the use of the capture channel.
+As described above, some features are necessary:</p>
+
+<ul>
+<li>  Transaction authorization: suitable for customers with the need to authorize large transaction volumes, especially recurring transactions (academies, insurance, subscriptions, etc.).</li>
+<li>  Transaction cancellation: suitable for guests in need to withdraw large volumes of transactions in an automated manner.</li>
+<li>  Transactions IATA: International Air Cias used by that part of the IATA and GDS.</li>
+<li>  Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.</li>
+</ul>
+
+<h2 id="edi-in-4-steps">EDI in 4 steps</h2>
+
+<p>To use the EDI capture channel, requires four steps:</p>
+
+<ol>
+<li> Accreditation: the customer must be accredited Cielo;</li>
+<li> Integration: carry out development according to the manual to integrate with EDI. Obs .: the development size will depend on the desired degree of integration with their management systems (ERP, Commercial Automation, etc.);</li>
+<li> Approval: a test file can be sent to the EDI Service Island to file structure validation;</li>
+<li> Production: send the file for processing.</li>
+</ol>
+
+<p><img alt="Steps" src="images/edi-passos.png" /></p>
+
+<h2 id="technical-support">Technical support</h2>
+
+<p>The EDI capture solution includes a Service Island to support, responsible for:</p>
+
+<ol>
+<li> Integration support and approval by the client;</li>
+<li> 1st level support at the production stage;</li>
+<li> Interface with internal areas Cielo and VAN&rsquo;s partners (TIVIT and GXS), for 2nd and 3rd level support.</li>
+</ol>
+
+<h2 id="goods-and-card-issuers-enabled-edi-channel:">Goods and card issuers enabled EDI CHANNEL:</h2>
+
+<p><img alt="Card issuers" src="images/edi-bandeiras.png" /></p>
+
+<table><thead>
+<tr>
+<th>Product/Service</th>
+<th>Batch authorization</th>
+<th>Batch cancellation</th>
+<th>IATA Submission Base2</th>
+<th>IATA Cancellation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Debt</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes*</td>
+</tr>
+<tr>
+<td>Credit View</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Shop installments</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<h3 id="exceptions">Exceptions</h3>
+
+<ul>
+<li>  ELO is not enabled for IATA mode.</li>
+<li>Card issuers in the VANs model (Amex, Vouchers, etc.) are not enabled for EDI channel.</li>
+</ul>
+
+<h1 id="concepts">Concepts</h1>
+
+<h2 id="what-is?">What is?</h2>
+
+<p>EDI - Electronic Data Interchange, it is a capture channel and batch transaction processing, through the exchange of files between the client and file transmission partner (VANs) and Cielo.</p>
+
+<h2 id="what-is-it-for?">What is it for?</h2>
+
+<ul>
+<li>  Authorize card not present transactions, especially recurring transactions, ex .: Publishing, Insurance, Academies, etc.</li>
+<li>  Cancel card transactions, present or not present, independent of the channel where the commitment was made: Machine, TEF, E-Commerce or EDI.</li>
+<li>  Transactions IATA: International Air Cias used by that part of the IATA and GDS.</li>
+<li>  Electronic Statement: suitable for clients with large volume of transactions, in order to facilitate financial reconciliation.</li>
+</ul>
+
+<h2 id="how-it-works?">How it works?</h2>
+
+<ul>
+<li>  The customer, after accreditation in Cielo, requests the integration of documents and the creation of a mailbox for sending EDI files.</li>
+<li>  Develops the integration of their management systems, back office and business automation to format transactions according to the layout EDI (transaction file).</li>
+<li>  The Island Care EDI and Cielo partner (VAN), providing the customer supports needed during the integration phase.</li>
+<li>  The client sends the transaction files in the format (layout) specific EDI for the electronic mailbox. Exception: IATA transactions have their own layout.</li>
+<li>  These transactions are sent to the systems of Cielo, which will hold the Monday to Saturday processing and sending of these transactions to their card brands, for approval or cancellation thereof.</li>
+<li>  Cielo returns the customer file within 2 days, with the result of processing all transactions (approved or denied with their reasons).</li>
+</ul>
+
+<h1 id="general-considerations">General considerations</h1>
+
+<ul>
+<li>  The return file will be available to the merchant within 48 hours, using the same layout.</li>
+<li>  The Sales or Cancellation Remittance file submitted by 12:00 will be returned in D + 1.Files submitted after 12:00 will be considered as later day of the movement and his return will be on T + 2.</li>
+<li>  The movements are processed from Monday to Saturday. No processing on Sundays.</li>
+<li>  Banners credit card transactions can be sent: Visa, MasterCard, ELO (except IATA mode) and Diners.</li>
+<li>  Transaction Cias files. Via IATA airlines are not covered in this manual. They have specific layout.</li>
+<li>  <strong>We have no homologation environment for this service.</strong></li>
+</ul>
+
+<h2 id="names-of-files-returns:">Names of files returns:</h2>
+
+<ul>
+<li>  By submitting Cancellation submission file, the system can return two types of files: &ldquo;Retmov&rdquo; or &ldquo;Visa error&rdquo;.</li>
+<li>  &ldquo;Retmov&rdquo;: return file with all transactions (approved or denied).</li>
+<li>  &ldquo;Visa Error&rdquo;: transactions were not carried out due to the uploaded file structure problem, and all uncommitted transactions.</li>
+<li>  Possible typos, as well as the file structure, are the customer&rsquo;s responsibility.</li>
+</ul>
+
+<h1 id="tips-for-formatting-edi-files">Tips for formatting EDI files</h1>
+
+<h2 id="operating-summary-(os)">Operating Summary (OS)</h2>
+
+<p>Identifies the batch number, sales transactions group.</p>
+
+<h2 id="sales-receipt-(sr)">Sales Receipt (SR)</h2>
+
+<p>Each sale is recorded in a sales voucher.</p>
+
+<ul>
+<li>Each Operating Summary (RO) can contain up to 9,999 vouchers for sale (HP).</li>
+<li>Transactions should be grouped by type of transaction (cash or in installments store), and one should create a specific RO for each of them.</li>
+<li>  For each transaction group (batch / RO) must be generated header containing a movement, detail (s) and trailer.</li>
+<li>  For each number of dobby all the above rules should be applied.</li>
+<li>Must undergo header, detail and trailer for each contraption and each transaction summary (RO)</li>
+<li>  The file must be formatted with one single lot (RO) of installment sales for dobby and the first batch of sale (RO) cash for Dobby.</li>
+</ul>
+
+<h1 id="files-for-shipping-and/or-sales-return">Files for Shipping and/or Sales Return</h1>
+
+<p>File layout for Shipping and/or Sales Return</p>
+
+<h2 id="header-record">Header record</h2>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>ConsistenciesEDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Header identifies the type of record</td>
+<td>Necessarily equal to &ldquo;00&rdquo;</td>
+</tr>
+<tr>
+<td>002</td>
+<td>Date of filing</td>
+<td>3</td>
+<td>8</td>
+<td>N</td>
+<td>Data generation and transmission of movement</td>
+<td>Required field format should be YYYYMMDD</td>
+</tr>
+<tr>
+<td>003</td>
+<td>Operational summary of the number (OS)</td>
+<td>11</td>
+<td>7</td>
+<td>N</td>
+<td>Informed by the establishment, identifies the batch of transactions</td>
+<td>Required field. Do not send the same lot in a 30-day period of the previous submission</td>
+</tr>
+<tr>
+<td>004</td>
+<td>Reserved for the establishment</td>
+<td>18</td>
+<td>10</td>
+<td>X</td>
+<td>Exclusive use of the property is not used by CIELO</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>005</td>
+<td>Do not use</td>
+<td>28</td>
+<td>3</td>
+<td>N</td>
+<td>Constant = Zeros</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Cielo establishment number</td>
+<td>31</td>
+<td>10</td>
+<td>N</td>
+<td>The dobby (CIELO contract)</td>
+<td>Required field. Rejection is &lt;0 or non-numeric</td>
+</tr>
+<tr>
+<td>007</td>
+<td>Currency code</td>
+<td>41</td>
+<td>3</td>
+<td>N</td>
+<td>&ldquo;986&rdquo; - R $, &ldquo;840&rdquo; - US$</td>
+<td>Rejected if other than 986 or 840</td>
+</tr>
+<tr>
+<td>008</td>
+<td>Indicator process</td>
+<td>44</td>
+<td>1</td>
+<td>X</td>
+<td>&ldquo;P&rdquo; - Production</td>
+<td>Rejects is other than &ldquo;P&rdquo;</td>
+</tr>
+<tr>
+<td>009</td>
+<td>Sales Indicator</td>
+<td>45</td>
+<td>1</td>
+<td>X</td>
+<td>“V&quot; - sale</td>
+<td>Required field</td>
+</tr>
+<tr>
+<td>010</td>
+<td>Establishing special statement</td>
+<td>46</td>
+<td>01</td>
+<td>X</td>
+<td>Constant = white</td>
+<td>Only to be other than white so if the systems team determine.</td>
+</tr>
+<tr>
+<td>011</td>
+<td>Do not use</td>
+<td>47</td>
+<td>204</td>
+<td>X</td>
+<td>Constant = white</td>
+<td>not read</td>
+</tr>
+</tbody></table>
+
+<h3 id="subtitle">Subtitle</h3>
+
+<p>• POS = Field Start position in file;
+• TAM = Field Size
+• FOR = valid formats for the field contents, as follows:
+   * <strong>N</strong>= Numeric
+   * <strong>X</strong> = Alphanumeric</p>
+
+<h1 id="registration-detail">Registration Detail</h1>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>Consistencies EDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Identifies the detail record type</td>
+<td>Consistencies EDI</td>
+</tr>
+<tr>
+<td>002</td>
+<td>N. of the sales receipt (SR)</td>
+<td>3</td>
+<td>7</td>
+<td>N</td>
+<td>It is a sequential number assigned by the establishment, identifies the transaction within the batch</td>
+<td>Required field; Must be numeric; It can not be duplicated on the lot</td>
+</tr>
+<tr>
+<td>003</td>
+<td>Card number</td>
+<td>10</td>
+<td>19</td>
+<td>N</td>
+<td>N. aligned right card, with leading zeros</td>
+<td>Required field Must be between 16 and 19 digits</td>
+</tr>
+<tr>
+<td>004</td>
+<td>Authorization Code</td>
+<td>29</td>
+<td>6</td>
+<td>X</td>
+<td>The delivery, fill with zeros. In return, return with the authorization code</td>
+<td>No consistency in the time of shipment</td>
+</tr>
+<tr>
+<td>005</td>
+<td>Date of sale</td>
+<td>35</td>
+<td>8</td>
+<td>N</td>
+<td>DDMMYYYY format</td>
+<td>Only accept the specified format required field</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Option sale</td>
+<td>43</td>
+<td>1</td>
+<td>N</td>
+<td>&lsquo;0&rsquo; - the sight, &#39;2&rsquo; - Installment shopkeeper, &#39;4&rsquo; - shopkeeper Installment - Cia Aerea</td>
+<td>Within the same batch all transactions must have the same put option.</td>
+</tr>
+<tr>
+<td>007</td>
+<td>Sale value *</td>
+<td>44</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; the sale. Sale parceled =&gt; total amount of installments + value + shipment entry fee</td>
+<td>Required field - has to adhere to the &ldquo;put option&rdquo; - can not be less than zero / non-numeric</td>
+</tr>
+<tr>
+<td>008</td>
+<td>Number of installments</td>
+<td>59</td>
+<td>3</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros. Sale parceled =&gt; number of installments</td>
+<td>Required field - has to adhere to the &ldquo;put option&rdquo; - can not be less than zero\nonnumeric.</td>
+</tr>
+<tr>
+<td>009</td>
+<td>Funded Value *</td>
+<td>62</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros. Sale parceled =&gt; Original Value funded</td>
+<td>Can&rsquo;t be less than zero/nonnumeric</td>
+</tr>
+<tr>
+<td>010</td>
+<td>Input value *</td>
+<td>77</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros. Sale parceled =&gt; input value. <strong>Only Airlines Cias.</strong></td>
+<td>Can&rsquo;t be less than zero/nonnumeric</td>
+</tr>
+<tr>
+<td>011</td>
+<td>Boarding Fee *</td>
+<td>92</td>
+<td>15</td>
+<td>N</td>
+<td><strong>Fill only to Airlines Cias. Aeras.</strong> Otherwise fill with zeros</td>
+<td>Can&rsquo;t be less than zero/nonnumeric</td>
+</tr>
+<tr>
+<td>012</td>
+<td>Value share *</td>
+<td>107</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros.Sale parceled =&gt; value share (without rounding)</td>
+<td>Required Field.It can not be &lt;0 or non-numeric</td>
+</tr>
+<tr>
+<td>013</td>
+<td>In summary operations (SO)</td>
+<td>122</td>
+<td>7</td>
+<td>N</td>
+<td>Same as in the RO informed the header record</td>
+<td>Mandatory to use the same header number</td>
+</tr>
+<tr>
+<td>014</td>
+<td>Do not use</td>
+<td>129</td>
+<td>3</td>
+<td>N</td>
+<td>Constant = zeros</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>015</td>
+<td>Number of the establishment</td>
+<td>132</td>
+<td>10</td>
+<td>N</td>
+<td>The dobby (CIELO contract)</td>
+<td>It should be the same header</td>
+</tr>
+<tr>
+<td>016</td>
+<td>Reserved for the establishment</td>
+<td>142</td>
+<td>30</td>
+<td>X</td>
+<td>Exclusive use of the property is not used by CIELO</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>017</td>
+<td>Status of sale (return code). Detail field 023</td>
+<td>172</td>
+<td>2</td>
+<td>N</td>
+<td>The delivery complete with zeros, in return, will be formatted by CIELO containing status as table ANNEX I</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>018</td>
+<td>Expected date of settlement</td>
+<td>174</td>
+<td>8</td>
+<td>N</td>
+<td>The delivery complete with zeros; In return, it will be formatted by CIELO with the expected settlement date.</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>019</td>
+<td>Card due date</td>
+<td>182</td>
+<td>4</td>
+<td>X</td>
+<td>Format = AAMM</td>
+<td>Mandatory field</td>
+</tr>
+<tr>
+<td>020</td>
+<td>Do not use</td>
+<td>186</td>
+<td>7</td>
+<td>N</td>
+<td>Constant = zero</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>021</td>
+<td>Do not use</td>
+<td>193</td>
+<td>15</td>
+<td>N</td>
+<td>Constant = zero</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>022</td>
+<td>Do not use</td>
+<td>208</td>
+<td>03</td>
+<td>X</td>
+<td>Inform white spaces</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Error code</td>
+<td>211</td>
+<td>04</td>
+<td>X</td>
+<td>The delivery fill with white. In return, if any error is returned by Cielo as ANNEX II</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>024</td>
+<td>Reference</td>
+<td>215</td>
+<td>11</td>
+<td>X</td>
+<td>Constant = zero</td>
+<td>Should be white</td>
+</tr>
+<tr>
+<td>025</td>
+<td>New card</td>
+<td>226</td>
+<td>19</td>
+<td>X</td>
+<td>Na remessa preencher com brancos. No retorno, caso tenha convênio “renova fácil” virá o número cartão alinhado a esquerda com brancos direita.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>026</td>
+<td>New Due date</td>
+<td>245</td>
+<td>04</td>
+<td>N</td>
+<td>The delivery fill with white. In return, if you covenant &ldquo;renews easy&rdquo; will come to the New Due Date. New card</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>027</td>
+<td>Do not use</td>
+<td>249</td>
+<td>02</td>
+<td>X</td>
+<td>Constant = zero</td>
+<td>Not read</td>
+</tr>
+</tbody></table>
+
+<h2 id="trailler-register">Trailler register</h2>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>Consistencies EDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Identifies the type of record detail trailer</td>
+<td>Consistencies EDI</td>
+</tr>
+<tr>
+<td>002</td>
+<td>Number of records</td>
+<td>3</td>
+<td>7</td>
+<td>N</td>
+<td>Including header and trailer</td>
+<td>Rejeição se &lt;0 ou não numérico</td>
+</tr>
+<tr>
+<td>003</td>
+<td>Total gross amount (*)</td>
+<td>10</td>
+<td>15</td>
+<td>N</td>
+<td>Informed by the establishment - Total value of the lot, the sum of the field 007 Detail record.</td>
+<td>Rejection is &lt;0 or non-numeric. Rejects different value if the sum of the field 07</td>
+</tr>
+<tr>
+<td>004</td>
+<td>Total value accept (*)</td>
+<td>25</td>
+<td>15</td>
+<td>N</td>
+<td>The delivery complete with zeros; In return, will be formatted by Cielo with the amount accepted.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>005</td>
+<td>Total net value(*)</td>
+<td>40</td>
+<td>15</td>
+<td>N</td>
+<td>The delivery complete with zeros; In return, will be formatted by Cielo with total net value.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Expected date of credit</td>
+<td>55</td>
+<td>8</td>
+<td>N</td>
+<td>In return, will be formatted by Cielo with the expected payment date.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>007</td>
+<td>Do not use</td>
+<td>63</td>
+<td>188</td>
+<td>X</td>
+<td>Constant = white</td>
+<td>Not read</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">( * )These fields should be considered with two (2) decimal places, without commas, periods, or any other character to separate numbers.</aside>
+
+<ul>
+<li>Other sales on cancellation rules</li>
+</ul>
+
+<p>The cancellation of any transaction will only be accepted if there is available balance on the Financial Schedule Commercial Establishment to cover the value of the requested cancellation.</p>
+
+<ul>
+<li>Cancellations can be requested up to 365 days from the date of authorization.</li>
+<li>  For sales cancellations, the fields 004, 005, 006, 007 and 008 detail line must be filled with the same information the sale, respecting the time and date of authorization and capture of Brazil.</li>
+<li>  It allowed the cancellation Total or Partial sale.</li>
+<li>  Partial cancellations can be sent to the total value of the transaction, in compliance with the following conditions: </li>
+<li>  Transactions Vista: they can be sent over a partial cancellation of the same transaction on the same day if they are sent in different Lots.</li>
+<li>  Transactions Installment Shop: does not allow partial cancellation of the same transaction on the same day.</li>
+<li>Cancellations of transactions authorized through the EDI channel can only be ordered upon receipt of the file the return authorization transaction (up to 48 hours after sending the file).</li>
+</ul>
+
+<h1 id="batch-files-and-cancellations-return">Batch files and Cancellations Return</h1>
+
+<p>Remittance File layout and Cancellations Return (not PCI) used for transaction cancellations through the EDI channel, eg recurring transactions.</p>
+
+<h2 id="without-pci-certification-key:">Without PCI certification key:</h2>
+
+<ul>
+<li>  Number of Dobby;</li>
+<li>  Card number;</li>
+<li>  Date,</li>
+<li>  Value</li>
+<li>  Authorization of the original transaction;</li>
+</ul>
+
+<h2 id="header-registry">Header registry</h2>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>Consistencies EDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Header identifies the type of record Must be &ldquo;00&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>002</td>
+<td>Date of filing</td>
+<td>3</td>
+<td>8</td>
+<td>N</td>
+<td>Data generation and transmission of movement Required field.</td>
+<td>Format should be YYYYMMDD</td>
+</tr>
+<tr>
+<td>003</td>
+<td>Operational summary of the number (RO)</td>
+<td>11</td>
+<td>7</td>
+<td>N</td>
+<td>Informed by the establishment, identifies the batch of transactions. Required field.</td>
+<td>Do not send the same lot in a 30-day period of the previous submission</td>
+</tr>
+<tr>
+<td>004</td>
+<td>Reserved for the establishment</td>
+<td>18</td>
+<td>10</td>
+<td>X</td>
+<td>Exclusive use of the property is not used by CIELO</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>005</td>
+<td>Do not use</td>
+<td>28</td>
+<td>3</td>
+<td>N</td>
+<td>Constant = Zeros</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Cielo establishment number</td>
+<td>31</td>
+<td>10</td>
+<td>N</td>
+<td>No. Dobby (CIELO contract)</td>
+<td>Required field.</td>
+</tr>
+<tr>
+<td>007</td>
+<td>Currency code</td>
+<td>41</td>
+<td>3</td>
+<td>N   &ldquo;986&rdquo; - R $. &ldquo;840&rdquo; - US $   Rejected if other than 986 or 840</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>008</td>
+<td>Indicator process  44  1   X   &ldquo;P&rdquo; - Production    Rejects is other than &ldquo;P&rdquo;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>009</td>
+<td>Sales cancellation indicator   45  1   X   &ldquo;C&rdquo; - cancellation of sale Credit sight.&ldquo;P&rdquo; - selling cancellation Installment Shop. &ldquo;D&rdquo; - selling cancellation Debit   If different field of &ldquo;C&rdquo; or &ldquo;P&rdquo; or &ldquo;D&rdquo; the lot will be rejected.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>010</td>
+<td>Establishing special statement 46  01  X   Constant = white    Only to be other than white so if the systems team determine.</td>
+<td>011</td>
+<td>Do not use</td>
+<td>47</td>
+<td>204</td>
+<td>X</td>
+</tr>
+</tbody></table>
+
+<h2 id="registration-detail">Registration Detail</h2>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>Consistencies EDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Identifies the detail record type    Only accepted if equal to &ldquo;01&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>002</td>
+<td>No. sale receipt (CV)</td>
+<td>3</td>
+<td>7</td>
+<td>N</td>
+<td>It is a sequential number assigned by the establishment, identifies the transaction within the batch.  Required field; Must be numeric; It can not be duplicated on the lot.</td>
+<td></td>
+</tr>
+<tr>
+<td>003</td>
+<td>card number</td>
+<td>10</td>
+<td>19</td>
+<td>N</td>
+<td>No. aligned right card, with leading zeros Required field; must be between 16 and 19 digits.</td>
+<td></td>
+</tr>
+<tr>
+<td>004</td>
+<td>Authorization Code</td>
+<td>29</td>
+<td>6</td>
+<td>X</td>
+<td>Fill with the authorization code from the sale.</td>
+<td>Required field</td>
+</tr>
+<tr>
+<td>005</td>
+<td>Date of sale</td>
+<td>5</td>
+<td>8</td>
+<td>N</td>
+<td>DDMMYYYY</td>
+<td>Required field only accept the specified format</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Option sale</td>
+<td>43</td>
+<td>1</td>
+<td>N</td>
+<td>&#39;0&rsquo;- the sight, &#39;2&rsquo; - Installment shopkeeper, &#39;4&rsquo; -. Shopkeeper Installment Airline Required Field. Within the same batch all transactions must have the same put option</td>
+<td></td>
+</tr>
+<tr>
+<td>007</td>
+<td>Sale value*</td>
+<td>44</td>
+<td>15</td>
+<td>N</td>
+<td>Sale view =&gt; value sale, sale parceled =&gt; sum of installments and input value. Required field. You have to respect the &ldquo;put option&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>008</td>
+<td>Number of installments</td>
+<td>59</td>
+<td>3</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros, sale parceled =&gt; number of installments    Required field. You have to respect the &ldquo;put option&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>009</td>
+<td>The amount financed*</td>
+<td>62</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros, sale parceled =&gt; funded original value  Required field. You have to respect the &ldquo;put option&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>010</td>
+<td>Input value*</td>
+<td>77</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros, sale parceled =&gt; input value. Only Cias. Flight Required field. You have to respect the &ldquo;put option&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>011</td>
+<td>Departure Tax Value*</td>
+<td>92</td>
+<td>15</td>
+<td>N</td>
+<td>Fill only to Cias.Aeras.Otherwise fill with zeros Rejected if nonzero or non-numeric</td>
+<td></td>
+</tr>
+<tr>
+<td>012</td>
+<td>Value share*</td>
+<td>107</td>
+<td>15</td>
+<td>N</td>
+<td>Cash sale =&gt; fill with zeros, sale parceled =&gt; Value of the plot (not to rounding)   Required field. You have to respect the &ldquo;put option&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>013</td>
+<td>No. summary operations (RO)</td>
+<td>122</td>
+<td>7</td>
+<td>N</td>
+<td>Same as No. RO informed the header record  Mandatory to use the same header number</td>
+<td></td>
+</tr>
+<tr>
+<td>014</td>
+<td>Do not use</td>
+<td>129</td>
+<td>3</td>
+<td>N</td>
+<td>Constant = zeros</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>015</td>
+<td>Number of the establishment</td>
+<td>132</td>
+<td>10</td>
+<td>N</td>
+<td>No. Dobby (CIELO contract)</td>
+<td>It should be the same header</td>
+</tr>
+<tr>
+<td>016</td>
+<td>Reserved for the establishment</td>
+<td>142</td>
+<td>30</td>
+<td>X</td>
+<td>Exclusive use of the property is not used by CIELO No checks</td>
+<td></td>
+</tr>
+<tr>
+<td>017</td>
+<td>Status of sale (return code). Detail field 023 172 2   N   The delivery fill with zeros. In return, it will be formatted by CIELO containing status as table ANNEX I</td>
+<td>No checks</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>018</td>
+<td>Expected date of settlement</td>
+<td>174</td>
+<td>8</td>
+<td>N</td>
+<td>The delivery complete with zeros; In return, it will be formatted by CIELO with the expected settlement date.</td>
+<td>Not read</td>
+</tr>
+<tr>
+<td>019</td>
+<td>Validity of the card</td>
+<td>182</td>
+<td>4</td>
+<td>X</td>
+<td>Format = AAMM.</td>
+<td>It may be padded with zeros</td>
+</tr>
+<tr>
+<td>020</td>
+<td>Operational summary of the number (RO) Original</td>
+<td>186</td>
+<td>7</td>
+<td>N</td>
+<td>Inform the original RO in the number of sale   Required field. Rejected if &lt;or = 0 or non-numeric</td>
+<td></td>
+</tr>
+<tr>
+<td>021</td>
+<td>Reimbursement of the value/cancellation</td>
+<td>193</td>
+<td>15</td>
+<td>N</td>
+<td>Amount to be reimbursed   Required field. Rejected if &lt;or = 0 or non-numeric</td>
+<td></td>
+</tr>
+<tr>
+<td>022</td>
+<td>Do not use</td>
+<td>208</td>
+<td>03</td>
+<td>X</td>
+<td>Constant = white   No checks</td>
+<td></td>
+</tr>
+<tr>
+<td>023</td>
+<td>Error code</td>
+<td>211</td>
+<td>04</td>
+<td>X</td>
+<td>The remittance fill with white.In return, if any error is returned by Cielo as ANNEX II    No checks</td>
+<td></td>
+</tr>
+<tr>
+<td>024</td>
+<td>Reference number</td>
+<td>215</td>
+<td>11</td>
+<td>X</td>
+<td>Constant = white Should be white</td>
+<td></td>
+</tr>
+<tr>
+<td>025</td>
+<td>New card</td>
+<td>226</td>
+<td>19</td>
+<td>X</td>
+<td>The delivery fill with white. In return, if you covenant &ldquo;renews easy&rdquo; will come the card number aligned left to right white.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>026</td>
+<td>New Due Date</td>
+<td>245</td>
+<td>04</td>
+<td>N</td>
+<td>The delivery fill with white. In return, if you covenant &ldquo;renews easy&rdquo; will come to the Maturity Date. the new card.</td>
+<td>No checks</td>
+</tr>
+<tr>
+<td>027</td>
+<td>Do not use</td>
+<td>249</td>
+<td>02</td>
+<td>X</td>
+<td>Constant = white</td>
+<td>Not read</td>
+</tr>
+</tbody></table>
+
+<h2 id="trailler-record">Trailler record</h2>
+
+<table><thead>
+<tr>
+<th>SEQ</th>
+<th>DESCRIPTION</th>
+<th>POS</th>
+<th>TAM</th>
+<th>FOR</th>
+<th>COMMENTS</th>
+<th>Consistencies EDI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>Record type</td>
+<td>1</td>
+<td>2</td>
+<td>N</td>
+<td>Identifies the type of record detail trailer Mandatory use of the code &ldquo;99&rdquo;</td>
+<td></td>
+</tr>
+<tr>
+<td>002</td>
+<td>Number of records</td>
+<td>3</td>
+<td>7</td>
+<td>N</td>
+<td>Including header and trailer   Rejection is &lt;0 or non-numeric</td>
+<td></td>
+</tr>
+<tr>
+<td>003</td>
+<td>Total gross amount (*) 10  15  N   Informed by the establishment - the total value of the lot, the sum of the field 007 Detail record  Rejection is &lt;0 or non-numeric. Rejects different value if the sum of the field 07</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>004</td>
+<td>Total value accept (*) 25  15  N   The delivery complete with zeros; In return, it will be formatted in Cielo a total amount accepted.</td>
+<td>No checks</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>005</td>
+<td>Net total amount (*)   40  15  N   The delivery complete with zeros; In return, will be formatted by Cielo with total net value.</td>
+<td>No checks</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>006</td>
+<td>Expected date of credit    55  8   N   The delivery complete with zeros; In return, will be formatted by Cielo with the expected payment date.</td>
+<td>No checks</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>007</td>
+<td>Do not use 63  188 X   Constant = white</td>
+<td>Not read</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>(*) - These fields should be considered with two (2) decimal places, without commas, periods, or any other character to separate numbers.</p>
+
+<h1 id="attachments">Attachments</h1>
+
+<h2 id="annex-i---return-codes-table">ANNEX I - Return Codes Table</h2>
+
+<table><thead>
+<tr>
+<th>Rejection code</th>
+<th>Occurrence Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>00</td>
+<td>Transaction ok (transaction accepted)</td>
+</tr>
+<tr>
+<td>01</td>
+<td>Error in file</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Invalid authorization code</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Invalid property</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Mixed batch</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Invalid number of installments</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Difference in value in RO</td>
+</tr>
+<tr>
+<td>07</td>
+<td>RO invalid number (BH record)</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Invalid input value</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Invalid shipping rate value</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Invalid share value</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Invalid transaction code</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Invalid transaction</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Invalid value</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Invalid cancellation value</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Not located the original transaction (for cancellation)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Number of items reported in the RO not compatible with CVs</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Invalid number of reference</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Cancellation for transaction installments already canceled</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Cancellation of value greater than the value of the sale</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Cancellation of value greater than allowed (heave)</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Number of invalid original RO (I2 record)</td>
+</tr>
+<tr>
+<td>42</td>
+<td>Card canceled</td>
+</tr>
+<tr>
+<td>54</td>
+<td>You may not partial cancellation of an installment plan that is being disputed by the carrier.</td>
+</tr>
+<tr>
+<td>56</td>
+<td>Invalid card type of plan</td>
+</tr>
+<tr>
+<td>59</td>
+<td>Invalid card type 60 Invalid Data</td>
+</tr>
+<tr>
+<td>71</td>
+<td>Transaction rejected by the issuing bank</td>
+</tr>
+<tr>
+<td>72</td>
+<td>Transaction rejected by the issuing bank</td>
+</tr>
+<tr>
+<td>73</td>
+<td>Card problem - retain the card</td>
+</tr>
+<tr>
+<td>74</td>
+<td>Denied authorization</td>
+</tr>
+<tr>
+<td>75</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>76</td>
+<td>Transaction rejected by the issuing bank</td>
+</tr>
+<tr>
+<td>77</td>
+<td>Syntax error - redo the transaction</td>
+</tr>
+<tr>
+<td>78</td>
+<td>There was no authorization issuer</td>
+</tr>
+<tr>
+<td>79</td>
+<td>Card canceled</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Card canceled</td>
+</tr>
+<tr>
+<td>81</td>
+<td>Insufficient funds</td>
+</tr>
+<tr>
+<td>82</td>
+<td>Expired card or expiration date wrong</td>
+</tr>
+<tr>
+<td>87</td>
+<td>Card not allowed</td>
+</tr>
+<tr>
+<td>88</td>
+<td>Exceeded the number of transactions in the period</td>
+</tr>
+<tr>
+<td>89</td>
+<td>Message differs from the original message</td>
+</tr>
+<tr>
+<td>92</td>
+<td>Issuing bank without communication</td>
+</tr>
+<tr>
+<td>93</td>
+<td>Cancellation more than 365 days</td>
+</tr>
+<tr>
+<td>94</td>
+<td>Duplication of airlines</td>
+</tr>
+<tr>
+<td>95</td>
+<td>No outstanding balance</td>
+</tr>
+<tr>
+<td>99</td>
+<td>Other reasons</td>
+</tr>
+</tbody></table>
+
+<h2 id="annex-ii---detailed-error-status-for-sale-set-in-the-countryside-23">ANNEX II - Detailed error status for Sale Set in the countryside 23</h2>
+
+<table><thead>
+<tr>
+<th>CODE</th>
+<th>Complement</th>
+<th>Error</th>
+<th>EC action</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>E001</td>
+<td>Lot exceeded number of records    Review file structure</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E001</td>
+<td>Structure of incorrect batch  Review file structure</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E001</td>
+<td>Invalid transmission medium   Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E002</td>
+<td>Review card data  Redo the transaction with valid data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E005</td>
+<td>Establishment number not found    Check the data of the Establishment Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E005</td>
+<td>Problem in your registration in Cielo Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E010</td>
+<td>Problem in your registration in Cielo Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E023</td>
+<td>Problem in your registration in Cielo Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E024</td>
+<td>Card Type not allowed in this channel Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E044</td>
+<td>Transaction date does not give    Reviewing data from the original transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E045</td>
+<td>Authorization code not found  Check the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E048</td>
+<td>Incorrect card expiration date    Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E054</td>
+<td>Structure of incorrect batch  Review your file</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E055</td>
+<td>Installment amount invalidates    Check the amount of installments</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E056</td>
+<td>Transaction not allowed to Register   Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E057</td>
+<td>Card canceled Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E061</td>
+<td>Review card data  Redo the transaction with valid data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E094</td>
+<td>Transaction not permitted for International card  Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E095</td>
+<td>Transaction not permitted for Debit Card  Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E097</td>
+<td>Installments with less than R $ 5.00  Retrace adjusting the amount of parcels</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E101</td>
+<td>Transaction rejected by the Issuing bank  Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E102</td>
+<td>Transaction rejected by the Issuing bank  Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E103</td>
+<td>Problem in your registration in Cielo Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E104</td>
+<td>Card canceled Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E105</td>
+<td>Transaction rejected by the Issuing bank  Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E107</td>
+<td>Transaction rejected by the Issuing bank  Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction not allowed on this channel   Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction currency dollar not allowed.  Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction without authorization code    Redo including the authorization code</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction not allowed to Register Applicant Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Previously authorized transaction Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Card not allowed to Registration Dollar   Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction parceled Not Allowed  Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Problem in your registration in Cielo Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction not allowed   Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Transaction not allowed to Register   Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>International transaction card not allowed to Register    Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E112</td>
+<td>Invalid transaction data  Review transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E114</td>
+<td>Review card data  Redo the transaction with valid data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E141</td>
+<td>Card canceled Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E143</td>
+<td>Card canceled Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E151</td>
+<td>Unauthorized transaction by the Issuer bank   Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E154</td>
+<td>Incorrect card expiration date    Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E157</td>
+<td>Card canceled Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E158</td>
+<td>Card Type not allowed in this channel Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E162</td>
+<td>Card not allowed for this transaction Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E180</td>
+<td>Transaction date does not give    Reviewing data from the original transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E182</td>
+<td>Security code invalid card    Review transaction data/Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E191</td>
+<td>Issuing Bank without communication    Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E192</td>
+<td>Applicable for air companies  Applicable for air companies</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E205</td>
+<td>Review card data  Redo the transaction with valid data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E207</td>
+<td>Lot number invalid    Review the Lot number</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E207</td>
+<td>Batch field is not numeric    Review the Lot number</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E207</td>
+<td>Number of duplicate Lot   Review the Lot number</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E209</td>
+<td>Applicable for air companies  Review the value</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E210</td>
+<td>Installment amount invalidates    Field zeroed number of installments</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E210</td>
+<td>Installment amount invalidates    Number of plots exceeded limit</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E210</td>
+<td>Product not authorized for your property  Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E210</td>
+<td>Larger amount of shares permitted Contact Cielo to change registration installments</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E211</td>
+<td>Applicable for air companies  Review the value</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E212</td>
+<td>Applicable for air companies  Review the value</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E213</td>
+<td>Cancellation value not allowed    Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E214</td>
+<td>Not located Transaction   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E215</td>
+<td>Transaction already canceled  Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E216</td>
+<td>Transaction previously canceled   Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E217</td>
+<td>Cancellation value higher sales   Review transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E218</td>
+<td>Cancellation not allowed in this channel  Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E219</td>
+<td>Not located RO Number Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E220</td>
+<td>Period exceeded to cancel transaction Not resubmit the transaction</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E900</td>
+<td>Record Type Invalid   Review file structure</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E901</td>
+<td>Header date of the deposit Invalid    Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E902</td>
+<td>Operations Summary Number (RO) of the Header Invalid  Operations Review Summary Number (RO)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E903</td>
+<td>Header Establishment number Invalid   Review the number of Establishment / Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E904</td>
+<td>Currency Header Invalid   Review the structure of Header</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E905</td>
+<td>Header Test Invalid Indicator Review the structure of Header</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E906</td>
+<td>Selling indicator Invalid Header  Review the structure of Header</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E911</td>
+<td>Sales Receipt Number (CV) Invalid Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E912</td>
+<td>Date of Sale Invalid  Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E913</td>
+<td>Option Sale Invalid   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E914</td>
+<td>Card Number Invalid   Review the transaction data/Contact Your Customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E915</td>
+<td>Invalid value Sale    Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E916</td>
+<td>Invalid number of plots   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E917</td>
+<td>Invalid value Funded  Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E918</td>
+<td>Input value Invalid   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E919</td>
+<td>Rate value Invalid Boarding   Applicable for air companies</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E920</td>
+<td>Portion of value Invalid  Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E921</td>
+<td>Operations Summary Number (RO) Invalid    Operations Review Summary Number (RO)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E922</td>
+<td>Invalid Establishment Number  Review the number of Establishment / Contact Cielo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E923</td>
+<td>Validity of Invalid Card  Contact your customer</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E924</td>
+<td>Operations Summary Number (RO) Original Invalid   Operations Review Summary Number (RO)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E925</td>
+<td>Invalid refund of value   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E926</td>
+<td>Number of Invalid Reference   Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E930</td>
+<td>Trailer Records of quantity does not confer   Review the number of records</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E931</td>
+<td>Total gross amount does not confer    Review the transaction data</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+            </div>
+        </div>
+    </body>
+    </html>
