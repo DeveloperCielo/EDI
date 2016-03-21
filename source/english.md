@@ -4,7 +4,7 @@ title: Manual of EDI Integration
 search: true
 
 toc_footers:
-  - <a href='extrato-edi.html'>EDI Manual Statement</a>
+  - <a href='index.html'>EDI Manual Statemen</a>
 ---
 
 # Introduction
