@@ -138,11 +138,11 @@ File layout for Shipping and/or Sales Return
 
 ### Subtitle
 
-•	POS = Field Start position in file;
-•	TAM = Field Size
-•	FOR = valid formats for the field contents, as follows:
-   * **N**= Numeric
-   * **X** = Alphanumeric
+* **POS** = Field Start position in file;
+* **TAM** = Field Size
+* **FOR** = valid formats for the field contents, as follows:
+    * **N** = Numeric
+    * **X** = Alphanumeric
 
 # Registration Detail
 
@@ -190,7 +190,7 @@ File layout for Shipping and/or Sales Return
 
 <aside class="notice">( * )These fields should be considered with two (2) decimal places, without commas, periods, or any other character to separate numbers.</aside>
 
-* Other sales on cancellation rules
+# Other sales on cancellation rules
 
 The cancellation of any transaction will only be accepted if there is available balance on the Financial Schedule Commercial Establishment to cover the value of the requested cancellation.
 
@@ -198,11 +198,12 @@ The cancellation of any transaction will only be accepted if there is available 
 *	For sales cancellations, the fields 004, 005, 006, 007 and 008 detail line must be filled with the same information the sale, respecting the time and date of authorization and capture of Brazil.
 *	It allowed the cancellation Total or Partial sale.
 *	Partial cancellations can be sent to the total value of the transaction, in compliance with the following conditions: 
-*	Transactions Vista: they can be sent over a partial cancellation of the same transaction on the same day if they are sent in different Lots.
-*	Transactions Installment Shop: does not allow partial cancellation of the same transaction on the same day.
+*	In sight transactions: they can be sent over a partial cancellation of the same transaction on the same day if they are sent in different Lots.
+*	Installment transactions: does not allow partial cancellation of the same transaction on the same day.
 * Cancellations of transactions authorized through the EDI channel can only be ordered upon receipt of the file the return authorization transaction (up to 48 hours after sending the file).
 
 # Batch files and Cancellations Return
+
 Remittance File layout and Cancellations Return (not PCI) used for transaction cancellations through the EDI channel, eg recurring transactions.
 
 ## Without PCI certification key:
