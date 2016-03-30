@@ -43,7 +43,7 @@
         </div>
         <h2 class="toc-footer-title">Materiais complementares</h2>
         <ul class="toc-footer">
-            <li><a href='extrato-edi.html'>EDI Manual Statement</a></li>
+            <li><a href='index.html'>EDI Manual Statemen</a></li>
         </ul>
         <div class="links-footer">
             <ul class="link-list">
@@ -330,11 +330,16 @@ As described above, some features are necessary:</p>
 
 <h3 id="subtitle">Subtitle</h3>
 
-<p>• POS = Field Start position in file;
-• TAM = Field Size
-• FOR = valid formats for the field contents, as follows:
-   * <strong>N</strong>= Numeric
-   * <strong>X</strong> = Alphanumeric</p>
+<ul>
+<li><strong>POS</strong> = Field Start position in file;</li>
+<li><strong>TAM</strong> = Field Size</li>
+<li><strong>FOR</strong> = valid formats for the field contents, as follows:
+
+<ul>
+<li><strong>N</strong> = Numeric</li>
+<li><strong>X</strong> = Alphanumeric</li>
+</ul></li>
+</ul>
 
 <h1 id="registration-detail">Registration Detail</h1>
 
@@ -674,9 +679,7 @@ As described above, some features are necessary:</p>
 
 <aside class="notice">( * )These fields should be considered with two (2) decimal places, without commas, periods, or any other character to separate numbers.</aside>
 
-<ul>
-<li>Other sales on cancellation rules</li>
-</ul>
+<h1 id="other-sales-on-cancellation-rules">Other sales on cancellation rules</h1>
 
 <p>The cancellation of any transaction will only be accepted if there is available balance on the Financial Schedule Commercial Establishment to cover the value of the requested cancellation.</p>
 
@@ -685,8 +688,8 @@ As described above, some features are necessary:</p>
 <li>  For sales cancellations, the fields 004, 005, 006, 007 and 008 detail line must be filled with the same information the sale, respecting the time and date of authorization and capture of Brazil.</li>
 <li>  It allowed the cancellation Total or Partial sale.</li>
 <li>  Partial cancellations can be sent to the total value of the transaction, in compliance with the following conditions: </li>
-<li>  Transactions Vista: they can be sent over a partial cancellation of the same transaction on the same day if they are sent in different Lots.</li>
-<li>  Transactions Installment Shop: does not allow partial cancellation of the same transaction on the same day.</li>
+<li>  In sight transactions: they can be sent over a partial cancellation of the same transaction on the same day if they are sent in different Lots.</li>
+<li>  Installment transactions: does not allow partial cancellation of the same transaction on the same day.</li>
 <li>Cancellations of transactions authorized through the EDI channel can only be ordered upon receipt of the file the return authorization transaction (up to 48 hours after sending the file).</li>
 </ul>
 
