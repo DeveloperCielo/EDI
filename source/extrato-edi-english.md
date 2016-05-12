@@ -1,6 +1,6 @@
 ---
 
-title: Development Manual Extract EDI
+title: Development Eletronic Data Interchange Manual 
 
 search: true
 
@@ -10,9 +10,7 @@ toc_footers:
 
 # Introduction
 
-The Electronic Statement (EDI) is a product offered by Cielo to customers requiring automation in conciliation. In it, the
-information is transmitted in a standardized manner without manual intervention through the EDI channel, providing agility and security
-in the traffic information.
+The Eletronic Data Interchange Report (EDI) is a product offered by Cielo to customers requiring automation in conciliation. In this case, the information is transmitted in a standardized manner without manual intervention through the EDI channel, providing agility and security in the traffic information.
 
 ![Fluxo](images/fluxo-edi.jpg)
 
@@ -26,12 +24,6 @@ in the traffic information.
 
 ## Attendance
 
-### Support Center:
-
-*+55 4002-9700 - *Capital and Metropolitan Regions*
-* **Other Places**: 0800.570.1700
-* From Monday to Saturday, from 8 to 22 hours.
-
 ### EDI - Specialized attendance
 
 * 4002 5270 - capitals, metropolitan areas and other locations
@@ -42,17 +34,13 @@ in the traffic information.
 
 www.cielo.com.br
 
-# Types of EDI extract
+# Types of Eletronic Data Interchange Report
 
-You can request to receive the following types of Electronic extract files:
+You can request to receive the following types of Eletronic Data Interchange Report:
 
 |File Type|Information|Record Type|Reconciliation|
 |---------------|----------|----------------|-----------|
-|03 - Selling Installment Plan|<ul><li> completed sales (reported) yesterday rejected adjustments and transactions, with the forecast 
-of payment </li><li> All installment plan sale held on previous day </ul><br/> <strong> Note: </strong> forecasting payment is sent only to
-the first installment. If changed by tweaking the acceleration records and rescheduling of the involved parcels will be presented|<ul><li> 
-0 - Header </li><li> 1 - RO Detail (with the first installment) </li><. li> 2 - Detail CV </ li> <li> 1 - Details RO 
-(forecast of the second installment on) </li><li> 9 - trailer </li></ul>|Check that all sales They were received by Cielo.|
+|03 - Selling Installment Plan|<ul><li> . Completed sales (reported) in the previous day, rejected adjustments and transactions, with the forecast of payment.</li><li> All installment plan sale held on previous day </ul><br/><strong> Note: </strong> forecasting payment is sent only to the first installment. If changed by tweaking the acceleration records and rescheduling of the involved parcels will be presented <ul><li>| 0 - Header </li><li> 1 - RO Detail (with the first installment) </li><li> 2 - Detail CV </li> <li> 1 - Details RO (forecast of the second installment on) </li><li> 9 - trailer </li></ul>|Check that all sales They were received by Cielo.|
 |04 - Payments|<ul><li> Amounts paid on current account on the day of submission of the Statement: Details the ROs and adjustments 
 compensated the day </li><li> Transactions offset, as anticipated or transferred previously and payments of outstanding installments 
 </li></ul>|<ul><li> 0 - Header </li><li> 1 - Details RO </li><li> 2 - Detail CV </li>< li> 9 - trailer </li></ul>|Check origin of the payment 
