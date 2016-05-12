@@ -313,7 +313,7 @@ It may also be necessary to include new types of different registers 0, 1, 2, 3,
 
 * When a credit value is clearing process with a value to debt, both will be sent in the payment file in the clearing date later than 
 scheduled payment date. The status sent to the bank to be displayed again in the payment statement when the bank domicile return a 
-credit order.1.0
+credit order.
 
 ## Table IV - Product Code
 
