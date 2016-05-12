@@ -43,33 +43,22 @@ You can request to receive the following types of Eletronic Data Interchange Rep
 |03 - Selling Installment Plan|<ul><li> . Completed sales (reported) in the previous day, rejected adjustments and transactions, with the forecast of payment.</li><li> All installment plan sale held on previous day </ul><br/><strong> Note: </strong> forecasting payment is sent only to the first installment. If changed by tweaking the acceleration records and rescheduling of the involved parcels will be presented <ul><li>| 0 - Header </li><li> 1 - RO Detail (with the first installment) </li><li> 2 - Detail CV </li> <li> 1 - Details RO (forecast of the second installment on) </li><li> 9 - trailer </li></ul>|Check that all sales They were received by Cielo.|
 |04 - Payments|<ul><li> Amounts paid on current account on the day of submission of the Statement: Details the ROs and adjustments 
 compensated the day </li><li> Transactions offset, as anticipated or transferred previously and payments of outstanding installments 
-</li></ul>|<ul><li> 0 - Header </li><li> 1 - Details RO </li><li> 2 - Detail CV </li>< li> 9 - trailer </li></ul>|Check origin of the payment 
-received (type of sale, flag and client/establishment that carried out the sale).Reconciliation of the current account.|
-|06 - Prepayment of Receivables|ARV operation conducted by Cielo the day before sending the file and its detail of ROs and CVs that were 
-anticipated|<ul><li> 0 - Header </li><li> 5 - detail of ARV </li><li> 6 - detail anticipated ROs </li><li> 2 - detail CV </li><li> 7 - ROs debts 
-detail advance </li> <li> 2 - detail CV </li> <li> 9 - trailer </li></ul><br/> <strong> Note:. </strong> will be shown the record type 5 for
-each transaction carried out by bank domicile.|Update the cash flow, considering the amounts already received by anticipation.|
-|07 - Assignment of Receivables|<Ul><li>assignment operation performed at home bank (Bradesco and HSBC) the day before sending the file and its detail 
-of the assigned ROs </li><li> It is shown the commercial condition negotiated or assigned portion </li></ul>|<ul><li> 0 - Header </li><li> 5 - receivables 
-assignment information </li><li> 6 - Detail assigned ROs </li><li> 9 - trailer </li></ul><br/><strong> Note:. </strong> will be shown the record type 5 for each
-transaction carried out by bank domicile.|Update the cash flow, considering the amounts already received by the transfer operation.|
-|08 - Pending Plots|File generated only once on the first day after the customer choose to receive the Sales extract with Installment Plan (file 03)|
-<ul> <li> 0 - Header </li> <li> 1 -. detail RO </li> <li> 2 - detail CV </li> <li> 9 - trailer </ li> </ ul>|Prepare a cash flow forecast of sales previously.|
-|09 - Balance at Open|<ul> <li> Receivables with Cielo, contemplating transactions, captured and processed, sales debit, credit and installment not yet settled 
-on the movement closed the previous month </ li> <li> an indicator of ARV and assignment is presented to facilitate the reconciliation of ROs involved in 
-anticipation of operations that change the amounts outstanding from the customer.</ li><li> the file is available monthly. </li></ul>|<ul><li> 0 - Header </li><li> 
-1 - RO Detail </ li> <li> 9 - trailer </ li> </ ul> | Refresh forward-receipts with due allowances of Advances, Disposals and Adjustments.|
+</li></ul>|<ul><li> 0 - Header </li><li> 1 - Details RO </li><li> 2 - Detail CV </li>< li> 9 - trailer </li></ul> Check origin of the payment received (type of sale, issuer and client/establishment that carried out the sale).Reconciliation of the current account.|
+|06 - Prepayment of Receivables|ARV operation conducted by Cielo the day before sending the file and its detail of ROs and CVs that were anticipated|<ul><li> 0 - Header </li><li> 5 - detail of ARV </li><li> 6 - detail anticipated ROs </li><li> 2 - detail CV </li><li> 7 - ROs debts detail advance </li> <li> 2 - detail CV </li> <li> 9 - trailer </li></ul><br/> <strong> Note:.</strong> will be shown the record type 5 for each transaction carried out by bank domicile.|Update the cash flow, considering the amounts already received by anticipation.|
+|07 - Assignment of Receivables|<Ul><li>assignment operation performed at home bank (Bradesco and HSBC) the day before sending the file and its detail of the assigned ROs </li><li> It is shown the commercial condition negotiated or assigned portion </li></ul>|<ul><li> 0 - Header </li><li> 5 - receivables assignment information </li><li> 6 - Detail assigned ROs </li><li> 9 - trailer </li></ul><br/><strong> Note:.</strong> will be shown the record type 5 for each transaction carried out by bank domicile.|Update the cash flow, considering the amounts already received by the transfer operation.|
+|08 - Pending Plots|File generated only once on the first day after the customer choose to receive the Sales extract with Installment Plan (file 03)|<ul> <li> 0 - Header </li> <li> 1 -. detail RO </li> <li> 2 - detail CV </li> <li> 9 - trailer </ li> </ ul>|Prepare a cash flow forecast of sales previously.|
+|09 - Balance at Open|<ul><li> Receivables with Cielo, contemplating transactions, captured and processed, sales debit, credit and installment not yet settled on the movement closed the previous month </li><li> an indicator of ARV and assignment is presented to facilitate the reconciliation of ROs involved in anticipation of operations that change the amounts outstanding from the customer.</ li><li> the file is available monthly.</li></ul>|<ul><li> 0 - Header </li><li> 1 - RO Detail </li><li> 9 - trailer </li></ul>| Refresh forward-receipts with due allowances of Advances, Disposals and Adjustments.|
 
 # Layouts of Records Types
 
-The information shown in the Electronic Statement - EDI (EDI) will be organized by the types of records that are described in sequence.
+The information shown in the Eletronic Data Interchange Report (EDI) will be organized by the types of records that are described in sequence.
 
 ## Type 0 - Header
 
-Identifies the header of each file electronically extract chain *.
+Identifies the header of each Eletronic Data Interchange Report chain*.
 
 |Home|End|Size|Type|Description|Data Edition|
-|------|---|-------|----|---------|----------------|
+|------|---|-------|----|---------|------------|
 |001|001|1|a|Record Type|Constant "0": Header identifies the type of record (beginning of the file).|
 |002|011|10|a|Establishment Matrix|establishment number matrix electronic statement chain.|
 |012|019|8|a|Data processing|YYYYMMDD - date the file was created.|
@@ -80,11 +69,11 @@ Identifies the header of each file electronically extract chain *.
 |048|049|2|a|Extract Option|See Table I.|
 |050|050|1|Alpha|VAN|"I" - OpenText (formerly GXS), "P" - TIVIT|.
 |051|070|20|alphanumeric|Mailbox| Information obtained in the registration form in VAN|
-|071|073|3|a|Layout Version| Constant "001".|
-|074|250|177|-|Use Cielo|Blank. Reserved for Cielo.|
+|071|073|3|a|Layout Version|Constant "001".|
+|074|250|177|-|Use Cielo|Blank.Reserved for Cielo.|
 
 (*) Register which allows the inclusion of all establishments controlled by the customer, regardless of the payment is centralized. 
-All * establishment numbers * should be informed in the registration form.
+All *establishment numbers* should be informed in the registration form.
 
 ## Type 1 - Detail Operations Summary (RO)
 
