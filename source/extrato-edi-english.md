@@ -84,14 +84,10 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |012|018|7|Num.|RO Number|Operation summary number. They contain information relating to a sales group performed on a certain date.|
 |019|020|2|Num.|Portion|In the case of split sale, will be formatted with the number of the parcel which is being released in the file submission date. In the case of cash sale, will be formatted with white.|
 |021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales.</li><li>"a" - acceleration of installments.</li><li>“  “ - other situations.</li></ul>|
-|022|023|2|Alpha|Plan|In the case of split sale, will be formatted with the largest number of parcels found that sales group. 
-If the RO has sales in 03, 04 or 06 installments, will be filled with 06.<br/>If an acceleration of installments will be formatted 
-with the most accelerated share.<br/><br/>Example: (019 positions to 023) <br/><ul><li>02A02. - indicates the acceleration of the 
-parcel 02 to 02, or only a portion.</li><li>03A08 - indicates the acceleration of the portion 03 to the portion 08 plan of sale, 
-or were accelerated 06 installments.</li></ul><br/>In the case of cash sale, will be formatted with white.|
+|022|023|2|Alpha|Plan|In the case of split sale, will be formatted with the largest number of parcels found that sales group. If the RO has sales in 03, 04 or 06 installments, will be filled with 06.<br/>If an acceleration of installments will be formatted with the most accelerated share.<br/><br/>Example: (019 positions to 023) <br/><ul><li>02A02. - indicates the acceleration of the installment 02 to 02, or only a portion.</li><li>03A08 - indicates the acceleration of the portion 03 to the portion 08 plan of sale or were accelerated 06 installments.</li></ul><br/>In the case of cash sale, will be formatted with white.|
 |024|025|2|Num.|Transaction Type|Code identifying the transaction - see Table II.|
 |026|031|6|Num.|Date of submission|YYMMDD - Date on which the RO is transmitted to Cielo.|
-|032|037|6|Num.|Estimated date of payment|YYMMDD - Expected date of payment.. In recovery, it can be updated after processing the transaction or adjustment.|
+|032|037|6|Num.|Estimated date of payment|YYMMDD - Expected date of payment.In recovery, it can be updated after processing the transaction or adjustment.|
 |038|043|6|Num.|Date of dispatch to the bank<sup>(5)</sup>|YYMMDD - Date on which payment file was sent to the bank. In recovery, it can be updated after processing the transaction or adjustment.|
 |044|044|1|Alpha|Sign gross|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt</li></ul>.|
 |045|057|13|Num.|Gross <sup>(1)</sup>|Sum of sales figures.|
