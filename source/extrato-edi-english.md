@@ -40,10 +40,10 @@ You can request to receive the following types of Eletronic Data Interchange Rep
 
 |File Type|Information|Record Type|Reconciliation|
 |---------------|----------|----------------|-----------|
-|03 - Selling Installment Plan|<ul><li>Completed sales (reported) in the previous day, rejected adjustments and transactions, with the forecast of payment.</li><li>All installment plan sale held on previous day.</ul><br /><strong>Obs.:</strong> forecasting payment
-is sent only to the first installment. If changed by tweaking the acceleration records and rescheduling of the involved installments will be presented.|<ul><li>0 - Header </li><li>1 - RO Detail (with the first installment)</li><li>2 - Detail CV </li><li>1 - Details RO (forecast of the second installment on)</li><li>9 - Trailer </li></ul>|Check that all sales They were received by Cielo.|
+|03 - Selling Installment Plan|<ul><li>Completed sales (reported) in the previous day, rejected adjustments and transactions, with the forecast of payment.</li><li>All installment plan sale held on previous day.</ul><br /><strong>Obs.:</strong>forecasting payment
+is sent only to the first installment. If changed by tweaking the acceleration records and rescheduling of the involved installments will be presented.|<ul><li>0 - Header</li><li>1 - RO Detail (with the first installment)</li><li>2 - Detail CV</li><li>1 - Details RO (forecast of the second installment on)</li><li>9 - Trailer</li></ul>|Check that all sales They were received by Cielo.|
 |04 - Payments|<ul><li> Amounts paid on current account on the day of submission of the Statement: Details the ROs and adjustments compensated the day</li><li>Transactions offset, as anticipated or transferred previously and payments of outstanding installments 
-</li></ul>|<ul><li>0 - Header </li><li>1 - Details RO</li><li>2 - Detail CV</li><li>9 - Trailer</li></ul>|Check origin of the payment received (type of sale, issuer and client/establishment that carried out the sale). Reconciliation of the current account.|
+</li></ul>|<ul><li>0 - Header</li><li>1 - Details RO</li><li>2 - Detail CV</li><li>9 - Trailer</li></ul>|Check origin of the payment received (type of sale, issuer and client/establishment that carried out the sale). Reconciliation of the current account.|
 |06 - * Prepayment of Receivables|ARV operation conducted by Cielo the day before sending the file and its detail of ROs and CVs that were anticipated|<ul><li>0 - Header</li><li>5 - Detail of ARV</li><li>6 - Detail anticipated ROs</li><li>2 - Detail CV </li><li>7 - ROs debts detail advance</li><li>2 - Detail CV </li><li>9 - Trailer</li></ul><br/><strong>Note.:</strong>It will be shown the record type 5 for each transaction carried out by home bank.|Update the cash flow, considering the amounts already received by anticipation.|
 |07 - Assignment of Receivables|<Ul><li>assignment operation performed at home bank (Bradesco and HSBC) the day before sending the file and its detail of the assigned ROs.</li><li>It is not shown the commercial condition negotiated or assigned installment.</li></ul>|<ul><li>0 - Header</li><li>5 - Receivables assignment details</li><li>6 - Detail assigned ROs</li><li>9 - Trailer</li></ul><br/><strong>Note.:</strong>It will be shown the record type 5 for each transaction carried out by home bank.|Update the cash flow, considering the amounts already received by the transfer operation.|
 |08 - Pending Installments|File generated only once on the first day after the customer choose to receive the Sales extract with Installment Plan (file 03).|<ul><li>0 - Header</li><li>1 - Detail RO</li><li>2 - Detail CV</li><li>9 - Trailer</li></ul>|Prepare a cash flow forecast of sales previously.|
@@ -86,55 +86,51 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |012|018|7|Num.|RO Number|Operation summary number. They contain information relating to a sales group performed on a certain date.|
 |019|020|2|Num.|Portion|In the case of split sale, will be formatted with the number of the parcel which is being released in the file
 submission date. In the case of cash sale, will be formatted with white.|
-|021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales </li><li> "a" - acceleration of installments </ li> <li> '."-. . other 
-situations </li></ul>|
-|022|023|2|Alpha|Plan| In the case of split sale, will be formatted with the largest number of parcels found that sales group. 
-If the RO has sales in 03, 04 or 06 installments, will be filled with <br/> 06. If an acceleration of installments will be formatted 
-with the most accelerated share <br/>. Example: (019 positions to 023) <br/><ul><li> 02A02. - indicates the acceleration of the 
-parcel 02 to 02, or only a portion </li><li> 03A08 - indicates the acceleration of the portion 03 to the portion 08 plan of sale, 
-or were accelerated 06 installments. </li></ul><br/> in the case of cash sale, will be formatted with white.|
+|021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales.</li><li>"a" - acceleration of installments.</li><li>“  “ - other 
+situations.</li></ul>|
+|022|023|2|Alpha|Plan|In the case of split sale, will be formatted with the largest number of parcels found that sales group. 
+If the RO has sales in 03, 04 or 06 installments, will be filled with 06.<br/>If an acceleration of installments will be formatted 
+with the most accelerated share.<br/><br/>Example: (019 positions to 023) <br/><ul><li>02A02. - indicates the acceleration of the 
+parcel 02 to 02, or only a portion.</li><li>03A08 - indicates the acceleration of the portion 03 to the portion 08 plan of sale, 
+or were accelerated 06 installments.</li></ul><br/>In the case of cash sale, will be formatted with white.|
 |024|025|2|Num.|Transaction Type|Code identifying the transaction - see Table II.|
 |026|031|6|Num.|Date of submission|YYMMDD - Date on which the RO is transmitted to Cielo.|
 |032|037|6|Num.|Estimated date of payment|YYMMDD - Expected date of payment.. In recovery, it can be updated after processing the transaction or adjustment.|
-|038|043|6|Num.|Date of dispatch to the bank|YYMMDD - Date on which payment file was sent to the bank.. In recovery, it can be updated
-after processing the transaction or adjustment.|
-|044|044|1|Alpha|Sign gross|<ul> <li> "+" identifies value credit </li><li> "-" identifies value debt </ li> </ ul>..|
-|045|057|13|Num.|Gross (*)|Sum of sales figures.|
-|058|058|1|Alpha|Commission sign| <Ul> <li> "+" identifies value credit </li><li> "-" identifies value debt </li></ul>|
-|059|071|13|Num.|Commission value (*)| commission value discounted on sales.|
-|072|072|1| Alpha|Rejected value of the sign|<Ul> <li> "+" value identifies the credit </li><li> "-" identifies value debt </li></ul>|
-|073|085|13|Num.|Rejected Value (*)|If there is rejection, will be filled with the sum of rejected transactions./
-|086|086|1|Alpha|Signal net|<Ul><li> "+" identifies value credit </ li> <li> "-" identifies value debt </li> </ul >|
-|087|099|13|Num.|Net (*)|Sales value minus the amount of commission.|
+|038|043|6|Num.|Date of dispatch to the bank<sup>(5)</sup>|YYMMDD - Date on which payment file was sent to the bank. In recovery, it can be updated after processing the transaction or adjustment.|
+|044|044|1|Alpha|Sign gross|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt</li></ul>.|
+|045|057|13|Num.|Gross <sup>(1)</sup>|Sum of sales figures.|
+|058|058|1|Alpha|Commission <sup>(5)</sup>|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
+|059|071|13|Num.|Commission value <sup>(1)</sup><sup>(5)</sup>|Value of commission discounted on sales.|
+|072|072|1|Alpha|Sign of Rejected value <sup>(4)</sup>|<ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul>|
+|073|085|13|Num.|Rejected Value <sup>(1)</sup><sup>(4)</sup>|If there is rejection, will be filled with the sum of rejected transactions.|
+|086|086|1|Alpha|Signal net|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
+|087|099|13|Num.|Net Value<sup>(1)</sup>|Sales value minus the amount of commission.|
 |100|103|4|Num.|Bank|Bank code in which the amounts were deposited|
-|104|108|5|Num.|Agency|Agency ID in which the values ​​were deposited|
-|109|122|14|Alphanumeric|Current account|Current account code in which the values ​​were deposited|
-|123|124|2|Num.|Payment Status |identifies the situation in which they are sent to the bank credits - see Table III. During recover, 
+|104|108|5|Num.|Agency<sup>(5)</sup>|Agency ID in which the values were deposited|
+|109|122|14|Alphanumeric|Current account<sup>(5)</sup>|Current account code in which the values ​​were deposited|
+|123|124|2|Num.|Payment Status|Identifies the situation in which they are sent to the bank credits - see Table III. During recover, 
 the status is updated according to the shipping and payment confirmation back by the bank.|
 |125|130|6|Num.|CV Quantity accepted|Sales quantities accepted in RO.|
-|131|132|2|Num.|Product Code| From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters. 
+|131|132|2|Num.|Product Code|From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters. 
 Disregard the information sent in this position.|
-|133|138|6|Num.|CVs quantities rejected|quantity rejected in the RO.|
-|139|139|1|Alpha|Identifier resale/acceleration|Identifies maintenance occurrences in installments transactions in store: <ul> <li> "R" - Resale </li><li> "A" - Acceleration </li><li> "" - White (no occurrence) </li></ul>|
-|140|145|6|Num.|Transaction capture Date| YYMMDD - Date on which the transaction was captured by the Cielo. In recovery, it can be updated after processing the transaction or adjustment./
-|146|147|2|Alphanumeric|setting Source|Identifies the type of adjustment - see Table V. Fill in the type of transaction is: <ul> <li> 03 - Debt Adjustment </li> <li> 02 - setting credit </ li> <li> 04 - rent adjustment </li></ul>|
-|148|160|13|Num.|Additional Value|withdrawal amount when the product is equal to "36" or value of Agro Electron for transactions of products "22", "23" or "25" shown in Table IV.|
-|161|161|1|Alpha|Anticipation identifier|RO anticipation identifier: <ul><li> "" - not anticipated; </li><li> "A" - Early in Cielo - ARV; </.li><li> "C" - Early in the bank - Assignment of Receivables </li></ul>|
+|133|138|6|Num.|CVs quantities rejected <sup>(5)</sup>|Quantity rejected in the RO.|
+|139|139|1|Alpha|Identifier resale/acceleration <sup>(5)</sup>|Identifies maintenance occurrences in installments transactions in store:<ul><li>“R” - Resale</li><li>“A” - Acceleration </li><li>“  “ – White (no occurrence)</li></ul>|
+|140|145|6|Num.|Transaction capture Date<sup>(5)</sup>|YYMMDD - Date on which the transaction was captured by the Cielo. In recovery, it can be updated after processing the transaction or adjustment.|
+|146|147|2|Alphanumeric|Setting Source<sup>(4)</sup>|Identifies the type of adjustment - see Table V. Fill in the type of transaction is: <ul><li>02 - Debt Adjustment </li><li>03 - setting credit </li><li>04  - rent adjustment</li></ul>|
+|148|160|13|Num.|Additional Value<sup>(5)</sup>|withdrawal amount when the product is equal to "36" or value of Agro Electron for transactions of products "22", "23" or "25" shown in Table IV.|
+|161|161|1|Alpha|Anticipation identifier|RO anticipation identifier:<ul><li>“  “ – not anticipated; </li><li>“A” – Early in Cielo - ARV;</li><li>“C” - Early in the bank - Assignment of Receivables</li></ul>|
 |162|170|9|Num.|Anticipation operation number|identifies the number of Anticipation of operation presented in the record type 5 - Field 12-20, associated with the anticipated RO/ Cielo given in or on the bench.. Contains zeros if the RO has not been anticipated./
-|171|171|1|Alpha|value Signal anticipated Gross|<ul><li> "+" identifies value credit </li><li> "-" identifies value debt </li></..ul>|
-|172|184|13|Num.|Gross Value Early(*)|anticipated Gross, provided when the RO is anticipated/assigned. It will be filled with zeros when no anticipation. The anticipated gross value is the net value of the RO.|
+|171|171|1|Alpha|value Signal anticipated Gross|<ul><li>“+” identifies value credit </li><li>“-” identifies value debt </li></ul>|
+|172|184|13|Num.|Gross Value Early<sup>(1)</sup>|anticipated Gross, provided when the RO is anticipated/assigned. It will be filled with zeros when no anticipation. The anticipated gross value is the net value of the RO.|
 |185|187|3|Num.|Issuer|Issuer Code - see Table VI|
-|188|209|22|Num.|Single Number RO| RO identification Single Number formatted as follows:<Ul> <li> First part (fixed) - 15 fixed positions: Identifies the summary retaining its history in . Cielo; </ li> <li> Second part (variable) - 07 variable positions: Identifies changes made to the RO </ li> </ ul>|
-|210|213|4|Num.|Fee Rate(*)|Commission Percentage applied on the transaction amount.|
-|214|218|5|Num.|Tarifa|Tarifa charged per transaction.|
-|219|222|4|Num.|Guarantee Fee|Discount Percentage applied on Electron Pre-Dating transactions.|
-|223|224|2|Num.|Capture Media|See table VII. If the sale has been reprocessed, the system will send the means to capture 06: manual 
-capture medium; in this case disregard the value set in the logical terminal number. Course not available for debt sales in the daily 
-payment file and the second installment on the installment sales in the diary and recovered payment file.|
-|225|232|8|Num.|Logical terminal number|terminal logical number which was made the sale. When the capture medium is equal to 06,
-disregarding the logical terminal number as this is an internal issue of Cielo.|
+|188|209|22|Num.|Single Number RO| RO identification Single Number formatted as follows:<ul><li> First part (fixed) - 15 fixed positions: Identifies the summary retaining its history in Cielo;</li><li> Second part (variable) - 07 variable positions: Identifies changes made to the RO </li></ul>|
+|210|213|4|Num.|Fee Rate<sup>(1)</sup> <sup>(5)</sup>|Commission Percentage applied on the transaction amount.|
+|214|218|5|Num.|Fee<sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup>|Fee charged per transaction.|
+|219|222|4|Num.|Guarantee Fee <sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup>|Discount Percentage applied on Electron Pre-Dating transactions.|
+|223|224|2|Num.|Capture Media <sup>(5)</sup>|See table VII. If the sale has been reprocessed, the system will send the means to capture 06: manual capture medium; in this case disregard the value set in the logical terminal number. Course not available for debt sales in the daily payment file and the second installment on the installment sales in the diary and recovered payment file.|
+|225|232|8|Num.|Logical terminal number <sup>(5)</sup>|terminal logical number which was made the sale. When the capture medium is equal to 06, disregarding the logical terminal number as this is an internal issue of Cielo.|
 |233|235|3|Num.|Product Code|Code that identifies the product - see Table IV.|
-|236|245|10|Num.|Pay Matrix|Establishment array of centralized payment chain.|
+|236|245|10|Num.|Pay Matrix <sup>(3)</sup>|Establishment array of centralized payment chain.|
 |246|250|5|Alphanumeric.|Use Cielo|Blank. Reserved for Cielo.|
 
 * <Sup>(1)</sup> - should be considered 2 decimal places, without commas, periods, or any other character.
@@ -157,10 +153,9 @@ As security rules, all records that have card number will present the truncated 
 |019|037|19|Alphanumeric|truncated card number|Number of the truncated card: the card number that was purchased with truncated number.
 Contain zeros for purchases via mobile payment and e-commerce, and for the last option.|
 |038|045|8|Num.|Date of sale/set|YYYYMMDD - Date on which the sale or adjustment was made.|
-|046|046|1|Alpha|the purchase value of the signal or value of the parcel|..<Ul><li> "+" value identifies the credit </li><li> "-" 
-identifies value debt </li></ul>|
-|047|059|13|Num.|the purchase price or value of the parcel|value of purchase or the portion that was released in the case of piecemeal
-sale in the shop.|
+|046|046|1|Alpha|the purchase value of the signal or value of the parcel|<ul><li>“+” value identifies the credit </li><li>“-”
+identifies value debt.</li></ul>|
+|047|059|13|Num.|the purchase price or value of the parcel <sup>(1)</sup>|value of purchase or the portion that was released in the case of piecemeal sale in the shop.|
 |060|061|2|Num.|share|In case of split sale, will be formatted with the number of the parcel being released. In the case of cash sale,
 will be formatted with zeros.|
 |062|063|2|Num.|Total tranches|Total number of shares sale. In the case of cash sale, will be formatted with zero.|
@@ -170,24 +165,18 @@ reconciliation purposes should be combined with other keys.|
 |073|092|20|Alphanumeric|TID|transaction identification made in e-commerce and mobile payment.|
 |093|098|6|Alphanumeric|NSU/DOC|Sequence Number, also known as DOC (document number), which identifies the transaction in the day it 
 was made. This number is not unique and can be repeated. If the sale has been reprocessed, the NSU can be changed.|
-|099|111|13|Num.|Complementary Value|Serve with debit card transaction value or AgroElectron according RO product indicator.|
-|112|113|02|Num.|Total value of sale in the case of Instalment Store | Total value of the fractional sale in the shop is sent only in 
-the sales file on all plots. For the remaining cases will be empty.|
-|127|139|13|Num.|next installment value|The value of the next installments of the sale is sent only in the sales file. For customers 
-without installment plan will be sent to all parts of the sale, with the exception of the last installment. For customers with 
-installment plan will be sent on the first portion and captured in detail the first accelerated share.|
-|140|148|9|Num.|number Invoice|Number of invoice for establishments that capture this information at POS. When not available will be 
-formatted with zeros|
-|149|152|4|Num.|Card indicator issued abroad|Identifies whether the card that made the purchase was sent abroad as follows: <ul><li> "0000" 
-- Service not assigned </ li> <li> "0001" - issued card in Brazil </ li> <li> "0002" - issued card abroad </li></ul>|
-|153|160|8|Num.|logical terminal number|logical terminal number which was made the sale. When the capture medium is 06, disregard this
+|099|111|13|Num.|Complementary Value <sup>(1)</sup>|Serve with debit card transaction value or AgroElectron according RO product indicator.|
+|112|113|02|Num|Dig - Card|Number of Card Digits|
+|114|126|13|Num.|Total value of sale in the case of Instalment Store<sup>(2)</sup>| Total value of the fractional sale in the shop is sent only in the sales file on all plots. For the remaining cases will be empty.|
+|127|139|13|Num.|Next installment value<sup>(2)</sup>|The value of the next installments of the sale is sent only in the sales file. For customers without installment plan will be sent to all parts of the sale, with the exception of the last installment. For customers with installment plan will be sent on the first portion and captured in detail the first accelerated share.|
+|140|148|9|Num.|Number of Invoice <sup>(2)</sup>|Number of invoice for establishments that capture this information at POS. When not available will be formatted with zeros|
+|149|152|4|Num.|Card indicator issued abroad <sup>(2)</sup>|Identifies whether the card that made the purchase was sent abroad as follows:<ul><li>“0000” - Service not assigned </li><li>“0001” - issued card in Brazil </li><li>“0002” - issued card abroad </li></ul>|
+|153|160|8|Num.|Logical terminal number|logical terminal number which was made the sale. When the capture medium is 06, disregard this
 information.|
-|161|162|2|Alpha|boarding rate identifier or input value|transaction ID referring to the departure tax or input value: <ul> <li> TX - 
-boarding rate; </li><li.> VE - input value; </li><li> White - for other types of transaction </li></ul>|
-|163|182|20|alphanumeric|Reference/code request|Reference or code request informed in a transaction mobile payment and e-commerce. When
-not available, it will be formatted with white.|
-|183|188|6|Num.|Transaction Time|Transaction Time presented in the format HHMMSS. This information will be generated only in the sales
-records of the sales file with original CV. In other cases, the field is formatted with zeros.|
+|161|162|2|Alpha|boarding rate identifier or input value|transaction ID referring to the departure tax or input value:<ul><li>TX -
+boarding rate; </li><li>VE - input value; </li><li> White - for other types of transaction.</li></ul>|
+|163|182|20|alphanumeric|Reference/code request|Reference or code request informed in a transaction mobile payment and e-commerce. When not available, it will be formatted with white.|
+|183|188|6|Num.|Transaction Time <sup>(3)</sup>|Transaction Time presented in the format HHMMSS. This information will be generated only in the sales records of the sales file with original CV. In other cases, the field is formatted with zeros.|
 |189|217|29|Num.|Single transaction Number|Unique number that identifies each transaction|
 |218|218|1|Alpha|Cielo Promo Display|Identifier Product Promo Cielo = "S". It identifies that the sale took part in the promotional 
 campaign platform. Otherwise it will be formatted with white.|
@@ -207,32 +196,29 @@ generation.
 |002|011|10|Num.|Establishment of payment or submission|Number of the establishment and/or branch where the sale took place.|
 |012|020|9|Num.|Anticipation operation number|Number of financial Anticipation operation, also presented in the record type 1 in the RO settlement date.|
 |021|028|8|Num.|Operation credit date|YYYYMMDD - date of payment of the operation./
-|029|029|1|Alpha|Sign of the gross anticipation of view|<Ul><li> "+" value identifies the credit </li><li> "-" identifies value debt 
-</li></ul>|
+|029|029|1|Alpha|Sign of the gross anticipation of view|<ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul>|
 |030|042|13|Num.|Gross value of the anticipation of view|gross value of the order to book in advance. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs this agenda.|
-|043|043|1|Alpha|Sign of the gross advance installments|<Ul><li> "+" value identifies the credit </li><li> "-" identifies value debt </li></ul>|
+|043|043|1|Alpha|Sign of the gross advance installments|<ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul>|
 |044|056|13|Num.|Gross value of advance installments|gross amount of advance installments of the agenda. The amount of the advance is the sum of the original amounts net of anticipated ROs this agenda.|
-|057|057|1|Alpha|Sign of the gross anticipation Electron Pre-Dating|<ul><li> "+" value identifies the credit </ li> <li> "-" identifies value debt </li></ul>.|.
+|057|057|1|Alpha|Sign of the gross anticipation Electron Pre-Dating|<ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul>|
 |058|070|13|Num.|Gross value of anticipation Electron Pre-Dating|gross anticipation of Electron Pre-Dating agenda. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs this agenda.|
-|071|071|1|Alpha|Sign of the gross total advance|<Ul><li> "+" identifies value credit </li><li> "-" identifies value debt </li></ul>|
+|071|071|1|Alpha|Sign of the gross total advance|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
 |072|084|13|Num.|Gross value of total advance|Gross anticipation of agendas in cash installments and Electron Pre-Dating. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs.|
-|085|085|1|Alpha|Sign the net value of the anticipation of view|<Ul> <li> "+" identifies value credit </li><li> "-" identifies value 
-debt </li></ul>|
+|085|085|1|Alpha|Sign the net value of the anticipation of view|<ul><li>“+” identifies value credit.</li><li>“-” identifies value 
+debt.</li></ul>|
 |086|098|13|Num.|In anticipating the Net| Net anticipation agenda in sight.|
-|099|099|1|Alpha|Net sign of anticipation installments| <Ul><li> "+" identifies value credit </li><li> "-" identifies value debt
-</li></ul>|
+|099|099|1|Alpha|Net sign of anticipation installments|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>
 |100|112|13|Num.|Net anticipation installments|Net value of advance installments of the agenda.|
-|113|113|1|Alpha|Signal net value of Pre-Dating anticipation | <ul><li> "+" identifies value credit </li><li> "-" identifies value 
-debt. </li></ul>|
+|113|113|1|Alpha|Signal net value of Pre-Dating anticipation|<ul><li>“+” identifies value credit.</li><li>“-” identifies value 
+debt.</li></ul>|
 |114|126|13|Num.|Net Pre-Dating anticipation|Net anticipation of Electron Pre-Dating agenda.|
-|127|127|1|Alpha|Sign the net value of the total advance| <Ul><li> "+" identifies value credit </li><li> "-" identifies value debt 
-</li></ul>|
+|127|127|1|Alpha|Sign the net value of the total advance|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
 |128|1140|13|Num.|net total anticipated value|Net anticipation of agendas in cash installments and Electron Pre-Dating.|
 |141|145|5|Num.|Discount rate of anticipation|discount shopping anticipation fee.|
 |146|149|4|Num.|Bank Code|Bank in which the amounts were deposited|
 |150|154|5|Num.|Household agency code|Agency in which the values were deposited|
 |155|168|14|Alphanumeric|current account Code of household|Current account in which the values ​​were deposited|
-|169|169|1|Alpha|Signal net anticipation|<Ul><li> "+" identifies value credit </ li> <li> "-" identifies value debt </li></ul>|
+|169|169|1|Alpha|Signal net anticipation|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
 |170|182|13|Num.|Net anticipation|Net Value of anticipation.|
 |183|250|68|Alphanumeric|Use Cielo|In Blank. Reserved for Cielo.|
 
@@ -243,47 +229,70 @@ It provides a breakdown of Anticipation operation demonstrating the anticipated 
 |Home|End|Size|Type|Description|Data Edition|
 |----|---|----|----|-----------|------------|
 |1|1|1|Num.|Record Type|Constant “6” – identifies the type of record that displays the information of an RO that was anticipated.|
-|2|11|10|Num.|Estabelecimento Submissor|Number of the establishment and/or branch where the sale took place.|
+|2|11|10|Num.|Submitter establishment|Number of the establishment and/or branch where the sale took place.|
 |12|20|9|Num.|Establishment of payment or submission|Advance Operation number.|
 |21|28|8|Num.|Due date of RO|AAAAAMMDD – Date of original validity that RO has been anticipated.|
 |29|35|7|Num.|Number of RO anticipated|Number of RO anticipated.|
-|36|37|2|Num.|Antecipated installment|Número da parcela antecipada no caso de RO parcelado, se RO de venda  à vista será formatado com zeros.|
+|36|37|2|Num.|Antecipated installment|Number of anticipated installment in the case of RO installments, c the sale of RO will be formatted with zeros.|
 |38|39|2|Num.|Total os instalments|Quantity of installments of RO. In the case of RO in sight, will be formated with zeros.|
-|40|40|1|Alpha|Sinal do valor bruto original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|41|53|13|Num.|Valor bruto original do RO <sup>(1)</sup>|Valor bruto original do RO.|
-|54|54|1|Alpha|Sinal do valor líquido original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|55|67|13|Num.|Valor líquido original do RO <sup>(1)</sup>|Valor líquido Original do RO.|
-|68|68|1|Num.|Sinal do valor bruto da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|69|81|13|Num.|Valor bruto da antecipação do RO <sup>(1)</sup>|Valor líquido original do RO, exceto se houver débitos programados para este RO.|
-|82|82|1|Alpha|Sinal do valor líquido da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|83|95|13|Num.|Valor líquido da antecipação do RO <sup>(1)</sup>|Valor líquido efetivamente pago ao estabelecimento, já descontada  a taxa de desconto comercial da antecipação.|
-|96|98|3|Num.|Código da Bandeira|Código da Bandeira – Vide Tabela VI.|
-|99|120|22|Num.|Número Único do RO|Número Único de identificação do RO formatado da seguinte forma: Primeira parte (fixa) - 15 posições fixas: identifica o resumo mantendo o seu histórico na Cielo; Segunda parte (variável) - 07 posições variáveis: para uso da Cielo. Identifica as alterações realizadas no RO.|
+|40|40|1|Alpha|Sign of the original gross amount of RO|“+” identifies positive value. “-” identifies negative value.|
+|41|53|13|Num.|Original gross amount of RO <sup>(1)</sup>|Original gross amount of RO.|
+|54|54|1|Alpha|Sign of the original net value of  RO|“+” identifies positive value. “-” identifies negative value.|
+|55|67|13|Num.|Original net value of RO <sup>(1)</sup>|Original net value of RO.|
+|68|68|1|Num.|Sign of the gross anticipation of RO|“+” identifies positive value. “-” identifies negative value.|
+|69|81|13|Num.|Gross anticipation value of RO <sup>(1)</sup>|Original net value of RO, except if scheduled debt for this RO.|
+|82|82|1|Alpha|Sign of the net value of the anticipation of RO|“+” identifies positive value. “-” identifies negative value.|
+|83|95|13|Num.|Net amount of anticipation of RO <sup>(1)</sup>|Net amount actually paid to the establishment, already discounted commercial discount rate anticipation.|
+|96|98|3|Num.|Issuer code|Issuer code – View VI Table.|
+|99|120|22|Num.|Unique number of RO|Unique number of identification of RO formed as follows: First part (fixed) - 15 fixed positions: identifies the summary retaining its history in Cielo; Second part (variable) - 07 variable positions: to use Cielo. Identifies changes made to the RO.|
 |121|250|130|Alpha|Use Cielo|Reserved for Cielo.|
 
 * <sup>(1)</sup> - Devem ser consideradas 2 casas decimais, sem vírgulas, pontos ou qualquer outro caractere.
+
+## Type 7 - Detail of Debt ROs Antecipated
+
+Displays offset debts in early dates.
+
+|Home|End|Size|Type|Description|Editing data|
+|----|---|----|----|-----------|------------|
+|1|1|1|Num.|Type of register|Constant “7” – identifies the type of record that displays the information of an RO that was anticipated.|
+|2|11|10|Num.|Submitter establishment|Number of the establishment and/or branch where the sale took place.|
+|12|33|22|Num.|Número Único do RO original da venda|Número único do RO original da venda.|
+|34|40|7|Num.|Number of RO antecipated|Number of RO of original sale.|
+|41|48|8|Num.|Due date of RO|YYYYMMDD – Date of original validity that RO has been anticipated.|
+|49|49|1|Alpha|Signal value anticipated of RO|“+” identifies positive valueo. “-” identifies negative value.|
+|50|62|13|Num.|Value of RO antecipated|Value of RO antecipated.|
+|63|84|22|Num.|Unique number of RO of sale that led to the setting|Unique number of RO sale that led to the setting.|
+|85|91|7|Num.|Number of RO of debt adjustment|Number of RO that represents values for antecipation operation.|
+|92|99|8|Num.|Payment date setting|YYYYMMDD.|
+|100|100|1|Alpha|Setting value of the signal output|“+” identifies positive value. “-” identifies negative value.|
+|101|113|13|Num.|Setting value debt|Total value of debt.|
+|114|114|1|Alpha|Signal offset value|“+” identifies positive value. “-” identifies negative value.|
+|115|127|13|Num.|Amount compensated|Amount compensated  of RO antecipated.|
+|128|128|1|Alpha|Signal balance anticipated RO|“+” identifies positive valueo. “-” identifies negative value.|
+|129|141|13|Num.|Balance amount of the anticipated RO|Total debt loss - Amount compensated.|
+|142|250|109|Alpha.|Use Cielo|Reserved for Cielo.|
 
 ## Type 9 - Trailer
 
 Indicates the end of the file.
 
 |Home|End|Size|Type|Description|Data Edition|
-|------|---|-------|----|---------|----------------|
-|001|001|1|A|Record Type|Constant "9" - Identifies the type of detail trailer record (end of file).|
-|002|012|11|A|Total record|Total number of records, which do not include header and trailer.|
+|----|---|----|----|-----------|------------|
+|001|001|1|Num.|Record Type|Constant "9" - Identifies the type of detail trailer record (end of file).|
+|002|012|11|Num.|Total record|Total number of records, which do not include header and trailer.|
 |013|250|238|Alphanumeric.|Use Cielo|Reserved for Cielo.|
 
-<Aside class = "notice"> <strong> Note: </strong> fields reserved for Cielo can be used for adding new information. 
-It may also be necessary to include new types of different registers 0, 1, 2, 3, 4, 5, 6, 7 or 9. Because of this, we suggest that the reconciliation solution despise records not listed in this specification. </ Aside>
+<aside class="notice"><strong>Note:</strong> fields reserved for Cielo can be used for adding new information. It may also be necessary to include new types of different registers. Because of this, we suggest that the reconciliation solution despise records not listed in this specification.</aside>
 
 # Tables
 
 ## Table I - Extract Option
 
 |Code|Description|
-|------|---------|
+|----|-----------|
 |03|Selling Installment Plan|
-|04|payments|
+|04|Payments|
 |06|Prepayment of Receivables|
 |07|Assignment of Receivables|
 |08|Outstanding installments|
@@ -304,11 +313,11 @@ It may also be necessary to include new types of different registers 0, 1, 2, 3,
 |Code|Description|
 |------|---------|
 |00|Scheduled: identifies the capture of a transaction and informs the forecast of payment. The schedule may be changed|
-|01|Pay: identifies that the payment was made by bank domicile |
-|02|Sent to the Bank: it identifies the Cielo requested payment / collection for the home bank, but there was no confirmation|
-|03|The Confirm: identifies the Cielo requested payment / collection for the home bank, but still there was no confirmation|
+|01|Pay: identifies that the payment was made by home bank|
+|02|Sent to the Bank: it identifies the Cielo requested payment/collection for the home bank, but there was no confirmation|
+|03|The Confirm: identifies the Cielo requested payment/collection for the home bank, but still there was no confirmation|
 
-<Aside class = "notice"> <strong> Note: </ strong> is important that all payment status are considered </aside>.
+<Aside class="notice"><strong> Note:</strong> is important that all payment status are considered</aside>.
 
 * When a credit value is clearing process with a value to debt, both will be sent in the payment file in the clearing date later than 
 scheduled payment date. The status sent to the bank to be displayed again in the payment statement when the bank domicile return a 
@@ -317,9 +326,9 @@ credit order.
 ## Table IV - Product Code
 
 |Code|Description|
-|------|---------|
+|----|-----------|
 |001|AGIPLAN view credit|
-|002| AGIPLAN installments shop|
+|002|AGIPLAN installments shop|
 |003|Banescard view credit|
 |004|Banescard installments shop|
 |005|view credit Esplanade|
@@ -385,22 +394,22 @@ credit order.
 |378|Master Carnet|
 |380|Mastercard Credit Currency Converter|
 
-<Aside class = "notice"> <strong> * </strong> codes concerning Construcard cards, My House Best, Producard and Moveiscard </ aside>
+<aside class="notice"><strong>*</strong> Codes concerning Construcard cards, Minha Casa Melhor, Producard and Moveiscard</aside>
 
 ## Table V - Set Source
 
 |Code|Description|Adjustment Type|
 |----|-----------|---------------|
-|1|restatement Setting|Setting|
+|1|Restatement Setting|Setting|
 |2|payment date Setting|Setting|
 |3|Adjustment commission rate|Hit|
-|4|Setting values ​​unprocessed|Hit|
+|4|Setting values unprocessed|Hit|
 |5|Settlement of amounts not received|Hit|
-|6|Setting values ​​unrecognized|Hit|
-|7|Hit traded values ​​|Hit|
-|8|Setting values ​​processed improperly|Hit|
+|6|Setting values unrecognized|Hit|
+|7|Hit traded values|Hit|
+|8|Setting values processed improperly|Hit|
 |9|Release Hit uncompensated current account|Hit|
-|10|Hit regarding disputed values ​​|Hit|
+|10|Hit regarding disputed values|Hit|
 |11|Temporary Settlement of contested values|Hit|
 |12|many Hits|Hit|
 |13|Billing Agreement|Hit|
@@ -433,7 +442,7 @@ credit order.
 ## Table VI - Issuer
 
 |Code|Description|
-|------|---------|
+|----|-----------|
 |001|VISA|
 |002|Mastercard|
 |006|Sorocred|
@@ -449,7 +458,7 @@ credit order.
 ## Table VII - Capture Media
 
 |Code|Description|
-|------|---------|
+|----|---------|
 |01|POS (Point of Sale)|
 |02|POS (Point of Sale) or EFT (Electronic Funds Transfer)|
 |03|e-Commerce (E-Commerce)|
@@ -463,7 +472,7 @@ credit order.
 ## Table VIII - Rejection Reason
 
 |Code|Description|
-|------|---------|
+|----|-----------|
 |002|Invalid Card|
 |023|Other errors|
 |031|withdrawal Transaction with card Electron zero value|
@@ -509,12 +518,90 @@ credit order.
 |134|withdrawal transaction with invalid Electron card|
 |145|invalid Establishment for distribution|
 
+## Table VI - Issuers
+
+|Code|Description|
+|----|-----------|
+|001|VISA|
+|002|Mastercard|
+|006|Sorocred|
+|007|ELO|
+|009|Diners|
+|011|Agiplan|
+|015|Banescard|
+|023|Cabal|
+|029|Credsystem|
+|035|Esplanada|
+|064|Credz|
+
+## Table VII - Means of capturing
+
+|Código|Descrição|
+|------|---------|
+|01|POS (Point of Sale)|
+|02|PDV (Point of Sale) ou TEF (Electronic Funds Transfer)|
+|03|e-Commerce (Electronic Commerce)|
+|04|EDI (Electronic Data Exchange)|
+|05|ADP/BSP (Company that makes the capture)|
+|06|Manual|
+|07|URA/CVA|
+|08|Mobile|
+|09|Purse Electronic Network|
+
+## Table VIII - Reason for Rejection
+
+|Code|Description|
+|----|-----------|
+|002|Invalid card|
+|023|Other errors|
+|031|Withdrawal Transactions with Electron card with reset value|
+|039|Invalid bank issuer|
+|044|Date of the transaction invalid|
+|045|Invalid authorization code|
+|055|Invalid number of installments|
+|056|Transaction funded to establish unauthorized|
+|057|Card protector report|
+|061|Number of invalid card|
+|066|unauthorized transaction|
+|067|unauthorized transaction|
+|069|unauthorized transaction|
+|070|unauthorized transaction|
+|071|unauthorized transaction|
+|072|unauthorized transaction|
+|073|invalid transaction|
+|074|Invalid transaction value|
+|075|Number of invalid card|
+|077|unauthorized transaction|
+|078|unauthorized transaction|
+|079|unauthorized transaction|
+|080|unauthorized transaction|
+|081|Expired card|
+|082|unauthorized transaction|
+|083|unauthorized transaction|
+|084|unauthorized transaction|
+|086|unauthorized transaction|
+|092|Issuing bank without communication|
+|093|Imbalance in installments plan|
+|094|Installment sale for card issued abroad|
+|097|Value of installment smaller than allowed|
+|099|Invalid bank issuer|
+|100|unauthorized transaction|
+|101|transaction doubled|
+|102|transaction doubled|
+|124|BIN not registered|
+|126|Withdrawal Transactions with Electron card invalid|
+|128|Withdrawal Transactions with Electron card invalid|
+|129|Withdrawal Transactions with Electron card invalid|
+|130|Withdrawal Transactions with Electron card invalid|
+|133|Withdrawal Transactions with Electron card invalid|
+|134|Withdrawal Transactions with Electron card invalid|
+|145|Invalid establishment for distribution|
+
 # Partners
 
 ## VAN
 
-Access to Electronic Statement will be made through a mailbox created in the VAN website (company hired by Cielo to manage the sending
-and receiving of extracts) or via the receiving system, according to the best option for the client. For, change or problems with the mailbox, contact the respective VAN:
+Access to Eletronic Data Interchange Report  will be made through a mailbox created in the VAN website (company hired by Cielo to manage the sending and receiving of extracts) or via the receiving system, according to the best option for the client. For, change or problems with the mailbox, contact the respective VAN:
 
 ### TIVIT
 
@@ -554,11 +641,8 @@ can contact their van to request the court.
 ## File Recovery
 
 * Enables recovery of a previous movement, updating the status of the releases
-
 * Available for the movements of the last 30 days
-
 * The application must be submitted held for EDI Island.
-
 * Files are available separately from the journal file
 
 # Financial Concepts / Glossary
@@ -617,7 +701,7 @@ scheduled date of payment, which may be delayed if the value is used to offset t
 
 Date on which the payment file (credit or debit) was sent to the customer's home bank
 
-## Discount Rate / Commission Rate
+## Discount Rate/Commission Rate
 
 The discount is always calculated on the Operating Summary (RO) and in the case of installments store sales, the discount is on the 
 RO that the parcel is located. The sum of the discount of the total value is demonstrated in the RO.
@@ -629,7 +713,7 @@ and assignment of receivables held both the RO and in the CV to be reconciled by
 should use only fixed parts of the single number following this composition.
 
 |Shares|Composition|
-|------|----------|
+|------|-----------|
 |1|15 fixed positions that identify the summary of operations (RO) in a unique way, keeping the history of maintenance performed on 
 Cielo.|
 |2|07 variable positions. Identify changes made to the RO.|
@@ -704,10 +788,10 @@ a split transaction in the store held on 01/12/2015 4,151,201 will have the RO.
 
 |Location|Description|Data Edition|
 |-------|---------|---------------|
-|1|Product Type|<ul> <li> 0 - open credit </li> <li> 3 - Outbound installments </ li> <li> 4 - installments store </ li> <li> 5 - card debit </ li> <li> 6 - postdated electron </ li> </ ul> |
-|2:03|Year that the transaction was carried out|AA|
-|4:05|month the transaction was carried out|MM|
-|6:07|Day the transaction was carried out |DD|
+|1|Product Type|<ul><li>0 - open credit</li><li>3 - Outbound installments</li><li>4 - installments store</li><li>5 - card debit </li><li>6 - postdated electron</li></ul>|
+|2 e 3|Year that the transaction was carried out|YY|
+|4 e 5|month the transaction was carried out|MM|
+|6 e 7|Day the transaction was carried out|DD|
 
 ## Transaction Rejection
 
