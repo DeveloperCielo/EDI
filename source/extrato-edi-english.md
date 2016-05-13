@@ -100,8 +100,7 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |100|103|4|Num.|Bank|Bank code in which the amounts were deposited|
 |104|108|5|Num.|Agency<sup>(5)</sup>|Agency ID in which the values were deposited|
 |109|122|14|Alphanumeric|Current account<sup>(5)</sup>|Current account code in which the values ​​were deposited|
-|123|124|2|Num.|Payment Status|Identifies the situation in which they are sent to the bank credits - see Table III. During recover, 
-the status is updated according to the shipping and payment confirmation back by the bank.|
+|123|124|2|Num.|Payment Status|Identifies the situation in which they are sent to the bank credits - see Table III.During recover, the status is updated according to the shipping and payment confirmation back by the bank.|
 |125|130|6|Num.|CV Quantity accepted|Sales quantities accepted in RO.|
 |131|132|2|Num.|Product Code|From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters. 
 Disregard the information sent in this position.|
