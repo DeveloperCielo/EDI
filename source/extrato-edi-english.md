@@ -82,10 +82,8 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |001|001|1|Num.|Record Type|Constant "1" - Identifies the detail record type RO|
 |002|011|10|Num.|Establishment Submitter| Number of establishment and / or branch where the sale took place.|
 |012|018|7|Num.|RO Number|Operation summary number. They contain information relating to a sales group performed on a certain date.|
-|019|020|2|Num.|Portion|In the case of split sale, will be formatted with the number of the parcel which is being released in the file
-submission date. In the case of cash sale, will be formatted with white.|
-|021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales.</li><li>"a" - acceleration of installments.</li><li>“  “ - other 
-situations.</li></ul>|
+|019|020|2|Num.|Portion|In the case of split sale, will be formatted with the number of the parcel which is being released in the file submission date. In the case of cash sale, will be formatted with white.|
+|021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales.</li><li>"a" - acceleration of installments.</li><li>“  “ - other situations.</li></ul>|
 |022|023|2|Alpha|Plan|In the case of split sale, will be formatted with the largest number of parcels found that sales group. 
 If the RO has sales in 03, 04 or 06 installments, will be filled with 06.<br/>If an acceleration of installments will be formatted 
 with the most accelerated share.<br/><br/>Example: (019 positions to 023) <br/><ul><li>02A02. - indicates the acceleration of the 
