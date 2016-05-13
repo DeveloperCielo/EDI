@@ -102,24 +102,23 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |109|122|14|Alphanumeric|Current account<sup>(5)</sup>|Current account code in which the values ​​were deposited|
 |123|124|2|Num.|Payment Status|Identifies the situation in which they are sent to the bank credits - see Table III.During recover, the status is updated according to the shipping and payment confirmation back by the bank.|
 |125|130|6|Num.|CV Quantity accepted|Sales quantities accepted in RO.|
-|131|132|2|Num.|Product Code|From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters. 
-Disregard the information sent in this position.|
+|131|132|2|Num.|Product Code|From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters.Disregard the information sent in this position.|
 |133|138|6|Num.|CVs quantities rejected <sup>(5)</sup>|Quantity rejected in the RO.|
 |139|139|1|Alpha|Identifier resale/acceleration <sup>(5)</sup>|Identifies maintenance occurrences in installments transactions in store:<ul><li>“R” - Resale</li><li>“A” - Acceleration </li><li>“  “ – White (no occurrence)</li></ul>|
 |140|145|6|Num.|Transaction capture Date<sup>(5)</sup>|YYMMDD - Date on which the transaction was captured by the Cielo. In recovery, it can be updated after processing the transaction or adjustment.|
 |146|147|2|Alphanumeric|Setting Source<sup>(4)</sup>|Identifies the type of adjustment - see Table V. Fill in the type of transaction is: <ul><li>02 - Debt Adjustment </li><li>03 - setting credit </li><li>04  - rent adjustment</li></ul>|
 |148|160|13|Num.|Additional Value<sup>(5)</sup>|withdrawal amount when the product is equal to "36" or value of Agro Electron for transactions of products "22", "23" or "25" shown in Table IV.|
 |161|161|1|Alpha|Anticipation identifier|RO anticipation identifier:<ul><li>“  “ – not anticipated; </li><li>“A” – Early in Cielo - ARV;</li><li>“C” - Early in the bank - Assignment of Receivables</li></ul>|
-|162|170|9|Num.|Anticipation operation number|identifies the number of Anticipation of operation presented in the record type 5 - Field 12-20, associated with the anticipated RO/ Cielo given in or on the bench.. Contains zeros if the RO has not been anticipated./
+|162|170|9|Num.|Anticipation operation number|identifies the number of Anticipation of operation presented in the record type 5 - Field 12-20, associated with the anticipated RO/ Cielo given in or on the bench.. Contains zeros if the RO has not been anticipated.|
 |171|171|1|Alpha|value Signal anticipated Gross|<ul><li>“+” identifies value credit </li><li>“-” identifies value debt </li></ul>|
-|172|184|13|Num.|Gross Value Early<sup>(1)</sup>|anticipated Gross, provided when the RO is anticipated/assigned. It will be filled with zeros when no anticipation. The anticipated gross value is the net value of the RO.|
+|172|184|13|Num.|Gross Value Early<sup>(1)</sup>|Anticipated Gross, provided when the RO is anticipated/assigned. It will be filled with zeros when no anticipation. The anticipated gross value is the net value of the RO.|
 |185|187|3|Num.|Issuer|Issuer Code - see Table VI|
 |188|209|22|Num.|Single Number RO| RO identification Single Number formatted as follows:<ul><li> First part (fixed) - 15 fixed positions: Identifies the summary retaining its history in Cielo;</li><li> Second part (variable) - 07 variable positions: Identifies changes made to the RO </li></ul>|
 |210|213|4|Num.|Fee Rate<sup>(1)</sup> <sup>(5)</sup>|Commission Percentage applied on the transaction amount.|
 |214|218|5|Num.|Fee<sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup>|Fee charged per transaction.|
 |219|222|4|Num.|Guarantee Fee <sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup>|Discount Percentage applied on Electron Pre-Dating transactions.|
 |223|224|2|Num.|Capture Media <sup>(5)</sup>|See table VII. If the sale has been reprocessed, the system will send the means to capture 06: manual capture medium; in this case disregard the value set in the logical terminal number. Course not available for debt sales in the daily payment file and the second installment on the installment sales in the diary and recovered payment file.|
-|225|232|8|Num.|Logical terminal number <sup>(5)</sup>|terminal logical number which was made the sale. When the capture medium is equal to 06, disregarding the logical terminal number as this is an internal issue of Cielo.|
+|225|232|8|Num.|Logical terminal number <sup>(5)</sup>|Terminal logical number which was made the sale. When the capture medium is equal to 06, disregarding the logical terminal number as this is an internal issue of Cielo.|
 |233|235|3|Num.|Product Code|Code that identifies the product - see Table IV.|
 |236|245|10|Num.|Pay Matrix <sup>(3)</sup>|Establishment array of centralized payment chain.|
 |246|250|5|Alphanumeric.|Use Cielo|Blank. Reserved for Cielo.|
@@ -141,36 +140,29 @@ As security rules, all records that have card number will present the truncated 
 |001|001|1|Num.|Record Type|Constant "2" - identifies the type of Sales Receipt detail record (CV).|
 |002|011|10|Num.|Establishment Submitter| Number of the establishment and/or branch where the sale took place.|
 |012|018|7|Num.|RO Number| Operation summary of the number. They contain information relating to a sales group performed on a certain date.|
-|019|037|19|Alphanumeric|truncated card number|Number of the truncated card: the card number that was purchased with truncated number.
-Contain zeros for purchases via mobile payment and e-commerce, and for the last option.|
+|019|037|19|Alphanumeric|truncated card number|Number of the truncated card: the card number that was purchased with truncated number. Contain zeros for purchases via mobile payment and e-commerce, and for the last option.|
 |038|045|8|Num.|Date of sale/set|YYYYMMDD - Date on which the sale or adjustment was made.|
-|046|046|1|Alpha|the purchase value of the signal or value of the parcel|<ul><li>“+” value identifies the credit </li><li>“-”
-identifies value debt.</li></ul>|
-|047|059|13|Num.|the purchase price or value of the parcel <sup>(1)</sup>|value of purchase or the portion that was released in the case of piecemeal sale in the shop.|
-|060|061|2|Num.|share|In case of split sale, will be formatted with the number of the parcel being released. In the case of cash sale,
+|046|046|1|Alpha|the purchase value of the signal or value of the parcel|<ul><li>“+” value identifies the credit</li><li>“-”identifies value debt.</li></ul>|
+|047|059|13|Num.|The purchase price or value of the parcel<sup>(1)</sup>|value of purchase or the portion that was released in the case of piecemeal sale in the shop.|
+|060|061|2|Num.|share|In case of split sale, will be formed with the number of the parcel being released. In the case of cash sale,
 will be formatted with zeros.|
-|062|063|2|Num.|Total tranches|Total number of shares sale. In the case of cash sale, will be formatted with zero.|
+|062|063|2|Num.|Total os intallments|Total number of installments. In the case of cash sale, will be formed with zero.|
 |064|066|3|Num.|Reason for Rejection| See Table VIII, should not have rejected the field is blank formatted.|
-|067|072|6|Alphanumeric|authorization code|transaction authorization ode. This number is not unique and can be repeated. For 
-reconciliation purposes should be combined with other keys.|
+|067|072|6|Alphanumeric|authorization code|transaction authorization ode. This number is not unique and can be repeated.For reconciliation purposes should be combined with other keys.|
 |073|092|20|Alphanumeric|TID|transaction identification made in e-commerce and mobile payment.|
-|093|098|6|Alphanumeric|NSU/DOC|Sequence Number, also known as DOC (document number), which identifies the transaction in the day it 
-was made. This number is not unique and can be repeated. If the sale has been reprocessed, the NSU can be changed.|
+|093|098|6|Alphanumeric|NSU/DOC|Sequence Number, also known as DOC (document number), which identifies the transaction in the day it was made. This number is not unique and can be repeated. If the sale has been reprocessed, the NSU can be changed.|
 |099|111|13|Num.|Complementary Value <sup>(1)</sup>|Serve with debit card transaction value or AgroElectron according RO product indicator.|
 |112|113|02|Num|Dig - Card|Number of Card Digits|
-|114|126|13|Num.|Total value of sale in the case of Instalment Store<sup>(2)</sup>| Total value of the fractional sale in the shop is sent only in the sales file on all plots. For the remaining cases will be empty.|
-|127|139|13|Num.|Next installment value<sup>(2)</sup>|The value of the next installments of the sale is sent only in the sales file. For customers without installment plan will be sent to all parts of the sale, with the exception of the last installment. For customers with installment plan will be sent on the first portion and captured in detail the first accelerated share.|
+|114|126|13|Num.|Total value of sale in the case of Instalment Store<sup>(2)</sup>|Total value of the fractional sale in the shop is sent only in the sales file on all plots. For the remaining cases will be empty.|
+|127|139|13|Num.|Next installment value<sup>(2)</sup>|The value of the next installments of the sale is sent only in the sales file. For customers without installment plan will be sent to all parts of the sale, with the exception of the last installment.For customers with installment plan will be sent on the first portion and captured in detail the first accelerated share.|
 |140|148|9|Num.|Number of Invoice <sup>(2)</sup>|Number of invoice for establishments that capture this information at POS. When not available will be formatted with zeros|
 |149|152|4|Num.|Card indicator issued abroad <sup>(2)</sup>|Identifies whether the card that made the purchase was sent abroad as follows:<ul><li>“0000” - Service not assigned </li><li>“0001” - issued card in Brazil </li><li>“0002” - issued card abroad </li></ul>|
-|153|160|8|Num.|Logical terminal number|logical terminal number which was made the sale. When the capture medium is 06, disregard this
-information.|
-|161|162|2|Alpha|boarding rate identifier or input value|transaction ID referring to the departure tax or input value:<ul><li>TX -
-boarding rate; </li><li>VE - input value; </li><li> White - for other types of transaction.</li></ul>|
+|153|160|8|Num.|Logical terminal number|Logical terminal number which was made the sale. When the capture medium is 06, disregard this information.|
+|161|162|2|Alpha|boarding rate identifier or input value|transaction ID referring to the departure tax or input value:<ul><li>TX-boarding rate; </li><li>VE - input value; </li><li> White - for other types of transaction.</li></ul>|
 |163|182|20|alphanumeric|Reference/code request|Reference or code request informed in a transaction mobile payment and e-commerce. When not available, it will be formatted with white.|
 |183|188|6|Num.|Transaction Time <sup>(3)</sup>|Transaction Time presented in the format HHMMSS. This information will be generated only in the sales records of the sales file with original CV. In other cases, the field is formatted with zeros.|
 |189|217|29|Num.|Single transaction Number|Unique number that identifies each transaction|
-|218|218|1|Alpha|Cielo Promo Display|Identifier Product Promo Cielo = "S". It identifies that the sale took part in the promotional 
-campaign platform. Otherwise it will be formatted with white.|
+|218|218|1|Alpha|Cielo Promo Display|Identifier Product Promo Cielo = "S". It identifies that the sale took part in the promotional campaign platform. Otherwise it will be formatted with white.|
 |219|250|32|Alphanumeric|Use Cielo|Blank. Reserved for Cielo.|
 
 * <Sup>(1)</sup> - should be considered 2 decimal places, without commas, periods, or any other character.
@@ -195,16 +187,14 @@ generation.
 |058|070|13|Num.|Gross value of anticipation Electron Pre-Dating|gross anticipation of Electron Pre-Dating agenda. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs this agenda.|
 |071|071|1|Alpha|Sign of the gross total advance|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
 |072|084|13|Num.|Gross value of total advance|Gross anticipation of agendas in cash installments and Electron Pre-Dating. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs.|
-|085|085|1|Alpha|Sign the net value of the anticipation of view|<ul><li>“+” identifies value credit.</li><li>“-” identifies value 
-debt.</li></ul>|
+|085|085|1|Alpha|Sign the net value of the anticipation of view|<ul><li>“+” identifies value credit.</li><li>“-”identifies value debt.</li></ul>|
 |086|098|13|Num.|In anticipating the Net| Net anticipation agenda in sight.|
 |099|099|1|Alpha|Net sign of anticipation installments|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>
 |100|112|13|Num.|Net anticipation installments|Net value of advance installments of the agenda.|
-|113|113|1|Alpha|Signal net value of Pre-Dating anticipation|<ul><li>“+” identifies value credit.</li><li>“-” identifies value 
-debt.</li></ul>|
+|113|113|1|Alpha|Signal net value of Pre-Dating anticipation|<ul><li>“+” identifies value credit.</li><li>“-”identifies value debt.</li></ul>|
 |114|126|13|Num.|Net Pre-Dating anticipation|Net anticipation of Electron Pre-Dating agenda.|
 |127|127|1|Alpha|Sign the net value of the total advance|<ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul>|
-|128|1140|13|Num.|net total anticipated value|Net anticipation of agendas in cash installments and Electron Pre-Dating.|
+|128|1140|13|Num.|Net total anticipated value|Net anticipation of agendas in cash installments and Electron Pre-Dating.|
 |141|145|5|Num.|Discount rate of anticipation|discount shopping anticipation fee.|
 |146|149|4|Num.|Bank Code|Bank in which the amounts were deposited|
 |150|154|5|Num.|Household agency code|Agency in which the values were deposited|
@@ -293,11 +283,11 @@ Indicates the end of the file.
 
 |Code|Description|
 |------|---------|
-|01|sale|
+|01|Sale|
 |02|Set Credit|
 |03|Adjust Debit|
 |04|Cielo plan|
-|05|rescheduling|
+|05|Rescheduling|
 
 ## Table III - Payment Status
 
@@ -402,32 +392,32 @@ credit order.
 |9|Release Hit uncompensated current account|Hit|
 |10|Hit regarding disputed values|Hit|
 |11|Temporary Settlement of contested values|Hit|
-|12|many Hits|Hit|
+|12|Many Hits|Hit|
 |13|Billing Agreement|Hit|
 |14|Legal Agreement|Hit|
-|15|fine Application Program Monitoring Chargeback|Hit|
-|16|value Lock by court order|Lock|
-|17|of sale Cancellation|Cancellation|
+|15|Fine Application Program Monitoring Chargeback|Hit|
+|16|Value Lock by court order|Lock|
+|17|Cancellation|Cancellation|
 |18|Operating fare collection|collection|
 |19|Monthly Billing Lynx Trade|collection|
 |20|Recovery Plan Cielo|collection|
-|21|escrow contract|Hit|
+|21|Escrow contract|Hit|
 |22|cancellation of the return of credit - issuing bank|Hit|
 |23|Credit EC - related dispute carrier|Hit|
 |24|Credit for cancellation rejected - Cielo|Hit|
-|25|duplicate debit processing - Visa Toll|Hit|
+|25|Duplicate debit processing - Visa Toll|Hit|
 |26|Debt held by sale without reading the chip|Hit|
 |27|Debit for sale rejected in the system - Cielo|Hit|
 |28|Debit regarding the carrier's dispute|Chargeback|
 |29|Reversal of legal agreement|Hit|
-|30|escrow contract Reversal|Hit|
+|30|Escrow contract Reversal|Hit|
 |31|Reversal collection agreement|Hit|
-|32|value lock Reversal by court order|Hit|
-|33|selling cancellation Reversal|Hit|
+|32|Value lock Reversal by court order|Hit|
+|33|Selling cancellation Reversal|Hit|
 |34|Operating fare collection Reversal|Hit|
 |35|Reversal of monthly charge Lynx Trade|Hit|
 |36|Reversal collection Cielo Plan|Hit|
-|37|sale debit Reversal without reading the Chip|Hit|
+|37|Sale debit Reversal without reading the Chip|Hit|
 |38|Reversal of commercial incentive|Hit|
 
 ## Table VI - Issuer
@@ -473,41 +463,41 @@ credit order.
 |05|Invalid number of installments|
 |056|Transaction funded to establish unauthorized|
 |057|Card in Protective newsletter|
-|061|invalid card number|
-|066|unauthorized Transaction|
-|067|unauthorized Transaction|
-|069|unauthorized Transaction|
-|070|unauthorized Transaction|
+|061|Invalid card number|
+|066|Unauthorized Transaction|
+|067|Unauthorized Transaction|
+|069|Unauthorized Transaction|
+|070|Unauthorized Transaction|
 |92|Issuing bank without communication|
 |093|Imbalance in installments plan|
 |094|Sale installments for cards issued abroad|
-|097|smaller share than the permitted value|
+|097|Smaller share than the permitted value|
 |099|Invalid issuing Bank|
-|100|unauthorized Transaction|
+|100|Unauthorized Transaction|
 |101|Duplicate Transaction|
-|102|duplicate Transaction|
-|071|unauthorized Transaction|
-|072|unauthorized Transaction|
+|102|Duplicate Transaction|
+|071|Unauthorized Transaction|
+|072|Unauthorized Transaction|
 |12|Invalid Transaction|
 |074|Invalid transaction value|
 |075|invalid card number|
-|077|unauthorized Transaction|
-|078|unauthorized Transaction|
-|079|unauthorized Transaction|
-|080|unauthorized Transaction|
-|081|expired Card|
-|082|unauthorized Transaction|
-|083|unauthorized Transaction|
-|084|unauthorized Transaction|
-|086|unauthorized Transaction|
+|077|Unauthorized Transaction|
+|078|Unauthorized Transaction|
+|079|Unauthorized Transaction|
+|080|Unauthorized Transaction|
+|081|Expired Card|
+|082|Unauthorized Transaction|
+|083|Unauthorized Transaction|
+|084|Unauthorized Transaction|
+|086|Unauthorized Transaction|
 |124|BIN not registered|
-|126|withdrawal transaction with invalid Electron card|
-|128|withdrawal transaction with invalid Electron card|
-|129|withdrawal transaction with invalid Electron card|
-|130|withdrawal transaction with invalid Electron card|
-|133|withdrawal transaction with invalid Electron card|
-|134|withdrawal transaction with invalid Electron card|
-|145|invalid Establishment for distribution|
+|126|Withdrawal transaction with invalid Electron card|
+|128|Withdrawal transaction with invalid Electron card|
+|129|Withdrawal transaction with invalid Electron card|
+|130|Withdrawal transaction with invalid Electron card|
+|133|Withdrawal transaction with invalid Electron card|
+|134|Withdrawal transaction with invalid Electron card|
+|145|Invalid Establishment for distribution|
 
 ## Table VI - Issuers
 
@@ -553,32 +543,32 @@ credit order.
 |056|Transaction funded to establish unauthorized|
 |057|Card protector report|
 |061|Number of invalid card|
-|066|unauthorized transaction|
-|067|unauthorized transaction|
-|069|unauthorized transaction|
-|070|unauthorized transaction|
-|071|unauthorized transaction|
-|072|unauthorized transaction|
-|073|invalid transaction|
+|066|Unauthorized transaction|
+|067|Unauthorized transaction|
+|069|Unauthorized transaction|
+|070|Unauthorized transaction|
+|071|Unauthorized transaction|
+|072|Unauthorized transaction|
+|073|Invalid transaction|
 |074|Invalid transaction value|
 |075|Number of invalid card|
-|077|unauthorized transaction|
-|078|unauthorized transaction|
-|079|unauthorized transaction|
-|080|unauthorized transaction|
+|077|Unauthorized transaction|
+|078|Unauthorized transaction|
+|079|Unauthorized transaction|
+|080|Unauthorized transaction|
 |081|Expired card|
-|082|unauthorized transaction|
-|083|unauthorized transaction|
-|084|unauthorized transaction|
-|086|unauthorized transaction|
+|082|Unauthorized transaction|
+|083|Unauthorized transaction|
+|084|Unauthorized transaction|
+|086|Unauthorized transaction|
 |092|Issuing bank without communication|
 |093|Imbalance in installments plan|
 |094|Installment sale for card issued abroad|
 |097|Value of installment smaller than allowed|
 |099|Invalid bank issuer|
-|100|unauthorized transaction|
-|101|transaction doubled|
-|102|transaction doubled|
+|100|Unauthorized transaction|
+|101|Transaction doubled|
+|102|Transaction doubled|
 |124|BIN not registered|
 |126|Withdrawal Transactions with Electron card invalid|
 |128|Withdrawal Transactions with Electron card invalid|
