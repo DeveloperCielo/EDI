@@ -1,0 +1,2720 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Development Eletronic Data Interchange Manual</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <link href="https://www.cielo.com.br/wps/contenthandler/!ut/p/digest!3SvhW8ACOLyj_90YHxPhKQ/war/cielo-tema/themes/estatico/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="javascripts/all.js" type="text/javascript"></script>
+
+    <script async src='//www.google-analytics.com/analytics.js'></script>
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+
+    ga('create', 'UA-8516386-7', {'cookieDomain': 'auto', 'alwaysSendReferrer': true});
+    ga('create', 'UA-31855766-1', {'name': 'iMasters', 'cookieDomain': 'auto', 'alwaysSendReferrer': true});
+
+    ga("set", "transport", "beacon");
+    ga('send', 'pageview');
+    </script>
+</head>
+
+<body class="extrato-edi-english">
+    <a href="#" id="nav-button">
+        <span>
+            NAV
+            <img src="images/navbar.png" />
+        </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+        <div class="search">
+            <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+        <div id="toc">
+        </div>
+        <h2 class="toc-footer-title">Materiais complementares</h2>
+        <ul class="toc-footer">
+            <li><a Href='index.html'> Integration Manual EDI </a></li>
+        </ul>
+        <div class="links-footer">
+            <ul class="link-list">
+                <li class="cielo"><a href="https://www.cielo.com.br/ecommerce">Cielo</a></li>
+                <li class="github"><a href="https://github.com/developercielo">Cielo</a></li>
+                <li class="desenvolvedores"><a href="https://www.cielo.com.br/desenvolvedores">Cielo</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-wrapper">
+            <div class="content no-dark-box">
+                <h1 id="introduction">Introduction</h1>
+
+<p>The Eletronic Data Interchange Report (EDI) is a product offered by Cielo to customers requiring automation in conciliation. In this case, the information is transmitted in a standardized manner without manual intervention through the EDI channel, providing agility and security in the traffic information.</p>
+
+<p><img alt="Fluxo" src="images/fluxo-edi.jpg" /></p>
+
+<h2 id="benefits">Benefits</h2>
+
+<ul>
+<li>Allows the realization of accounting and financial reconciliation in an automated way;</li>
+<li>Greater agility and operational efficiency;</li>
+<li>Integration with the commercial sales automation;</li>
+<li>Security in receiving information;</li>
+<li>Specialized support.</li>
+</ul>
+
+<h2 id="attendance">Attendance</h2>
+
+<h3 id="edi---specialized-attendance">EDI - Specialized attendance</h3>
+
+<ul>
+<li>4002 5270 - capitals, metropolitan areas and other locations</li>
+<li>edi@cielo.com.br</li>
+<li>From Monday to Friday, from 9 to 18 hours.</li>
+</ul>
+
+<h3 id="internet">Internet</h3>
+
+<p>www.cielo.com.br</p>
+
+<h1 id="types-of-eletronic-data-interchange-report">Types of Eletronic Data Interchange Report</h1>
+
+<p>You can request to receive the following types of Eletronic Data Interchange Report:</p>
+
+<table><thead>
+<tr>
+<th>File Type</th>
+<th>Information</th>
+<th>Record Type</th>
+<th>Reconciliation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>03 - Selling Installment Plan</td>
+<td><ul><li>Completed sales (reported) in the previous day, rejected adjustments and transactions, with the forecast of payment.</li><li>All installment plan sale held on previous day.</ul><br /><strong>Obs.:</strong>forecasting payment is sent only to the first installment. If changed by tweaking the acceleration records and rescheduling of the involved installments will be presented.</td>
+<td><ul><li>0 - Header</li><li>1 - RO Detail (with the first installment)</li><li>2 - Detail CV</li><li>1 - Details RO (forecast of the second installment on)</li><li>9 - Trailer</li></ul></td>
+<td>Check that all sales They were received by Cielo.</td>
+</tr>
+<tr>
+<td>04 - Payments</td>
+<td><ul><li> Amounts paid on current account on the day of submission of the Statement: Details the ROs and adjustments compensated the day</li><li>Transactions offset, as anticipated or transferred previously and payments of outstanding installments </li></ul></td>
+<td><ul><li>0 - Header</li><li>1 - Details RO</li><li>2 - Detail CV</li><li>9 - Trailer</li></ul></td>
+<td>Check origin of the payment received (type of sale, issuer and client/establishment that carried out the sale). Reconciliation of the current account.</td>
+</tr>
+<tr>
+<td>06 - * Prepayment of Receivables</td>
+<td>ARV operation conducted by Cielo the day before sending the file and its detail of ROs and CVs that were anticipated</td>
+<td><ul><li>0 - Header</li><li>5 - Detail of ARV</li><li>6 - Detail anticipated ROs</li><li>2 - Detail CV </li><li>7 - ROs debts detail advance</li><li>2 - Detail CV </li><li>9 - Trailer</li></ul><br/><strong>Note.:</strong>It will be shown the record type 5 for each transaction carried out by home bank.</td>
+<td>Update the cash flow, considering the amounts already received by anticipation.</td>
+</tr>
+<tr>
+<td>07 - Assignment of Receivables</td>
+<td><Ul><li>assignment operation performed at home bank (Bradesco and HSBC) the day before sending the file and its detail of the assigned ROs.</li><li>It is not shown the commercial condition negotiated or assigned installment.</li></ul></td>
+<td><ul><li>0 - Header</li><li>5 - Receivables assignment details</li><li>6 - Detail assigned ROs</li><li>9 - Trailer</li></ul><br/><strong>Note.:</strong>It will be shown the record type 5 for each transaction carried out by home bank.</td>
+<td>Update the cash flow, considering the amounts already received by the transfer operation.</td>
+</tr>
+<tr>
+<td>08 - Pending Installments</td>
+<td>File generated only once on the first day after the customer choose to receive the Sales extract with Installment Plan (file 03).</td>
+<td><ul><li>0 - Header</li><li>1 - Detail RO</li><li>2 - Detail CV</li><li>9 - Trailer</li></ul></td>
+<td>Prepare a cash flow forecast of sales previously.</td>
+</tr>
+<tr>
+<td>09 - Balance at Open</td>
+<td><ul><li>Receivables with Cielo, contemplating transactions, captured and processed, sales debit, credit and installment not yet settled on the movement closed the previous month.</li><li>An indicator of ARV and assignment is presented to facilitate the reconciliation of ROs involved in anticipation of operations that change the amounts outstanding from the customer.</li><li>The file is available monthly.</li></ul></td>
+<td><ul><li>0 - Header</li><li>1 - RO Detail</li><li>9 - Trailer</li></ul></td>
+<td>Refresh forward-receipts with due allowances of Advances, Disposals and Adjustments.</td>
+</tr>
+</tbody></table>
+
+<h1 id="layouts-of-records-types">Layouts of Records Types</h1>
+
+<p>The information shown in the Eletronic Data Interchange Report (EDI) will be organized by the types of records that are described in sequence.</p>
+
+<h2 id="type-0---header">Type 0 - Header</h2>
+
+<p>Identifies the header of each Eletronic Data Interchange Report chain*.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>001</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant &ldquo;0&rdquo;: Header identifies the type of record (beginning of the file).</td>
+</tr>
+<tr>
+<td>002</td>
+<td>011</td>
+<td>10</td>
+<td>Num.</td>
+<td>Establishment Matrix</td>
+<td>establishment number matrix electronic statement chain.</td>
+</tr>
+<tr>
+<td>012</td>
+<td>019</td>
+<td>8</td>
+<td>Num.</td>
+<td>Data processing</td>
+<td>YYYYMMDD - date the file was created.</td>
+</tr>
+<tr>
+<td>020</td>
+<td>027</td>
+<td>8</td>
+<td>Num.</td>
+<td>Initial period</td>
+<td>YYYYMMDD - less data capture found in motion.</td>
+</tr>
+<tr>
+<td>028</td>
+<td>035</td>
+<td>8</td>
+<td>Num.</td>
+<td>Period end</td>
+<td>YYYYMMDD - most data capture found in motion.</td>
+</tr>
+<tr>
+<td>036</td>
+<td>042</td>
+<td>7</td>
+<td>Num.</td>
+<td>Sequence</td>
+<td>sequential file number. In cases of recovery this data will be sent to 9999999.</td>
+</tr>
+<tr>
+<td>043</td>
+<td>047</td>
+<td>5</td>
+<td>Alpha</td>
+<td>Company acquirer</td>
+<td>Constant Cielo.</td>
+</tr>
+<tr>
+<td>048</td>
+<td>049</td>
+<td>2</td>
+<td>Num.</td>
+<td>Extract Option</td>
+<td>See Table I.</td>
+</tr>
+<tr>
+<td>050</td>
+<td>050</td>
+<td>1</td>
+<td>Alpha</td>
+<td>VAN</td>
+<td>&ldquo;I&rdquo; - OpenText (formerly GXS), &ldquo;P&rdquo; - TIVIT</td>
+</tr>
+<tr>
+<td>051</td>
+<td>070</td>
+<td>20</td>
+<td>Alpha.</td>
+<td>Mailbox</td>
+<td>Information obtained in the registration form in VAN</td>
+</tr>
+<tr>
+<td>071</td>
+<td>073</td>
+<td>3</td>
+<td>Num.</td>
+<td>Layout Version</td>
+<td>Constant &ldquo;001&rdquo;.</td>
+</tr>
+<tr>
+<td>074</td>
+<td>250</td>
+<td>177</td>
+<td>Alpha</td>
+<td>Use Cielo</td>
+<td>Blank. Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<p>(<em>) Register which allows the inclusion of all establishments controlled by the customer, regardless of the payment is centralized. 
+All *establishment numbers</em> should be informed in the registration form.</p>
+
+<h2 id="type-1---detail-operations-summary-(ro)">Type 1 - Detail Operations Summary (RO)</h2>
+
+<p>Group sales, adjustments or billing services. It allows you to identify the source of releases and maintenance actions.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>001</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant &ldquo;1&rdquo; - Identifies the detail record type RO</td>
+</tr>
+<tr>
+<td>002</td>
+<td>011</td>
+<td>10</td>
+<td>Num.</td>
+<td>Establishment Submitter</td>
+<td>Number of establishment and/or branch where the sale took place.</td>
+</tr>
+<tr>
+<td>012</td>
+<td>018</td>
+<td>7</td>
+<td>Num.</td>
+<td>RO Number</td>
+<td>Operation summary number. They contain information relating to a sales group performed on a certain date.</td>
+</tr>
+<tr>
+<td>019</td>
+<td>020</td>
+<td>2</td>
+<td>Num.</td>
+<td>Portion</td>
+<td>In the case of split sale, will be formatted with the number of the parcel which is being released in the file submission date. In the case of cash sale, will be formatted with white.</td>
+</tr>
+<tr>
+<td>021</td>
+<td>021</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Filler</td>
+<td><ul><li>&ldquo;/&rdquo;- For installment sales.</li><li>&ldquo;a&rdquo; - acceleration of installments.</li><li>“  “ - other situations.</li></ul></td>
+</tr>
+<tr>
+<td>022</td>
+<td>023</td>
+<td>2</td>
+<td>Alpha</td>
+<td>Plan</td>
+<td>In the case of split sale, will be formatted with the largest number of parcels found that sales group. If the RO has sales in 03, 04 or 06 installments, will be filled with 06.<br/>If an acceleration of installments will be formatted with the most accelerated share.<br/><br/>Example: (019 positions to 023) <br/><ul><li>02A02. - indicates the acceleration of the installment 02 to 02, or only a portion.</li><li>03A08 - indicates the acceleration of the portion 03 to the portion 08 plan of sale or were accelerated 06 installments.</li></ul><br/>In the case of cash sale, will be formatted with white.</td>
+</tr>
+<tr>
+<td>024</td>
+<td>025</td>
+<td>2</td>
+<td>Num.</td>
+<td>Transaction Type</td>
+<td>Code identifying the transaction - see Table II.</td>
+</tr>
+<tr>
+<td>026</td>
+<td>031</td>
+<td>6</td>
+<td>Num.</td>
+<td>Date of submission</td>
+<td>YYMMDD - Date on which the RO is transmitted to Cielo.</td>
+</tr>
+<tr>
+<td>032</td>
+<td>037</td>
+<td>6</td>
+<td>Num.</td>
+<td>Estimated date of payment</td>
+<td>YYMMDD - Expected date of payment.In recovery, it can be updated after processing the transaction or adjustment.</td>
+</tr>
+<tr>
+<td>038</td>
+<td>043</td>
+<td>6</td>
+<td>Num.</td>
+<td>Date of dispatch to the bank<sup>(5)</sup></td>
+<td>YYMMDD - Date on which payment file was sent to the bank. In recovery, it can be updated after processing the transaction or adjustment.</td>
+</tr>
+<tr>
+<td>044</td>
+<td>044</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign gross</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt</li></ul>.</td>
+</tr>
+<tr>
+<td>045</td>
+<td>057</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross <sup>(1)</sup></td>
+<td>Sum of sales figures.</td>
+</tr>
+<tr>
+<td>058</td>
+<td>058</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Commission <sup>(5)</sup></td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>059</td>
+<td>071</td>
+<td>13</td>
+<td>Num.</td>
+<td>Commission value <sup>(1)</sup><sup>(5)</sup></td>
+<td>Value of commission discounted on sales.</td>
+</tr>
+<tr>
+<td>072</td>
+<td>072</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of Rejected value <sup>(4)</sup></td>
+<td><ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>073</td>
+<td>085</td>
+<td>13</td>
+<td>Num.</td>
+<td>Rejected Value <sup>(1)</sup><sup>(4)</sup></td>
+<td>If there is rejection, will be filled with the sum of rejected transactions.</td>
+</tr>
+<tr>
+<td>086</td>
+<td>086</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal net</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>087</td>
+<td>099</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net Value<sup>(1)</sup></td>
+<td>Sales value minus the amount of commission.</td>
+</tr>
+<tr>
+<td>100</td>
+<td>103</td>
+<td>4</td>
+<td>Num.</td>
+<td>Bank</td>
+<td>Bank code in which the amounts were deposited</td>
+</tr>
+<tr>
+<td>104</td>
+<td>108</td>
+<td>5</td>
+<td>Num.</td>
+<td>Agency<sup>(5)</sup></td>
+<td>Agency ID in which the values were deposited</td>
+</tr>
+<tr>
+<td>109</td>
+<td>122</td>
+<td>14</td>
+<td>Alphanumeric</td>
+<td>Current account<sup>(5)</sup></td>
+<td>Current account code in which the values ​​were deposited</td>
+</tr>
+<tr>
+<td>123</td>
+<td>124</td>
+<td>2</td>
+<td>Num.</td>
+<td>Payment Status</td>
+<td>Identifies the situation in which they are sent to the bank credits - see Table III.During recover, the status is updated according to the shipping and payment confirmation back by the bank.</td>
+</tr>
+<tr>
+<td>125</td>
+<td>130</td>
+<td>6</td>
+<td>Num.</td>
+<td>CV Quantity accepted</td>
+<td>Sales quantities accepted in RO.</td>
+</tr>
+<tr>
+<td>131</td>
+<td>132</td>
+<td>2</td>
+<td>Num.</td>
+<td>Product Code</td>
+<td>From 1.3.2014, the product identifier shall be sent in positions 233-235 with three characters.Disregard the information sent in this position.</td>
+</tr>
+<tr>
+<td>133</td>
+<td>138</td>
+<td>6</td>
+<td>Num.</td>
+<td>CVs quantities rejected <sup>(5)</sup></td>
+<td>Quantity rejected in the RO.</td>
+</tr>
+<tr>
+<td>139</td>
+<td>139</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Identifier resale/acceleration <sup>(5)</sup></td>
+<td>Identifies maintenance occurrences in installments transactions in store:<ul><li>“R” - Resale</li><li>“A” - Acceleration </li><li>“  “ – White (no occurrence)</li></ul></td>
+</tr>
+<tr>
+<td>140</td>
+<td>145</td>
+<td>6</td>
+<td>Num.</td>
+<td>Transaction capture Date<sup>(5)</sup></td>
+<td>YYMMDD - Date on which the transaction was captured by the Cielo. In recovery, it can be updated after processing the transaction or adjustment.</td>
+</tr>
+<tr>
+<td>146</td>
+<td>147</td>
+<td>2</td>
+<td>Alphanumeric</td>
+<td>Setting Source<sup>(4)</sup></td>
+<td>Identifies the type of adjustment - see Table V. Fill in the type of transaction is: <ul><li>02 - Debt Adjustment </li><li>03 - setting credit </li><li>04  - rent adjustment</li></ul></td>
+</tr>
+<tr>
+<td>148</td>
+<td>160</td>
+<td>13</td>
+<td>Num.</td>
+<td>Additional Value<sup>(5)</sup></td>
+<td>withdrawal amount when the product is equal to &ldquo;36&rdquo; or value of Agro Electron for transactions of products &ldquo;22&rdquo;, &ldquo;23&rdquo; or &ldquo;25&rdquo; shown in Table IV.</td>
+</tr>
+<tr>
+<td>161</td>
+<td>161</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Anticipation identifier</td>
+<td>RO anticipation identifier:<ul><li>“  “ – not anticipated; </li><li>“A” – Early in Cielo - ARV;</li><li>“C” - Early in the bank - Assignment of Receivables</li></ul></td>
+</tr>
+<tr>
+<td>162</td>
+<td>170</td>
+<td>9</td>
+<td>Num.</td>
+<td>Anticipation operation number</td>
+<td>identifies the number of Anticipation of operation presented in the record type 5 - Field 12-20, associated with the anticipated RO/ Cielo given in or on the bench.. Contains zeros if the RO has not been anticipated.</td>
+</tr>
+<tr>
+<td>171</td>
+<td>171</td>
+<td>1</td>
+<td>Alpha</td>
+<td>value Signal anticipated Gross</td>
+<td><ul><li>“+” identifies value credit </li><li>“-” identifies value debt </li></ul></td>
+</tr>
+<tr>
+<td>172</td>
+<td>184</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross Value Early<sup>(1)</sup></td>
+<td>Anticipated Gross, provided when the RO is anticipated/assigned. It will be filled with zeros when no anticipation. The anticipated gross value is the net value of the RO.</td>
+</tr>
+<tr>
+<td>185</td>
+<td>187</td>
+<td>3</td>
+<td>Num.</td>
+<td>Issuer</td>
+<td>Issuer Code - see Table VI</td>
+</tr>
+<tr>
+<td>188</td>
+<td>209</td>
+<td>22</td>
+<td>Num.</td>
+<td>Single Number RO</td>
+<td>RO identification Single Number formatted as follows:<ul><li> First part (fixed) - 15 fixed positions: Identifies the summary retaining its history in Cielo;</li><li> Second part (variable) - 07 variable positions: Identifies changes made to the RO </li></ul></td>
+</tr>
+<tr>
+<td>210</td>
+<td>213</td>
+<td>4</td>
+<td>Num.</td>
+<td>Fee Rate<sup>(1)</sup> <sup>(5)</sup></td>
+<td>Commission Percentage applied on the transaction amount.</td>
+</tr>
+<tr>
+<td>214</td>
+<td>218</td>
+<td>5</td>
+<td>Num.</td>
+<td>Fee<sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup></td>
+<td>Fee charged per transaction.</td>
+</tr>
+<tr>
+<td>219</td>
+<td>222</td>
+<td>4</td>
+<td>Num.</td>
+<td>Guarantee Fee <sup>(1)</sup> <sup>(2)</sup> <sup>(5)</sup></td>
+<td>Discount Percentage applied on Electron Pre-Dating transactions.</td>
+</tr>
+<tr>
+<td>223</td>
+<td>224</td>
+<td>2</td>
+<td>Num.</td>
+<td>Capture Media <sup>(5)</sup></td>
+<td>See table VII. If the sale has been reprocessed, the system will send the means to capture 06: manual capture medium; in this case disregard the value set in the logical terminal number. Course not available for debt sales in the daily payment file and the second installment on the installment sales in the diary and recovered payment file.</td>
+</tr>
+<tr>
+<td>225</td>
+<td>232</td>
+<td>8</td>
+<td>Num.</td>
+<td>Logical terminal number <sup>(5)</sup></td>
+<td>Terminal logical number which was made the sale. When the capture medium is equal to 06, disregarding the logical terminal number as this is an internal issue of Cielo.</td>
+</tr>
+<tr>
+<td>233</td>
+<td>235</td>
+<td>3</td>
+<td>Num.</td>
+<td>Product Code</td>
+<td>Code that identifies the product - see Table IV.</td>
+</tr>
+<tr>
+<td>236</td>
+<td>245</td>
+<td>10</td>
+<td>Num.</td>
+<td>Pay Matrix <sup>(3)</sup></td>
+<td>Establishment array of centralized payment chain.</td>
+</tr>
+<tr>
+<td>246</td>
+<td>250</td>
+<td>5</td>
+<td>Alphanumeric.</td>
+<td>Use Cielo</td>
+<td>Blank. Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><Sup>(1)</sup> - should be considered 2 decimal places, without commas, periods, or any other character.</li>
+<li><Sup>(2)</sup> - Available only in daily files; recovery is not shown.</li>
+<li><Sup>(3)</sup> - Available only in Balance extract Open. For other statements will be filled with blanks.</li>
+<li><Sup>(4)</sup> - Field Not Set in Balance extract Open - Revolving and Installment.</li>
+<li><Sup>(5)</sup> - Field Not Set in Balance extract Open - Installment.</li>
+</ul>
+
+<h2 id="type-2---sales-receipt-details-(cv)">Type 2 - Sales Receipt Details (CV)</h2>
+
+<p>Detail of sales or ganged adjustments in an RO.</p>
+
+<p>As security rules, all records that have card number will present the truncated number.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>001</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant &ldquo;2&rdquo; - identifies the type of Sales Receipt detail record (CV).</td>
+</tr>
+<tr>
+<td>002</td>
+<td>011</td>
+<td>10</td>
+<td>Num.</td>
+<td>Establishment Submitter</td>
+<td>Number of the establishment and/or branch where the sale took place.</td>
+</tr>
+<tr>
+<td>012</td>
+<td>018</td>
+<td>7</td>
+<td>Num.</td>
+<td>RO Number</td>
+<td>Operation summary of the number. They contain information relating to a sales group performed on a certain date.</td>
+</tr>
+<tr>
+<td>019</td>
+<td>037</td>
+<td>19</td>
+<td>Alphanumeric</td>
+<td>truncated card number</td>
+<td>Number of the truncated card: the card number that was purchased with truncated number. Contain zeros for purchases via mobile payment and e-commerce, and for the last option.</td>
+</tr>
+<tr>
+<td>038</td>
+<td>045</td>
+<td>8</td>
+<td>Num.</td>
+<td>Date of sale/set</td>
+<td>YYYYMMDD - Date on which the sale or adjustment was made.</td>
+</tr>
+<tr>
+<td>046</td>
+<td>046</td>
+<td>1</td>
+<td>Alpha</td>
+<td>the purchase value of the signal or value of the parcel</td>
+<td><ul><li>“+” value identifies the credit</li><li>“-”identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>047</td>
+<td>059</td>
+<td>13</td>
+<td>Num.</td>
+<td>The purchase price or value of the parcel<sup>(1)</sup></td>
+<td>value of purchase or the portion that was released in the case of piecemeal sale in the shop.</td>
+</tr>
+<tr>
+<td>060</td>
+<td>061</td>
+<td>2</td>
+<td>Num.</td>
+<td>share</td>
+<td>In case of split sale, will be formed with the number of the parcel being released. In the case of cash sale,</td>
+</tr>
+<tr>
+<td>will be formatted with zeros.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>062</td>
+<td>063</td>
+<td>2</td>
+<td>Num.</td>
+<td>Total os intallments</td>
+<td>Total number of installments. In the case of cash sale, will be formed with zero.</td>
+</tr>
+<tr>
+<td>064</td>
+<td>066</td>
+<td>3</td>
+<td>Num.</td>
+<td>Reason for Rejection</td>
+<td>See Table VIII, should not have rejected the field is blank formatted.</td>
+</tr>
+<tr>
+<td>067</td>
+<td>072</td>
+<td>6</td>
+<td>Alphanumeric</td>
+<td>authorization code</td>
+<td>transaction authorization ode. This number is not unique and can be repeated.For reconciliation purposes should be combined with other keys.</td>
+</tr>
+<tr>
+<td>073</td>
+<td>092</td>
+<td>20</td>
+<td>Alphanumeric</td>
+<td>TID</td>
+<td>transaction identification made in e-commerce and mobile payment.</td>
+</tr>
+<tr>
+<td>093</td>
+<td>098</td>
+<td>6</td>
+<td>Alphanumeric</td>
+<td>NSU/DOC</td>
+<td>Sequence Number, also known as DOC (document number), which identifies the transaction in the day it was made. This number is not unique and can be repeated. If the sale has been reprocessed, the NSU can be changed.</td>
+</tr>
+<tr>
+<td>099</td>
+<td>111</td>
+<td>13</td>
+<td>Num.</td>
+<td>Complementary Value <sup>(1)</sup></td>
+<td>Serve with debit card transaction value or AgroElectron according RO product indicator.</td>
+</tr>
+<tr>
+<td>112</td>
+<td>113</td>
+<td>02</td>
+<td>Num</td>
+<td>Dig - Card</td>
+<td>Number of Card Digits</td>
+</tr>
+<tr>
+<td>114</td>
+<td>126</td>
+<td>13</td>
+<td>Num.</td>
+<td>Total value of sale in the case of Instalment Store<sup>(2)</sup></td>
+<td>Total value of the fractional sale in the shop is sent only in the sales file on all plots. For the remaining cases will be empty.</td>
+</tr>
+<tr>
+<td>127</td>
+<td>139</td>
+<td>13</td>
+<td>Num.</td>
+<td>Next installment value<sup>(2)</sup></td>
+<td>The value of the next installments of the sale is sent only in the sales file. For customers without installment plan will be sent to all parts of the sale, with the exception of the last installment.For customers with installment plan will be sent on the first portion and captured in detail the first accelerated share.</td>
+</tr>
+<tr>
+<td>140</td>
+<td>148</td>
+<td>9</td>
+<td>Num.</td>
+<td>Number of Invoice <sup>(2)</sup></td>
+<td>Number of invoice for establishments that capture this information at POS. When not available will be formatted with zeros</td>
+</tr>
+<tr>
+<td>149</td>
+<td>152</td>
+<td>4</td>
+<td>Num.</td>
+<td>Card indicator issued abroad <sup>(2)</sup></td>
+<td>Identifies whether the card that made the purchase was sent abroad as follows:<ul><li>“0000” - Service not assigned </li><li>“0001” - issued card in Brazil </li><li>“0002” - issued card abroad </li></ul></td>
+</tr>
+<tr>
+<td>153</td>
+<td>160</td>
+<td>8</td>
+<td>Num.</td>
+<td>Logical terminal number</td>
+<td>Logical terminal number which was made the sale. When the capture medium is 06, disregard this information.</td>
+</tr>
+<tr>
+<td>161</td>
+<td>162</td>
+<td>2</td>
+<td>Alpha</td>
+<td>boarding rate identifier or input value</td>
+<td>transaction ID referring to the departure tax or input value:<ul><li>TX-boarding rate; </li><li>VE - input value; </li><li> White - for other types of transaction.</li></ul></td>
+</tr>
+<tr>
+<td>163</td>
+<td>182</td>
+<td>20</td>
+<td>alphanumeric</td>
+<td>Reference/code request</td>
+<td>Reference or code request informed in a transaction mobile payment and e-commerce. When not available, it will be formatted with white.</td>
+</tr>
+<tr>
+<td>183</td>
+<td>188</td>
+<td>6</td>
+<td>Num.</td>
+<td>Transaction Time <sup>(3)</sup></td>
+<td>Transaction Time presented in the format HHMMSS. This information will be generated only in the sales records of the sales file with original CV. In other cases, the field is formatted with zeros.</td>
+</tr>
+<tr>
+<td>189</td>
+<td>217</td>
+<td>29</td>
+<td>Num.</td>
+<td>Single transaction Number</td>
+<td>Unique number that identifies each transaction</td>
+</tr>
+<tr>
+<td>218</td>
+<td>218</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Cielo Promo Display</td>
+<td>Identifier Product Promo Cielo = &ldquo;S&rdquo;. It identifies that the sale took part in the promotional campaign platform. Otherwise it will be formatted with white.</td>
+</tr>
+<tr>
+<td>219</td>
+<td>250</td>
+<td>32</td>
+<td>Alphanumeric</td>
+<td>Use Cielo</td>
+<td>Blank. Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><Sup>(1)</sup> - should be considered 2 decimal places, without commas, periods, or any other character.</li>
+<li><Sup>(2)</sup> - Available only noas daily files; recovery is not shown.</li>
+</ul>
+
+<h2 id="type-5---detail-of-prepayment-of-receivables-operation">Type 5 - Detail of Prepayment of Receivables Operation</h2>
+
+<p>It presents the frontloading operation held in Cielo or assignment of receivables (for Bradesco and HSBC) held the day before the file
+generation.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>001</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant &ldquo;5&rdquo; - identifies the type of record that presents the information in a frontloading operation.</td>
+</tr>
+<tr>
+<td>002</td>
+<td>011</td>
+<td>10</td>
+<td>Num.</td>
+<td>Establishment of payment or submission</td>
+<td>Number of the establishment and/or branch where the sale took place.</td>
+</tr>
+<tr>
+<td>012</td>
+<td>020</td>
+<td>9</td>
+<td>Num.</td>
+<td>Anticipation operation number</td>
+<td>Number of financial Anticipation operation, also presented in the record type 1 in the RO settlement date.</td>
+</tr>
+<tr>
+<td>021</td>
+<td>028</td>
+<td>8</td>
+<td>Num.</td>
+<td>Operation credit date</td>
+<td>YYYYMMDD - date of payment of the operation./</td>
+</tr>
+<tr>
+<td>029</td>
+<td>029</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the gross anticipation of view</td>
+<td><ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>030</td>
+<td>042</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross value of the anticipation of view</td>
+<td>gross value of the order to book in advance. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs this agenda.</td>
+</tr>
+<tr>
+<td>043</td>
+<td>043</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the gross advance installments</td>
+<td><ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>044</td>
+<td>056</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross value of advance installments</td>
+<td>gross amount of advance installments of the agenda. The amount of the advance is the sum of the original amounts net of anticipated ROs this agenda.</td>
+</tr>
+<tr>
+<td>057</td>
+<td>057</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the gross anticipation Electron Pre-Dating</td>
+<td><ul><li>“+” value identifies the credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>058</td>
+<td>070</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross value of anticipation Electron Pre-Dating</td>
+<td>gross anticipation of Electron Pre-Dating agenda. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs this agenda.</td>
+</tr>
+<tr>
+<td>071</td>
+<td>071</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the gross total advance</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>072</td>
+<td>084</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross value of total advance</td>
+<td>Gross anticipation of agendas in cash installments and Electron Pre-Dating. The gross amount of anticipation is the sum of the original amounts net of anticipated ROs.</td>
+</tr>
+<tr>
+<td>085</td>
+<td>085</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign the net value of the anticipation of view</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-”identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>086</td>
+<td>098</td>
+<td>13</td>
+<td>Num.</td>
+<td>In anticipating the Net</td>
+<td>Net anticipation agenda in sight.</td>
+</tr>
+<tr>
+<td>099</td>
+<td>099</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Net sign of anticipation installments</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>100</td>
+<td>112</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net anticipation installments</td>
+<td>Net value of advance installments of the agenda.</td>
+</tr>
+<tr>
+<td>113</td>
+<td>113</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal net value of Pre-Dating anticipation</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-”identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>114</td>
+<td>126</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net Pre-Dating anticipation</td>
+<td>Net anticipation of Electron Pre-Dating agenda.</td>
+</tr>
+<tr>
+<td>127</td>
+<td>127</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign the net value of the total advance</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>128</td>
+<td>1140</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net total anticipated value</td>
+<td>Net anticipation of agendas in cash installments and Electron Pre-Dating.</td>
+</tr>
+<tr>
+<td>141</td>
+<td>145</td>
+<td>5</td>
+<td>Num.</td>
+<td>Discount rate of anticipation</td>
+<td>discount shopping anticipation fee.</td>
+</tr>
+<tr>
+<td>146</td>
+<td>149</td>
+<td>4</td>
+<td>Num.</td>
+<td>Bank Code</td>
+<td>Bank in which the amounts were deposited</td>
+</tr>
+<tr>
+<td>150</td>
+<td>154</td>
+<td>5</td>
+<td>Num.</td>
+<td>Household agency code</td>
+<td>Agency in which the values were deposited</td>
+</tr>
+<tr>
+<td>155</td>
+<td>168</td>
+<td>14</td>
+<td>Alphanumeric</td>
+<td>current account Code of household</td>
+<td>Current account in which the values ​​were deposited</td>
+</tr>
+<tr>
+<td>169</td>
+<td>169</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal net anticipation</td>
+<td><ul><li>“+” identifies value credit.</li><li>“-” identifies value debt.</li></ul></td>
+</tr>
+<tr>
+<td>170</td>
+<td>182</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net anticipation</td>
+<td>Net Value of anticipation.</td>
+</tr>
+<tr>
+<td>183</td>
+<td>250</td>
+<td>68</td>
+<td>Alphanumeric</td>
+<td>Use Cielo</td>
+<td>In Blank. Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-6---detail-of-foward-ros">Type 6 - Detail of Foward ROs</h2>
+
+<p>It provides a breakdown of Anticipation operation demonstrating the anticipated ROs/sold.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant “6” – identifies the type of record that displays the information of an RO that was anticipated.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>11</td>
+<td>10</td>
+<td>Num.</td>
+<td>Submitter establishment</td>
+<td>Number of the establishment and/or branch where the sale took place.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>20</td>
+<td>9</td>
+<td>Num.</td>
+<td>Establishment of payment or submission</td>
+<td>Advance Operation number.</td>
+</tr>
+<tr>
+<td>21</td>
+<td>28</td>
+<td>8</td>
+<td>Num.</td>
+<td>Due date of RO</td>
+<td>AAAAAMMDD – Date of original validity that RO has been anticipated.</td>
+</tr>
+<tr>
+<td>29</td>
+<td>35</td>
+<td>7</td>
+<td>Num.</td>
+<td>Number of RO anticipated</td>
+<td>Number of RO anticipated.</td>
+</tr>
+<tr>
+<td>36</td>
+<td>37</td>
+<td>2</td>
+<td>Num.</td>
+<td>Antecipated installment</td>
+<td>Number of anticipated installment in the case of RO installments, c the sale of RO will be formatted with zeros.</td>
+</tr>
+<tr>
+<td>38</td>
+<td>39</td>
+<td>2</td>
+<td>Num.</td>
+<td>Total os instalments</td>
+<td>Quantity of installments of RO. In the case of RO in sight, will be formated with zeros.</td>
+</tr>
+<tr>
+<td>40</td>
+<td>40</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the original gross amount of RO</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>41</td>
+<td>53</td>
+<td>13</td>
+<td>Num.</td>
+<td>Original gross amount of RO <sup>(1)</sup></td>
+<td>Original gross amount of RO.</td>
+</tr>
+<tr>
+<td>54</td>
+<td>54</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the original net value of  RO</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>55</td>
+<td>67</td>
+<td>13</td>
+<td>Num.</td>
+<td>Original net value of RO <sup>(1)</sup></td>
+<td>Original net value of RO.</td>
+</tr>
+<tr>
+<td>68</td>
+<td>68</td>
+<td>1</td>
+<td>Num.</td>
+<td>Sign of the gross anticipation of RO</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>69</td>
+<td>81</td>
+<td>13</td>
+<td>Num.</td>
+<td>Gross anticipation value of RO <sup>(1)</sup></td>
+<td>Original net value of RO, except if scheduled debt for this RO.</td>
+</tr>
+<tr>
+<td>82</td>
+<td>82</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Sign of the net value of the anticipation of RO</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>83</td>
+<td>95</td>
+<td>13</td>
+<td>Num.</td>
+<td>Net amount of anticipation of RO <sup>(1)</sup></td>
+<td>Net amount actually paid to the establishment, already discounted commercial discount rate anticipation.</td>
+</tr>
+<tr>
+<td>96</td>
+<td>98</td>
+<td>3</td>
+<td>Num.</td>
+<td>Issuer code</td>
+<td>Issuer code – View VI Table.</td>
+</tr>
+<tr>
+<td>99</td>
+<td>120</td>
+<td>22</td>
+<td>Num.</td>
+<td>Unique number of RO</td>
+<td>Unique number of identification of RO formed as follows: First part (fixed) - 15 fixed positions: identifies the summary retaining its history in Cielo; Second part (variable) - 07 variable positions: to use Cielo. Identifies changes made to the RO.</td>
+</tr>
+<tr>
+<td>121</td>
+<td>250</td>
+<td>130</td>
+<td>Alpha</td>
+<td>Use Cielo</td>
+<td>Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><sup>(1)</sup> - Devem ser consideradas 2 casas decimais, sem vírgulas, pontos ou qualquer outro caractere.</li>
+</ul>
+
+<h2 id="type-7---detail-of-debt-ros-antecipated">Type 7 - Detail of Debt ROs Antecipated</h2>
+
+<p>Displays offset debts in early dates.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Editing data</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Num.</td>
+<td>Type of register</td>
+<td>Constant “7” – identifies the type of record that displays the information of an RO that was anticipated.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>11</td>
+<td>10</td>
+<td>Num.</td>
+<td>Submitter establishment</td>
+<td>Number of the establishment and/or branch where the sale took place.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>33</td>
+<td>22</td>
+<td>Num.</td>
+<td>Número Único do RO original da venda</td>
+<td>Número único do RO original da venda.</td>
+</tr>
+<tr>
+<td>34</td>
+<td>40</td>
+<td>7</td>
+<td>Num.</td>
+<td>Number of RO antecipated</td>
+<td>Number of RO of original sale.</td>
+</tr>
+<tr>
+<td>41</td>
+<td>48</td>
+<td>8</td>
+<td>Num.</td>
+<td>Due date of RO</td>
+<td>YYYYMMDD – Date of original validity that RO has been anticipated.</td>
+</tr>
+<tr>
+<td>49</td>
+<td>49</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal value anticipated of RO</td>
+<td>“+” identifies positive valueo. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>50</td>
+<td>62</td>
+<td>13</td>
+<td>Num.</td>
+<td>Value of RO antecipated</td>
+<td>Value of RO antecipated.</td>
+</tr>
+<tr>
+<td>63</td>
+<td>84</td>
+<td>22</td>
+<td>Num.</td>
+<td>Unique number of RO of sale that led to the setting</td>
+<td>Unique number of RO sale that led to the setting.</td>
+</tr>
+<tr>
+<td>85</td>
+<td>91</td>
+<td>7</td>
+<td>Num.</td>
+<td>Number of RO of debt adjustment</td>
+<td>Number of RO that represents values for antecipation operation.</td>
+</tr>
+<tr>
+<td>92</td>
+<td>99</td>
+<td>8</td>
+<td>Num.</td>
+<td>Payment date setting</td>
+<td>YYYYMMDD.</td>
+</tr>
+<tr>
+<td>100</td>
+<td>100</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Setting value of the signal output</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>101</td>
+<td>113</td>
+<td>13</td>
+<td>Num.</td>
+<td>Setting value debt</td>
+<td>Total value of debt.</td>
+</tr>
+<tr>
+<td>114</td>
+<td>114</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal offset value</td>
+<td>“+” identifies positive value. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>115</td>
+<td>127</td>
+<td>13</td>
+<td>Num.</td>
+<td>Amount compensated</td>
+<td>Amount compensated  of RO antecipated.</td>
+</tr>
+<tr>
+<td>128</td>
+<td>128</td>
+<td>1</td>
+<td>Alpha</td>
+<td>Signal balance anticipated RO</td>
+<td>“+” identifies positive valueo. “-” identifies negative value.</td>
+</tr>
+<tr>
+<td>129</td>
+<td>141</td>
+<td>13</td>
+<td>Num.</td>
+<td>Balance amount of the anticipated RO</td>
+<td>Total debt loss - Amount compensated.</td>
+</tr>
+<tr>
+<td>142</td>
+<td>250</td>
+<td>109</td>
+<td>Alpha.</td>
+<td>Use Cielo</td>
+<td>Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<h2 id="type-9---trailer">Type 9 - Trailer</h2>
+
+<p>Indicates the end of the file.</p>
+
+<table><thead>
+<tr>
+<th>Home</th>
+<th>End</th>
+<th>Size</th>
+<th>Type</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>001</td>
+<td>1</td>
+<td>Num.</td>
+<td>Record Type</td>
+<td>Constant &ldquo;9&rdquo; - Identifies the type of detail trailer record (end of file).</td>
+</tr>
+<tr>
+<td>002</td>
+<td>012</td>
+<td>11</td>
+<td>Num.</td>
+<td>Total record</td>
+<td>Total number of records, which do not include header and trailer.</td>
+</tr>
+<tr>
+<td>013</td>
+<td>250</td>
+<td>238</td>
+<td>Alphanumeric.</td>
+<td>Use Cielo</td>
+<td>Reserved for Cielo.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice"><strong>Note:</strong> fields reserved for Cielo can be used for adding new information. It may also be necessary to include new types of different registers. Because of this, we suggest that the reconciliation solution despise records not listed in this specification.</aside>
+
+<h1 id="tables">Tables</h1>
+
+<h2 id="table-i---extract-option">Table I - Extract Option</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>03</td>
+<td>Selling Installment Plan</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Payments</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Prepayment of Receivables</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Assignment of Receivables</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Outstanding installments</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Balance Open</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-ii---transaction-type">Table II - Transaction Type</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>01</td>
+<td>Sale</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Set Credit</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Adjust Debit</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Cielo plan</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Rescheduling</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-iii---payment-status">Table III - Payment Status</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>00</td>
+<td>Scheduled: identifies the capture of a transaction and informs the forecast of payment. The schedule may be changed</td>
+</tr>
+<tr>
+<td>01</td>
+<td>Pay: identifies that the payment was made by home bank</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Sent to the Bank: it identifies the Cielo requested payment/collection for the home bank, but there was no confirmation</td>
+</tr>
+<tr>
+<td>03</td>
+<td>The Confirm: identifies the Cielo requested payment/collection for the home bank, but still there was no confirmation</td>
+</tr>
+</tbody></table>
+
+<Aside class="notice"><strong> Note:</strong> is important that all payment status are considered</aside>.
+
+* When a credit value is clearing process with a value to debt, both will be sent in the payment file in the clearing date later than 
+scheduled payment date. The status sent to the bank to be displayed again in the payment statement when the bank domicile return a 
+credit order.
+
+## Table IV - Product Code
+
+|Code|Description|
+|&mdash;-|&mdash;&mdash;&mdash;&ndash;|
+|001|Agiplan crédito à vista|
+|002|Agiplan parcelado loja|
+|003|Banescard crédito à vista|
+|004|Banescard parcelado loja|
+|005|Esplanada crédito à vista|
+|006|Credz crédito à vista|
+|007|Esplanada parcelado loja|
+|008|Credz parcelado loja|
+|009|Elo Crediário|
+|010|Mastercard crédito à vista|
+|011|Maestro|
+|012|Mastercard parcelado loja|
+|013|Elo Construcard|
+|014|Elo Agro Débito|
+|015|Elo Agro Custeio|
+|016|Elo Agro Investimento|
+|017|Elo Agro Custeio + Débito|
+|018|Elo Agro Investimento + Débito|
+|019|Discover crédito à vista|
+|020|Diners crédito à vista|
+|021|Diners parcelado loja|
+|022|Agro Custeio + Electron|
+|023|Agro Investimento + Electron|
+|024|FCO Investimento|
+|025|Agro Electron|
+|026|Agro Custeio|
+|027|Agro Investimento|
+|028|FCO Giro|
+|033|JCB|
+|036|Saque com cartão de Débito VISA|
+|037|Flex Car Visa Vale|
+|038|Credsystem crédito à vista|
+|039|Credsystem parcelado loja|
+|040|Visa Crédito à vista|
+|041|Visa Electron Débito à vista|
+|042|Visa Pedágio|
+|043|Visa Parcelado Loja|
+|044|Visa Electron Pré-Datado|
+|045|Alelo Refeição (Bandeira Visa/Elo)|
+|046|Alelo Alimentação (Bandeira Visa/Elo)|
+|058|Elo Cultura|
+|059|Alelo Auto|
+|061|Sorocred Crédito à vista|
+|062|Sorocred Parcelado Loja|
+|064|Visa Crediário|
+|065|Alelo Refeição (Bandeira Elo)|
+|066|Alelo Alimentação (Bandeira Elo)|
+|067|Visa Capital de Giro|
+|068|Visa Crédito Imobiliário|
+|069|Cultura Visa Vale|
+|070|Elo Crédito|
+|071|Elo Débito à vista|
+|072|Elo Parcelado loja|
+|079|Pagamento Carnê Visa Electron|
+|080|Visa Crédito Conversor de Moeda|
+|081|Mastercard Crédito Especializado (*)|
+|089|Elo Crédito Imobiliário|
+|091|Elo Crédito Especializado (*)|
+|094|Banescard Débito|
+|096|Cabal Crédito à vista|
+|097|Cabal Débito|
+|098|Cabal Parcelado Loja|
+|342|Master Pedágio|
+|377|Elo Carnê|
+|378|Master Carnê|
+|380|Mastercard Crédito Conversor de Moeda|
+
+<aside class="notice"><strong>*</strong> Codes concerning Construcard cards, Minha Casa Melhor, Producard and Moveiscard</aside>
+
+<h2 id="table-v---set-source">Table V - Set Source</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Adjustment Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Restatement Setting</td>
+<td>Setting</td>
+</tr>
+<tr>
+<td>2</td>
+<td>payment date Setting</td>
+<td>Setting</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Adjustment commission rate</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Setting values unprocessed</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Settlement of amounts not received</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Setting values unrecognized</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Hit traded values</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Setting values processed improperly</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Release Hit uncompensated current account</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Hit regarding disputed values</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Temporary Settlement of contested values</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Many Hits</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Billing Agreement</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Legal Agreement</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Fine Application Program Monitoring Chargeback</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Value Lock by court order</td>
+<td>Lock</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Cancellation</td>
+<td>Cancellation</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Operating fare collection</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Monthly Billing Lynx Trade</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Recovery Plan Cielo</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Escrow contract</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>22</td>
+<td>cancellation of the return of credit - issuing bank</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Credit EC - related dispute carrier</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Credit for cancellation rejected - Cielo</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Duplicate debit processing - Visa Toll</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Debt held by sale without reading the chip</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Debit for sale rejected in the system - Cielo</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Debit regarding the carrier&rsquo;s dispute</td>
+<td>Chargeback</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Reversal of legal agreement</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Escrow contract Reversal</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Reversal collection agreement</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Value lock Reversal by court order</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Selling cancellation Reversal</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>34</td>
+<td>Operating fare collection Reversal</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Reversal of monthly charge Lynx Trade</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>36</td>
+<td>Reversal collection Cielo Plan</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>37</td>
+<td>Sale debit Reversal without reading the Chip</td>
+<td>Hit</td>
+</tr>
+<tr>
+<td>38</td>
+<td>Reversal of commercial incentive</td>
+<td>Hit</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-vi---issuer">Table VI - Issuer</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>VISA</td>
+</tr>
+<tr>
+<td>002</td>
+<td>Mastercard</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Sorocred</td>
+</tr>
+<tr>
+<td>007</td>
+<td>ELO</td>
+</tr>
+<tr>
+<td>009</td>
+<td>Diners</td>
+</tr>
+<tr>
+<td>011</td>
+<td>AGIPLAN</td>
+</tr>
+<tr>
+<td>015</td>
+<td>Banescard</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Cabal</td>
+</tr>
+<tr>
+<td>029</td>
+<td>Credsystem</td>
+</tr>
+<tr>
+<td>035</td>
+<td>Terrace</td>
+</tr>
+<tr>
+<td>064</td>
+<td>Credz</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-vii---capture-media">Table VII - Capture Media</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>01</td>
+<td>POS (Point of Sale)</td>
+</tr>
+<tr>
+<td>02</td>
+<td>POS (Point of Sale) or EFT (Electronic Funds Transfer)</td>
+</tr>
+<tr>
+<td>03</td>
+<td>e-Commerce (E-Commerce)</td>
+</tr>
+<tr>
+<td>04</td>
+<td>EDI (Electronic Data Exchange)</td>
+</tr>
+<tr>
+<td>05</td>
+<td>ADP/BSP (Company video capture)</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td>07</td>
+<td>URA/CVA</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Mobile</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Purse Electronic Network</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-viii---rejection-reason">Table VIII - Rejection Reason</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>002</td>
+<td>Invalid Card</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Other errors</td>
+</tr>
+<tr>
+<td>031</td>
+<td>withdrawal Transaction with card Electron zero value</td>
+</tr>
+<tr>
+<td>039</td>
+<td>Invalid issuing Bank</td>
+</tr>
+<tr>
+<td>044</td>
+<td>Date of transaction invalid</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Invalid authorization code</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Invalid number of installments</td>
+</tr>
+<tr>
+<td>056</td>
+<td>Transaction funded to establish unauthorized</td>
+</tr>
+<tr>
+<td>057</td>
+<td>Card in Protective newsletter</td>
+</tr>
+<tr>
+<td>061</td>
+<td>Invalid card number</td>
+</tr>
+<tr>
+<td>066</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>067</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>069</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>070</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>92</td>
+<td>Issuing bank without communication</td>
+</tr>
+<tr>
+<td>093</td>
+<td>Imbalance in installments plan</td>
+</tr>
+<tr>
+<td>094</td>
+<td>Sale installments for cards issued abroad</td>
+</tr>
+<tr>
+<td>097</td>
+<td>Smaller share than the permitted value</td>
+</tr>
+<tr>
+<td>099</td>
+<td>Invalid issuing Bank</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Duplicate Transaction</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Duplicate Transaction</td>
+</tr>
+<tr>
+<td>071</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>072</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Invalid Transaction</td>
+</tr>
+<tr>
+<td>074</td>
+<td>Invalid transaction value</td>
+</tr>
+<tr>
+<td>075</td>
+<td>invalid card number</td>
+</tr>
+<tr>
+<td>077</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>078</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>079</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>080</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>081</td>
+<td>Expired Card</td>
+</tr>
+<tr>
+<td>082</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>083</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>084</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>086</td>
+<td>Unauthorized Transaction</td>
+</tr>
+<tr>
+<td>124</td>
+<td>BIN not registered</td>
+</tr>
+<tr>
+<td>126</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>128</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>129</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>130</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>133</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>134</td>
+<td>Withdrawal transaction with invalid Electron card</td>
+</tr>
+<tr>
+<td>145</td>
+<td>Invalid Establishment for distribution</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-vi---issuers">Table VI - Issuers</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>001</td>
+<td>VISA</td>
+</tr>
+<tr>
+<td>002</td>
+<td>Mastercard</td>
+</tr>
+<tr>
+<td>006</td>
+<td>Sorocred</td>
+</tr>
+<tr>
+<td>007</td>
+<td>ELO</td>
+</tr>
+<tr>
+<td>009</td>
+<td>Diners</td>
+</tr>
+<tr>
+<td>011</td>
+<td>Agiplan</td>
+</tr>
+<tr>
+<td>015</td>
+<td>Banescard</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Cabal</td>
+</tr>
+<tr>
+<td>029</td>
+<td>Credsystem</td>
+</tr>
+<tr>
+<td>035</td>
+<td>Esplanada</td>
+</tr>
+<tr>
+<td>064</td>
+<td>Credz</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-vii---means-of-capturing">Table VII - Means of capturing</h2>
+
+<table><thead>
+<tr>
+<th>Código</th>
+<th>Descrição</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>01</td>
+<td>POS (Point of Sale)</td>
+</tr>
+<tr>
+<td>02</td>
+<td>PDV (Point of Sale) ou TEF (Electronic Funds Transfer)</td>
+</tr>
+<tr>
+<td>03</td>
+<td>e-Commerce (Electronic Commerce)</td>
+</tr>
+<tr>
+<td>04</td>
+<td>EDI (Electronic Data Exchange)</td>
+</tr>
+<tr>
+<td>05</td>
+<td>ADP/BSP (Company that makes the capture)</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td>07</td>
+<td>URA/CVA</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Mobile</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Purse Electronic Network</td>
+</tr>
+</tbody></table>
+
+<h2 id="table-viii---reason-for-rejection">Table VIII - Reason for Rejection</h2>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>002</td>
+<td>Invalid card</td>
+</tr>
+<tr>
+<td>023</td>
+<td>Other errors</td>
+</tr>
+<tr>
+<td>031</td>
+<td>Withdrawal Transactions with Electron card with reset value</td>
+</tr>
+<tr>
+<td>039</td>
+<td>Invalid bank issuer</td>
+</tr>
+<tr>
+<td>044</td>
+<td>Date of the transaction invalid</td>
+</tr>
+<tr>
+<td>045</td>
+<td>Invalid authorization code</td>
+</tr>
+<tr>
+<td>055</td>
+<td>Invalid number of installments</td>
+</tr>
+<tr>
+<td>056</td>
+<td>Transaction funded to establish unauthorized</td>
+</tr>
+<tr>
+<td>057</td>
+<td>Card protector report</td>
+</tr>
+<tr>
+<td>061</td>
+<td>Number of invalid card</td>
+</tr>
+<tr>
+<td>066</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>067</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>069</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>070</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>071</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>072</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>073</td>
+<td>Invalid transaction</td>
+</tr>
+<tr>
+<td>074</td>
+<td>Invalid transaction value</td>
+</tr>
+<tr>
+<td>075</td>
+<td>Number of invalid card</td>
+</tr>
+<tr>
+<td>077</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>078</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>079</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>080</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>081</td>
+<td>Expired card</td>
+</tr>
+<tr>
+<td>082</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>083</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>084</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>086</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>092</td>
+<td>Issuing bank without communication</td>
+</tr>
+<tr>
+<td>093</td>
+<td>Imbalance in installments plan</td>
+</tr>
+<tr>
+<td>094</td>
+<td>Installment sale for card issued abroad</td>
+</tr>
+<tr>
+<td>097</td>
+<td>Value of installment smaller than allowed</td>
+</tr>
+<tr>
+<td>099</td>
+<td>Invalid bank issuer</td>
+</tr>
+<tr>
+<td>100</td>
+<td>Unauthorized transaction</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Transaction doubled</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Transaction doubled</td>
+</tr>
+<tr>
+<td>124</td>
+<td>BIN not registered</td>
+</tr>
+<tr>
+<td>126</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>128</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>129</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>130</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>133</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>134</td>
+<td>Withdrawal Transactions with Electron card invalid</td>
+</tr>
+<tr>
+<td>145</td>
+<td>Invalid establishment for distribution</td>
+</tr>
+</tbody></table>
+
+<h1 id="partners">Partners</h1>
+
+<h2 id="van">VAN</h2>
+
+<p>Access to Eletronic Data Interchange Report  will be made through a mailbox created in the VAN website (company hired by Cielo to manage the sending and receiving of extracts) or via the receiving system, according to the best option for the client. For, change or problems with the mailbox, contact the respective VAN:</p>
+
+<h3 id="tivit">TIVIT</h3>
+
+<p>sup.neg.cielo@tivit.com.br
+Contact: (11) 3626 6666
+Help Desk: 0800 55 0769 or (11) 3246 8511</p>
+
+<h3 id="opentext">OpenText</h3>
+
+<p>suporte.platinum@opentext.com
+Contact: (11) 2167 2620</p>
+
+<h3 id="intervan">INTERVAN</h3>
+
+<p>Company hired by the client to manage the sending and receiving of files. In this case, the transmission costs of INTERVAN are
+the customer&rsquo;s responsibility.</p>
+
+<h3 id="conciliator">Conciliator</h3>
+
+<p>Company conciliation contracted by the client to carry out the processing of information of files, according to the default layout provided by Cielo, developing and / or providing a reading tool file. In this case, costs are the customer&rsquo;s responsibility.</p>
+
+<h1 id="transmission-and-file-forwarding">Transmission and file forwarding</h1>
+
+<h2 id="file-transmission">File Transmission</h2>
+
+<p>To receive the Electronic Statement (EDI) requires that the customer contact specialist care (EDI Island) and complete the purchase 
+of the service. The files are available in the mailbox daily except the balance of open file which will be sent monthly.</p>
+
+<p>When there is no movement, the file will be sent only to the &ldquo;Header&rdquo; and &ldquo;Trailer&rdquo;. If there is any inconsistency in the transmission
+(s) file (s), the customer must inform the Cielo by contacting EDI Island (edi@cielo.com.br).</p>
+
+<h2 id="forward-files">Forward Files</h2>
+
+<p>In case of loss of the file or not receiving the VAN provide the mailbox the same file sent daily by Cielo (backup file). The customer
+can contact their van to request the court.</p>
+
+<h2 id="file-recovery">File Recovery</h2>
+
+<ul>
+<li>Enables recovery of a previous movement, updating the status of the releases</li>
+<li>Available for the movements of the last 30 days</li>
+<li>The application must be submitted held for EDI Island.</li>
+<li>Files are available separately from the journal file</li>
+</ul>
+
+<h1 id="financial-concepts-/-glossary">Financial Concepts / Glossary</h1>
+
+<h2 id="portion-of-acceleration">Portion of Acceleration</h2>
+
+<p>Occurs when maintenance is performed on the installment plan, as cancellation, chargeback or change in the amount of the sale 
+installments. The same movement is to advance debts.</p>
+
+<h2 id="prepayment-of-receivables-(arv)">Prepayment of Receivables (ARV)</h2>
+
+<p>Service offered to the customer affiliated with Cielo you want to anticipate receipt of your credit sales in cash and installments.</p>
+
+<h2 id="adjustment">Adjustment</h2>
+
+<p>financial posting to the credit or debit conducted by Cielo to rectify improper collection, cancel a sale or transfer one chargeback 
+to the client.</p>
+
+<h2 id="extract-chain">Extract Chain</h2>
+
+<p>This chain has no relation to the chain of payments of the company, so it is important to ask the EDI Island including all the stores 
+that should be included in the extract files.</p>
+
+<h2 id="chain-centralized-payment">Chain Centralized Payment</h2>
+
+<p>It is a group of customers with the same root CNPJ, bank address and the same trading conditions commission and run. A chain has only 
+one mother, chosen by the customer, which are registered all goods and payments imposed in branches. The rules locks and antecipaçãosão the same for all clients in a centralized chain.</p>
+
+<h2 id="change-installment-plan">Change Installment Plan</h2>
+
+<p>It occurs when the carrier calls the customer a change in the installment plan contracted at first, as a total or partial cancellation
+of the sale and change in the amount or value of land.</p>
+
+<h2 id="date-of-sale">Date of Sale</h2>
+
+<p>Day on which the sale is conducted at Cielo client. For customers who operate e-commerce solutions, this is the date on which the 
+carrier made the purchase on the site and not the date on which it was made to confirm the sale by Cielo client.</p>
+
+<h2 id="presentation-of-data">Presentation of Data</h2>
+
+<p>Day the sale was submitted for processing in Cielo, being a Saturday, Sunday or holiday. This data is the basis for calculating the 
+pay programming and may be different from the date of sale, according to the type of capture solution used.</p>
+
+<h2 id="data-capture">Data Capture</h2>
+
+<p>Date on which the transaction was captured on Cielo system. Cielo for customers who operate e-commerce solutions, this is the date on 
+which the transaction was confirmed by the customer.</p>
+
+<h2 id="pay-day">Pay day</h2>
+
+<p>payment amount effective the day the customer&rsquo;s current account, considering the period of deferred payment. If the calculated date 
+is not a business day, the payment will be made on the first working day. Initially, after the capture of the sale, it informed the 
+scheduled date of payment, which may be delayed if the value is used to offset the collection of any debt arising from cancellation of sale, chargeback and billing services. Payment can also be anticipated if the customer performs a preparatory operation.</p>
+
+<h2 id="data-submission-to-the-bank">Data Submission to the Bank</h2>
+
+<p>Date on which the payment file (credit or debit) was sent to the customer&rsquo;s home bank</p>
+
+<h2 id="discount-rate/commission-rate">Discount Rate/Commission Rate</h2>
+
+<p>The discount is always calculated on the Operating Summary (RO) and in the case of installments store sales, the discount is on the 
+RO that the parcel is located. The sum of the discount of the total value is demonstrated in the RO.</p>
+
+<h2 id="single-number-of-transaction">Single Number of Transaction</h2>
+
+<p>It is awarded by Cielo and identifies each uniquely transaction, allowing the reconciliation of the stock adjustments, anticipation 
+and assignment of receivables held both the RO and in the CV to be reconciled by this key To do this, the reconciliation solution 
+should use only fixed parts of the single number following this composition.</p>
+
+<table><thead>
+<tr>
+<th>Shares</th>
+<th>Composition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>15 fixed positions that identify the summary of operations (RO) in a unique way, keeping the history of maintenance performed on</td>
+</tr>
+<tr>
+<td>Cielo.</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>07 variable positions. Identify changes made to the RO.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>04 fixed positions that identify the Sales Receipt (DR) in a RO maintaining its track record in Cielo.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>03 variable positions. They identify changes made to the CV.</td>
+</tr>
+</tbody></table>
+
+<h2 id="installment-shop---term">Installment Shop - Term</h2>
+
+<p>Sales file with future installments option, all parcels will be sent with the original date of submission. However, the payment file 
+will be shown the date of release of its share.For customers without this option the system will always demonstrate the date of 
+submission of the tranche payment for the month. The calculation of the date of payment of all installments is based on the date 
+on which the first portion and has a different logic for transactions of each of the flags, as follows:</p>
+
+<h3 id="visa,-elo-and-diners">VISA, ELO and DINERS</h3>
+
+<p>The installments will be released monthly on the same day of the first part, whether the day is useful or not. Thus a sale in 04 
+installments presented on 01.10.2015 will have the following release plan (payment term: 30 days):</p>
+
+<table><thead>
+<tr>
+<th>Portion</th>
+<th>Date of transmission</th>
+<th>Date of deposit (Portion of Liberation)</th>
+<th>Date of payment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>01/04</td>
+<td>10/01/2015</td>
+<td>10/01/2015</td>
+<td>09/02/2015</td>
+</tr>
+<tr>
+<td>02/04</td>
+<td>10/01/2015</td>
+<td>10/02/2015</td>
+<td>12/03/2015</td>
+</tr>
+<tr>
+<td>03/04</td>
+<td>10/01/2015</td>
+<td>10/03/2015</td>
+<td>09/04/2015</td>
+</tr>
+<tr>
+<td>04/04</td>
+<td>10/01/2015</td>
+<td>10/04/2015</td>
+<td>11/05/2015</td>
+</tr>
+</tbody></table>
+
+<p>The only exception to the above rule occurs when the day does not exist in the month of release of the plot. Example: Sales whose 
+first installment was presented on 01/31/2015. As there is no 31 in February, the share of this month will be presented on the last 
+day of the month, ie 02.28.2015.</p>
+
+<h3 id="mastercard">MASTERCARD</h3>
+
+<p>The filing date of the first installment will also be the base date for the release of all the flat portions, however, the future 
+installments will always be 30 days after presentation of the first installment, keeping this logic to the completion of the plan. In the case of sale presented in 10/1/2015 previously used, we note that the installments will be released in 30, 60, 90 after the presentation of the first installment:</p>
+
+<table><thead>
+<tr>
+<th>Portion</th>
+<th>Date of transmission</th>
+<th>Date of deposit (Portion of Liberation)</th>
+<th>Date of payment</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>01/04</td>
+<td>10/01/2015</td>
+<td>10/01/2015</td>
+<td>09/02/2015</td>
+</tr>
+<tr>
+<td>02/04</td>
+<td>10/01/2015</td>
+<td>09/02/2015</td>
+<td>11/03/2015</td>
+</tr>
+<tr>
+<td>03/04</td>
+<td>10/01/2015</td>
+<td>11/03/2015</td>
+<td>10/04/2015</td>
+</tr>
+<tr>
+<td>04/04</td>
+<td>10/01/2015</td>
+<td>10/04/2015</td>
+<td>11/05/2015</td>
+</tr>
+</tbody></table>
+
+<h2 id="installment-shop---share-of-value-rounding">Installment shop - Share of Value Rounding</h2>
+
+<p>It is always performed in the first portion and occurs where the result of the sale value of the division by the number of portions 
+is a periodic tithe. In this case the first installment will be higher than the others.</p>
+
+<h2 id="adjustment">Adjustment</h2>
+
+<p>one debt adjustment will be generated in the value of the requested cancellation.</p>
+
+<h2 id="acceleration">Acceleration</h2>
+
+<p>an RO acceleration is generated for each maintenance performed with the amount of shares that were pending payment and were 
+accelerated due to the total cancellation of the transaction. For partial cancellation, will accelerate the amount of parcels needed
+to compensate for the amount canceled.</p>
+
+<h2 id="rescheduling">Rescheduling</h2>
+
+<p>If the customer has the Sales extract option Installment Plan (03) enabled and there is a partial cancellation of a transaction, the 
+system will generate the rescheduling records of parts which are not accelerated. This is because the original payment forecast sent 
+has been changed and no accelerated installments assume the maturity of the plots that were accelerated.</p>
+
+<p>Portion ## Rescheduling</p>
+
+<p>Changing the due date of payment of the portion of the installment plan. It occurs when there is a partial cancellation of a plan with 
+outstanding installments payment to the customer.</p>
+
+<h2 id="summary-of-operations-(ro)">Summary of Operations (RO)</h2>
+
+<p>The RO number identifies a grouping of sales in certain date. It has seven positions and will be formatted as follows. For example, 
+a split transaction in the store held on 01/12/2015 4,151,201 will have the RO.</p>
+
+<table><thead>
+<tr>
+<th>Location</th>
+<th>Description</th>
+<th>Data Edition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Product Type</td>
+<td><ul><li>0 - open credit</li><li>3 - Outbound installments</li><li>4 - installments store</li><li>5 - card debit </li><li>6 - postdated electron</li></ul></td>
+</tr>
+<tr>
+<td>2 e 3</td>
+<td>Year that the transaction was carried out</td>
+<td>YY</td>
+</tr>
+<tr>
+<td>4 e 5</td>
+<td>month the transaction was carried out</td>
+<td>MM</td>
+</tr>
+<tr>
+<td>6 e 7</td>
+<td>Day the transaction was carried out</td>
+<td>DD</td>
+</tr>
+</tbody></table>
+
+<h2 id="transaction-rejection">Transaction Rejection</h2>
+
+<p>It occurs when the client or the sale does not have the attributes necessary for the proper processing and scheduling of payment. 
+The sale is reprocessed manually and sent for further payment.</p>
+
+<h2 id="sale">Sale</h2>
+
+<p>It occurs when there is a change in the payment schedule of a piecemeal sale, either in number of installments or the total value
+of the transaction.</p>
+
+<h2 id="outstanding-balance">Outstanding balance</h2>
+
+<p>It comprises all releases to receive from following the date of calculation. the Cielo payments not made in the past due to 
+cancellations and objections should be considered.</p>
+
+<p>To read the balance of extract Open (09), consider the following fields (Type 1 record - RO detail):</p>
+
+<ul>
+<li>Revolving Balance (due in 30 days)</li>
+<li>Date Sent to the Bank (position 038-043): filter different data 000000.</li>
+<li>Consider the sum of the Net Asset Value (position 087-099)</li>
+<li>Installment Balance (due after 30 days)</li>
+</ul>
+
+            </div>
+        </div>
+    </body>
+    </html>

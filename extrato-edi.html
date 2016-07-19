@@ -76,10 +76,14 @@
 <h3 id="ilha-edi-–-atendimento-especializado">Ilha EDI – Atendimento especializado</h3>
 
 <ul>
-<li>(11) 4002 5270 - capitais, regiões metropolitanas e demais localidades</li>
+<li>4002 5270 - capitais, regiões metropolitanas e demais localidades</li>
 <li>edi@cielo.com.br</li>
 <li>De segunda a sexta-feira, das 9 às 18 horas.</li>
 </ul>
+
+<h3 id="internet">Internet</h3>
+
+<p>www.cielo.com.br</p>
 
 <h1 id="tipos-de-extrato-edi">Tipos de extrato EDI</h1>
 
@@ -101,12 +105,12 @@
 </tr>
 <tr>
 <td>04 - Pagamentos</td>
-<td><ul><li>Valores pagos na conta-corrente no dia do envio do Extrato: detalha os ROs e ajustes  compensados no dia.</li><li>Transações compensadas, já antecipadas ou cedidas anteriormente e pagamentos de parcelas em aberto.</li></ul></td>
+<td><ul><li>Valores pagos na conta-corrente no dia do envio do Extrato: detalha os ROs e ajustes compensados no dia.</li><li>Transações compensadas, já antecipadas ou cedidas anteriormente e pagamentos de parcelas em aberto.</li></ul></td>
 <td><ul><li>0 - Header</li><li>1 - Detalhe RO</li><li>2 - Detalhe CV</li><li>9 – Trailer</li></ul></td>
 <td>Conferir origem do pagamento recebido (tipo de venda, bandeira e cliente/estabelecimento que efetuou a venda). Conciliação com a conta-corrente.</td>
 </tr>
 <tr>
-<td>06 - (<sup>1</sup>) Antecipação de Recebíveis</td>
+<td>06 - * Antecipação de Recebíveis</td>
 <td>Operação de ARV realizada pela Cielo no dia anterior ao envio do arquivo e respectivo detalhe dos ROs e CVs que foram antecipados.</td>
 <td><ul><li>0 - Header</li><li>5 - Detalhe de ARV</li><li>6 - Detalhe ROs antecipados</li><li>2 - Detalhe CV </li><li>7 - Detalhe de débitos de ROs Antecipados</li><li>2 - Detalhe CV </li><li>9 – Trailer</li></ul><br/><strong>Obs.:</strong> Será demonstrado o registro tipo 5 para cada operação realizada por domicílio bancário.</td>
 <td>Atualizar o fluxo de caixa, considerando os valores já recebidos através da antecipação.</td>
@@ -247,9 +251,7 @@
 </tr>
 </tbody></table>
 
-<ul>
-<li>(<sup>1</sup>) Cadastro que permite a inclusão de todos os estabelecimentos controlados pelo cliente, independentemente do pagamento ser centralizado. Todos os <em>números de estabelecimento</em> devem ser informados no formulário de cadastro.</li>
-</ul>
+<p>(<em>) Cadastro que permite a inclusão de todos os estabelecimentos controlados pelo cliente, independentemente do pagamento ser centralizado. Todos os *números de estabelecimento</em> devem ser informados no formulário de cadastro.</p>
 
 <h2 id="tipo-1---detalhe-do-resumo-de-operações-(ro)">Tipo 1 - Detalhe do Resumo de Operações (RO)</h2>
 
@@ -815,7 +817,7 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 <td>188</td>
 <td>6</td>
 <td>Num</td>
-<td>Hora da transação <sup>(2)</sup></td>
+<td>Hora da transação <sup>(3)</sup></td>
 <td>Hora da transação apresentada no formado HHMMSS. Essa informação será gerada somente nos registros de venda do arquivo de venda com CV original. Nos demais casos, o campo será formatado com zeros.</td>
 </tr>
 <tr>
@@ -1017,7 +1019,7 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 <tr>
 <td>128</td>
-<td>140</td>
+<td>1140</td>
 <td>13</td>
 <td>Num</td>
 <td>Valor líquido da antecipação total</td>
@@ -1096,135 +1098,135 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 </thead><tbody>
 <tr>
-<td>001</td>
-<td>001</td>
+<td>1</td>
+<td>1</td>
 <td>1</td>
 <td>Num.</td>
 <td>Tipo de registro</td>
 <td>Constante “6” – identifica o tipo de registro que apresenta as informações  de um RO que foi antecipado.</td>
 </tr>
 <tr>
-<td>002</td>
-<td>011</td>
+<td>2</td>
+<td>11</td>
 <td>10</td>
 <td>Num.</td>
 <td>Estabelecimento Submissor</td>
 <td>Número do estabelecimento e/ou filial onde a venda foi realizada.</td>
 </tr>
 <tr>
-<td>012</td>
-<td>020</td>
+<td>12</td>
+<td>20</td>
 <td>9</td>
 <td>Num.</td>
 <td>Número da operação de antecipação</td>
 <td>Número de operação de antecipação.</td>
 </tr>
 <tr>
-<td>021</td>
-<td>028</td>
+<td>21</td>
+<td>28</td>
 <td>8</td>
 <td>Num.</td>
 <td>Data de vencimento do RO</td>
 <td>AAAAAMMDD – Data de vencimento original do RO que foi antecipado.</td>
 </tr>
 <tr>
-<td>029</td>
-<td>035</td>
+<td>29</td>
+<td>35</td>
 <td>7</td>
 <td>Num.</td>
 <td>Número do RO antecipado</td>
 <td>Número do RO antecipado.</td>
 </tr>
 <tr>
-<td>036</td>
-<td>037</td>
+<td>36</td>
+<td>37</td>
 <td>2</td>
 <td>Num.</td>
 <td>Parcela antecipada</td>
 <td>Número da parcela antecipada no caso de RO parcelado, se RO de venda  à vista será formatado com zeros.</td>
 </tr>
 <tr>
-<td>038</td>
-<td>039</td>
+<td>38</td>
+<td>39</td>
 <td>2</td>
 <td>Num.</td>
 <td>Total de parcelas</td>
 <td>Quantidade de parcelas do RO. No caso de RO de venda à vista, será formatado com zeros.</td>
 </tr>
 <tr>
-<td>040</td>
-<td>040</td>
+<td>40</td>
+<td>40</td>
 <td>1</td>
 <td>Alfa</td>
 <td>Sinal do valor bruto original do RO</td>
 <td>“+” identifica valor positivo. “-” identifica valor negativo.</td>
 </tr>
 <tr>
-<td>041</td>
-<td>053</td>
+<td>41</td>
+<td>53</td>
 <td>13</td>
 <td>Num.</td>
 <td>Valor bruto original do RO <sup>(1)</sup></td>
 <td>Valor bruto original do RO.</td>
 </tr>
 <tr>
-<td>054</td>
-<td>054</td>
+<td>54</td>
+<td>54</td>
 <td>1</td>
 <td>Alfa</td>
 <td>Sinal do valor líquido original do RO</td>
 <td>“+” identifica valor positivo. “-” identifica valor negativo.</td>
 </tr>
 <tr>
-<td>055</td>
-<td>067</td>
+<td>55</td>
+<td>67</td>
 <td>13</td>
 <td>Num.</td>
 <td>Valor líquido original do RO <sup>(1)</sup></td>
 <td>Valor líquido Original do RO.</td>
 </tr>
 <tr>
-<td>068</td>
-<td>068</td>
+<td>68</td>
+<td>68</td>
 <td>1</td>
 <td>Num.</td>
 <td>Sinal do valor bruto da  antecipação do RO</td>
 <td>“+” identifica valor positivo. “-” identifica valor negativo.</td>
 </tr>
 <tr>
-<td>069</td>
-<td>081</td>
+<td>69</td>
+<td>81</td>
 <td>13</td>
 <td>Num.</td>
 <td>Valor bruto da antecipação do RO <sup>(1)</sup></td>
 <td>Valor líquido original do RO, exceto se houver débitos programados para este RO.</td>
 </tr>
 <tr>
-<td>082</td>
-<td>082</td>
+<td>82</td>
+<td>82</td>
 <td>1</td>
 <td>Alfa</td>
 <td>Sinal do valor líquido da  antecipação do RO</td>
 <td>“+” identifica valor positivo. “-” identifica valor negativo.</td>
 </tr>
 <tr>
-<td>083</td>
-<td>095</td>
+<td>83</td>
+<td>95</td>
 <td>13</td>
 <td>Num.</td>
 <td>Valor líquido da antecipação do RO <sup>(1)</sup></td>
 <td>Valor líquido efetivamente pago ao estabelecimento, já descontada  a taxa de desconto comercial da antecipação.</td>
 </tr>
 <tr>
-<td>096</td>
-<td>098</td>
+<td>96</td>
+<td>98</td>
 <td>3</td>
 <td>Num.</td>
-<td>Bandeira</td>
+<td>Código da Bandeira</td>
 <td>Código da Bandeira – Vide Tabela VI.</td>
 </tr>
 <tr>
-<td>099</td>
+<td>99</td>
 <td>120</td>
 <td>22</td>
 <td>Num.</td>
@@ -1260,80 +1262,80 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 </thead><tbody>
 <tr>
-<td>001</td>
-<td>001</td>
+<td>1</td>
+<td>1</td>
 <td>1</td>
 <td>Num.</td>
 <td>Tipo de registro</td>
 <td>Constante “7” – identifica o tipo de registro que apresenta as informações de um RO que foi antecipado.</td>
 </tr>
 <tr>
-<td>002</td>
-<td>011</td>
+<td>2</td>
+<td>11</td>
 <td>10</td>
 <td>Num.</td>
 <td>Estabelecimento Submissor</td>
 <td>Número do estabelecimento e/ou filial onde a venda foi realizada.</td>
 </tr>
 <tr>
-<td>012</td>
-<td>033</td>
+<td>12</td>
+<td>33</td>
 <td>22</td>
 <td>Num.</td>
 <td>Número Único do RO original da venda</td>
 <td>Número único do RO original da venda.</td>
 </tr>
 <tr>
-<td>034</td>
-<td>040</td>
+<td>34</td>
+<td>40</td>
 <td>7</td>
 <td>Num.</td>
 <td>Número do RO antecipado</td>
 <td>Número do RO da venda original.</td>
 </tr>
 <tr>
-<td>041</td>
-<td>048</td>
+<td>41</td>
+<td>48</td>
 <td>8</td>
 <td>Num.</td>
 <td>Data de pagamento do RO antecipado</td>
 <td>AAAAMMDD – Data de Pagamento do RO Antecipado.</td>
 </tr>
 <tr>
-<td>049</td>
-<td>049</td>
+<td>49</td>
+<td>49</td>
 <td>1</td>
 <td>Alfa</td>
 <td>Sinal do valor do RO antecipado</td>
 <td>“+” identifica valor positivo. “-” identifica valor negativo.</td>
 </tr>
 <tr>
-<td>050</td>
-<td>062</td>
+<td>50</td>
+<td>62</td>
 <td>13</td>
 <td>Num.</td>
 <td>Valor do RO antecipado</td>
 <td>Valor do RO antecipado.</td>
 </tr>
 <tr>
-<td>063</td>
-<td>084</td>
+<td>63</td>
+<td>84</td>
 <td>22</td>
 <td>Num.</td>
 <td>Nº Único do RO da venda que originou o ajuste</td>
 <td>Número único do RO da venda que originou o ajuste.</td>
 </tr>
 <tr>
-<td>085</td>
-<td>091</td>
+<td>85</td>
+<td>91</td>
 <td>7</td>
 <td>Num.</td>
 <td>Nº do RO de ajuste a débito</td>
 <td>Número do RO que apresenta os valores retidos para a operação de antecipação.</td>
 </tr>
 <tr>
-<td>092</td>
-<td>099</td>
+<td>92</td>
+<td>99</td>
 <td>8</td>
 <td>Num.</td>
 <td>Data de pagamento do ajuste</td>
@@ -1821,47 +1823,47 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 </thead><tbody>
 <tr>
-<td>01</td>
+<td>1</td>
 <td>Acerto de correção monetária</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>02</td>
+<td>2</td>
 <td>Acerto de data de pagamento</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>03</td>
+<td>3</td>
 <td>Acerto de taxa de comissão</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>04</td>
+<td>4</td>
 <td>Acerto de valores não processados</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>05</td>
+<td>5</td>
 <td>Acerto de valores não recebidos</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>06</td>
+<td>6</td>
 <td>Acerto de valores não reconhecidos</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>07</td>
+<td>7</td>
 <td>Acerto de valores negociados</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>08</td>
+<td>8</td>
 <td>Acerto de valores processados indevidamente</td>
 <td>Acerto</td>
 </tr>
 <tr>
-<td>09</td>
+<td>9</td>
 <td>Acerto de lançamento não compensado  em conta-corrente</td>
 <td>Acerto</td>
 </tr>
@@ -2217,8 +2219,8 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 <tr>
 <td>80</td>
-<td>Ajuste do débito de cessão</td>
-<td>Cobrança/Acerto</td>
+<td>Cielo Promo</td>
+<td>Cobrança</td>
 </tr>
 <tr>
 <td>81</td>
@@ -2307,7 +2309,7 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 </tr>
 <tr>
 <td>05</td>
-<td>ADP/BSP (Empresa Capturadora)/Post-In (Manual)</td>
+<td>ADP/BSP (Empresa Capturadora)</td>
 </tr>
 <tr>
 <td>06</td>
