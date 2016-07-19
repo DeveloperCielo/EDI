@@ -80,7 +80,7 @@ Group sales, adjustments or billing services. It allows you to identify the sour
 |Home|End|Size|Type|Description|Data Edition|
 |----|---|----|----|-----------|------------|
 |001|001|1|Num.|Record Type|Constant "1" - Identifies the detail record type RO|
-|002|011|10|Num.|Establishment Submitter| Number of establishment and / or branch where the sale took place.|
+|002|011|10|Num.|Establishment Submitter|Number of establishment and/or branch where the sale took place.|
 |012|018|7|Num.|RO Number|Operation summary number. They contain information relating to a sales group performed on a certain date.|
 |019|020|2|Num.|Portion|In the case of split sale, will be formatted with the number of the parcel which is being released in the file submission date. In the case of cash sale, will be formatted with white.|
 |021|021|1|Alpha|Filler|<ul><li>"/"- For installment sales.</li><li>"a" - acceleration of installments.</li><li>“  “ - other situations.</li></ul>|
@@ -308,72 +308,72 @@ credit order.
 
 |Code|Description|
 |----|-----------|
-|001|AGIPLAN view credit|
-|002|AGIPLAN installments shop|
-|003|Banescard view credit|
-|004|Banescard installments shop|
-|005|view credit Esplanade|
-|006|Credz view credit|
-|007|Terrace installments shop|
-|008|Credz installments shop|
-|009|Link Crediário|
-|010|Mastercard credit view|
+|001|Agiplan crédito à vista|
+|002|Agiplan parcelado loja|
+|003|Banescard crédito à vista|
+|004|Banescard parcelado loja|
+|005|Esplanada crédito à vista|
+|006|Credz crédito à vista|
+|007|Esplanada parcelado loja|
+|008|Credz parcelado loja|
+|009|Elo Crediário|
+|010|Mastercard crédito à vista|
 |011|Maestro|
-|012|Mastercard installments shop|
-|013|Link Construcard|
-|014|Link Agro Debit|
-|015|Link Agro Costing|
-|016|Link Agro Investment|
-|039|Credsystem installments shop|
-|040|Visa Credit sight|
-|041|Visa Electron Debit sight|
-|042|Visa Toll|
-|043|Visa Installment Store|
-|044|Visa Electron Pre-Dating|
-|045|Allele Meal (Visa issuer/Elo)|
-|046|Allele Power (Visa issuer/Elo)|
-|058|Link Culture|
-|059|Allele Auto|
-|061|Sorocred Mortgage view|
-|062|Sorocred Installment Store|
-|064|Visa Crediário|
-|065|Allele meal (Elo Flag)|
-|066|Allele Power (Elo Flag)|
-|067|Visa Working Capital|
-|068|Visa Mortgages|
-|017|Link Agro Costing + Debit|
-|018|Link Agro Investment + Debit|
-|019|Discover credit view|
-|020|Diners credit view|
-|021|Diners installments shop|
-|022|Agro Costing + Electron|
-|023|Agro Investment + Electron|
-|024|FCO Investment|
+|012|Mastercard parcelado loja|
+|013|Elo Construcard|
+|014|Elo Agro Débito|
+|015|Elo Agro Custeio|
+|016|Elo Agro Investimento|
+|017|Elo Agro Custeio + Débito|
+|018|Elo Agro Investimento + Débito|
+|019|Discover crédito à vista|
+|020|Diners crédito à vista|
+|021|Diners parcelado loja|
+|022|Agro Custeio + Electron|
+|023|Agro Investimento + Electron|
+|024|FCO Investimento|
 |025|Agro Electron|
-|026|Agro Costing|
-|027|Agro Investment|
+|026|Agro Custeio|
+|027|Agro Investimento|
 |028|FCO Giro|
 |033|JCB|
-|036|Serve with VISA Debit Card|
+|036|Saque com cartão de Débito VISA|
 |037|Flex Car Visa Vale|
-|038|Credsystem view credit|
-|069|Culture Visa Vale|
-|070|Link Credit|
-|071|Link Debit sight|
-|072|Link Installment shop|
-|079|Carnet payment Visa Electron|
-|080|Visa Credit Currency Converter|
-|081|Mastercard Specialised Credit (*)|
-|089|Link Mortgages|
-|091|Link Specialised Credit (*)|
-|094|Banescard Debit|
-|096|Cabal Credit sight|
-|097|Cabal Debit|
-|098|Cabal Installment Store|
-|342|Master Toll|
-|377|Link Carnet|
-|378|Master Carnet|
-|380|Mastercard Credit Currency Converter|
+|038|Credsystem crédito à vista|
+|039|Credsystem parcelado loja|
+|040|Visa Crédito à vista|
+|041|Visa Electron Débito à vista|
+|042|Visa Pedágio|
+|043|Visa Parcelado Loja|
+|044|Visa Electron Pré-Datado|
+|045|Alelo Refeição (Bandeira Visa/Elo)|
+|046|Alelo Alimentação (Bandeira Visa/Elo)|
+|058|Elo Cultura|
+|059|Alelo Auto|
+|061|Sorocred Crédito à vista|
+|062|Sorocred Parcelado Loja|
+|064|Visa Crediário|
+|065|Alelo Refeição (Bandeira Elo)|
+|066|Alelo Alimentação (Bandeira Elo)|
+|067|Visa Capital de Giro|
+|068|Visa Crédito Imobiliário|
+|069|Cultura Visa Vale|
+|070|Elo Crédito|
+|071|Elo Débito à vista|
+|072|Elo Parcelado loja|
+|079|Pagamento Carnê Visa Electron|
+|080|Visa Crédito Conversor de Moeda|
+|081|Mastercard Crédito Especializado (*)|
+|089|Elo Crédito Imobiliário|
+|091|Elo Crédito Especializado (*)|
+|094|Banescard Débito|
+|096|Cabal Crédito à vista|
+|097|Cabal Débito|
+|098|Cabal Parcelado Loja|
+|342|Master Pedágio|
+|377|Elo Carnê|
+|378|Master Carnê|
+|380|Mastercard Crédito Conversor de Moeda|
 
 <aside class="notice"><strong>*</strong> Codes concerning Construcard cards, Minha Casa Melhor, Producard and Moveiscard</aside>
 
