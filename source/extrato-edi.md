@@ -25,13 +25,9 @@ O Extrato Eletrônico (EDI) é um  produto disponibilizado pela Cielo aos client
 
 ### Ilha EDI – Atendimento especializado
 
-* 4002 5270 - capitais, regiões metropolitanas e demais localidades
+* (11) 4002 5270 - capitais, regiões metropolitanas e demais localidades
 * edi@cielo.com.br
 * De segunda a sexta-feira, das 9 às 18 horas.
-
-### Internet
-
-www.cielo.com.br
 
 # Tipos de extrato EDI
 
@@ -40,8 +36,13 @@ www.cielo.com.br
 |Tipo de arquivo|Informação|Tipo de registro|Conciliação|
 |---------------|----------|----------------|-----------|
 |03 - Vendas com Plano Parcelado|<ul><li>Vendas concluídas (apresentadas) no dia anterior, ajustes e transações rejeitadas, com a previsão de pagamento.</li><li>Todo o plano parcelado da venda realizada no dia anterior.</ul><br /><strong>Obs.:</strong> a previsão de pagamento é enviada somente para a primeira parcela. Caso seja alterada por ajustes, os registros de aceleração e reagendamento das parcelas envolvidas serão apresentados.|<ul><li>0 - Header</li><li>1 - Detalhe RO (com a primeira parcela)</li><li>2 - Detalhe CV</li><li>1 - Detalhe RO (previsão da segunda parcela em diante)</li><li>9 – Trailer</li></ul>|Conferir se todas as vendas realizadas foram recebidas pela Cielo.|
+<<<<<<< HEAD
+|04 - Pagamentos|<ul><li>Valores pagos na conta-corrente no dia do envio do Extrato: detalha os ROs e ajustes  compensados no dia.</li><li>Transações compensadas, já antecipadas ou cedidas anteriormente e pagamentos de parcelas em aberto.</li></ul>|<ul><li>0 - Header</li><li>1 - Detalhe RO</li><li>2 - Detalhe CV</li><li>9 – Trailer</li></ul>|Conferir origem do pagamento recebido (tipo de venda, bandeira e cliente/estabelecimento que efetuou a venda). Conciliação com a conta-corrente.|
+|06 - (<sup>1</sup>) Antecipação de Recebíveis|Operação de ARV realizada pela Cielo no dia anterior ao envio do arquivo e respectivo detalhe dos ROs e CVs que foram antecipados.|<ul><li>0 - Header</li><li>5 - Detalhe de ARV</li><li>6 - Detalhe ROs antecipados</li><li>2 - Detalhe CV </li><li>7 - Detalhe de débitos de ROs Antecipados</li><li>2 - Detalhe CV </li><li>9 – Trailer</li></ul><br/><strong>Obs.:</strong> Será demonstrado o registro tipo 5 para cada operação realizada por domicílio bancário.|Atualizar o fluxo de caixa, considerando os valores já recebidos através da antecipação.|
+=======
 |04 - Pagamentos|<ul><li>Valores pagos na conta-corrente no dia do envio do Extrato: detalha os ROs e ajustes compensados no dia.</li><li>Transações compensadas, já antecipadas ou cedidas anteriormente e pagamentos de parcelas em aberto.</li></ul>|<ul><li>0 - Header</li><li>1 - Detalhe RO</li><li>2 - Detalhe CV</li><li>9 – Trailer</li></ul>|Conferir origem do pagamento recebido (tipo de venda, bandeira e cliente/estabelecimento que efetuou a venda). Conciliação com a conta-corrente.|
 |06 - * Antecipação de Recebíveis|Operação de ARV realizada pela Cielo no dia anterior ao envio do arquivo e respectivo detalhe dos ROs e CVs que foram antecipados.|<ul><li>0 - Header</li><li>5 - Detalhe de ARV</li><li>6 - Detalhe ROs antecipados</li><li>2 - Detalhe CV </li><li>7 - Detalhe de débitos de ROs Antecipados</li><li>2 - Detalhe CV </li><li>9 – Trailer</li></ul><br/><strong>Obs.:</strong> Será demonstrado o registro tipo 5 para cada operação realizada por domicílio bancário.|Atualizar o fluxo de caixa, considerando os valores já recebidos através da antecipação.|
+>>>>>>> 374dac2f75b64039c7eaf330f689127b981ab190
 | 07 - Cessão de Recebíveis|<ul><li>Operação de cessão realizada no banco domicílio (Bradesco ou HSBC) no dia anterior ao envio do arquivo e respectivo detalhe dos ROs cedidos.</li><li>Não é demonstrada a condição comercial negociada ou parcela cedida.</li></ul>|<ul><li>0 - Header</li><li>5 - Detalhe de cessão de recebíveis</li><li>6 - Detalhe ROs cedidos</li><li>9 – Trailer</li></ul><br/><strong>Obs.:</strong> Será demonstrado o registro tipo 5 para cada operação realizada por domicílio bancário.|Atualizar o fluxo de caixa, considerando os valores já recebidos através da operação de cessão.|
 | 08 - Parcelas Pendentes|Arquivo gerado uma única vez no primeiro dia após o cliente optar pelo recebimento do extrato de Vendas com Plano Parcelado (arquivo 03).|<ul><li>0 - Header</li><li>1 - Detalhe RO</li><li>2 - Detalhe CV</li><li>9 – Trailer</li></ul>|Elaborar a previsão de fluxo de caixa das vendas realizadas anteriormente.|
 |09 - Saldo em Aberto|<ul><li>Valores a receber com a Cielo, contemplando as transações realizadas, capturadas e processadas, vendas a débito, crédito e parceladas ainda não liquidadas no movimento fechado no mês anterior.</li><li>É apresentado um indicador de ARV e Cessão, para facilitar a conciliação dos ROs envolvidos nas operações de antecipação e que alteram os valores em aberto do cliente.</li><li>O arquivo é disponibilizado mensalmente.</li></ul>|<ul><li>0 - Header</li><li>1 - Detalhe RO</li><li>9 - Trailer</li></ul>|Atualizar a previsão futura de recebimentos com os devidos abatimentos de Antecipações, Cessões e Ajustes.|
@@ -69,7 +70,7 @@ Identifica o cabeçalho de cada arquivo por cadeia de extrato eletrônico*.
 |071|073|3|Num|Versão Layout|Constante “001”.|
 |074|250|177|AlfaNum|Uso Cielo|Em Branco. Reservado para Cielo.|
 
-(*) Cadastro que permite a inclusão de todos os estabelecimentos controlados pelo cliente, independentemente do pagamento ser centralizado. Todos os *números de estabelecimento* devem ser informados no formulário de cadastro.
+* (<sup>1</sup>) Cadastro que permite a inclusão de todos os estabelecimentos controlados pelo cliente, independentemente do pagamento ser centralizado. Todos os *números de estabelecimento* devem ser informados no formulário de cadastro.
 
 ## Tipo 1 - Detalhe do Resumo de Operações (RO)
 
@@ -156,7 +157,7 @@ Conforme regras de segurança, todos os registros que possuírem número de cart
 |153| 160| 8| Num.| Número lógico do terminal| Número lógico do terminal onde foi efetuada a venda. Quando o Meio de Captura for 06, desconsiderar esta informação.|
 |161|162|2|Alfa|Identificador de taxa de embarque ou valor de entrada|Identificação da transação referente à taxa de embarque ou valor de entrada:<ul><li>TX - Taxa de embarque;</li><li>VE - Valor da entrada;</li><li>Brancos - para demais tipos de transação.</li></ul>|
 |163|182|20|Alfanum|Referência/código do pedido|Referência ou código do pedido informado em uma transação mobile payment e comércio eletrônico. Quando não disponível, será formatado com brancos.|
-|183|188|6|Num|Hora da transação <sup>(3)</sup>|Hora da transação apresentada no formado HHMMSS. Essa informação será gerada somente nos registros de venda do arquivo de venda com CV original. Nos demais casos, o campo será formatado com zeros.|
+|183|188|6|Num|Hora da transação <sup>(2)</sup>|Hora da transação apresentada no formado HHMMSS. Essa informação será gerada somente nos registros de venda do arquivo de venda com CV original. Nos demais casos, o campo será formatado com zeros.|
 |189|217|29|Num.|Número único da transação|Número Único que identifica cada transação|
 |218|218|1|Alfa|Indicador Cielo Promo|Identificador do Produto Cielo Promo = “S”. Identifica que a venda participou de campanha na Plataforma Promocional. Caso contrário, será formatado com brancos.|
 |219|250|32|Alfanum|Uso Cielo|Em Branco. Reservado para Cielo.|
@@ -189,7 +190,7 @@ Apresenta a operação de antecipação realizada na Cielo ou de cessão de rece
 |113|113|1|Alfa|Sinal do valor líquido da antecipação Pré-Datado|<ul><li>“+” identifica valor a crédito.</li><li>“-” identifica valor a débito.</li></ul>|
 |114|126|13|Num|Valor líquido da antecipação Pré-Datado|Valor líquido da antecipação da agenda do Electron Pré-Datado.|
 |127|127|1|Alfa|Sinal do valor líquido da antecipação total|<ul><li>“+” identifica valor a crédito.</li><li>“-” identifica valor a débito.</li></ul>|
-|128|1140|13|Num|Valor líquido da antecipação total|Valor líquido da antecipação das agendas à vista, parcelado e Electron Pré-Datado.|
+|128|140|13|Num|Valor líquido da antecipação total|Valor líquido da antecipação das agendas à vista, parcelado e Electron Pré-Datado.|
 |141|145|5|Num|Taxa de desconto da antecipação|Taxa de desconto comercial da antecipação.|
 |146|149|4|Num|Banco|Banco no qual os valores foram depositados|
 |150|154|5|Num|Agência|Agência na qual os valores foram depositados|
@@ -204,23 +205,23 @@ Apresenta o detalhamento da operação de Antecipação demonstrando os Ros ante
 
 |Início|Fim|Tamanho|Tipo|Descrição|Edição dos dados|
 |------|---|-------|----|---------|----------------|
-|1|1|1|Num.|Tipo de registro|Constante “6” – identifica o tipo de registro que apresenta as informações  de um RO que foi antecipado.|
-|2|11|10|Num.|Estabelecimento Submissor|Número do estabelecimento e/ou filial onde a venda foi realizada.|
-|12|20|9|Num.|Número da operação de antecipação|Número de operação de antecipação.|
-|21|28|8|Num.|Data de vencimento do RO|AAAAAMMDD – Data de vencimento original do RO que foi antecipado.|
-|29|35|7|Num.|Número do RO antecipado|Número do RO antecipado.|
-|36|37|2|Num.|Parcela antecipada|Número da parcela antecipada no caso de RO parcelado, se RO de venda  à vista será formatado com zeros.|
-|38|39|2|Num.|Total de parcelas|Quantidade de parcelas do RO. No caso de RO de venda à vista, será formatado com zeros.|
-|40|40|1|Alfa|Sinal do valor bruto original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|41|53|13|Num.|Valor bruto original do RO <sup>(1)</sup>|Valor bruto original do RO.|
-|54|54|1|Alfa|Sinal do valor líquido original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|55|67|13|Num.|Valor líquido original do RO <sup>(1)</sup>|Valor líquido Original do RO.|
-|68|68|1|Num.|Sinal do valor bruto da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|69|81|13|Num.|Valor bruto da antecipação do RO <sup>(1)</sup>|Valor líquido original do RO, exceto se houver débitos programados para este RO.|
-|82|82|1|Alfa|Sinal do valor líquido da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
-|83|95|13|Num.|Valor líquido da antecipação do RO <sup>(1)</sup>|Valor líquido efetivamente pago ao estabelecimento, já descontada  a taxa de desconto comercial da antecipação.|
-|96|98|3|Num.|Código da Bandeira|Código da Bandeira – Vide Tabela VI.|
-|99|120|22|Num.|Número Único do RO|Número Único de identificação do RO formatado da seguinte forma: Primeira parte (fixa) - 15 posições fixas: identifica o resumo mantendo o seu histórico na Cielo; Segunda parte (variável) - 07 posições variáveis: para uso da Cielo.  Identifica as alterações realizadas no RO.|
+|001|001|1|Num.|Tipo de registro|Constante “6” – identifica o tipo de registro que apresenta as informações  de um RO que foi antecipado.|
+|002|011|10|Num.|Estabelecimento Submissor|Número do estabelecimento e/ou filial onde a venda foi realizada.|
+|012|020|9|Num.|Número da operação de antecipação|Número de operação de antecipação.|
+|021|028|8|Num.|Data de vencimento do RO|AAAAAMMDD – Data de vencimento original do RO que foi antecipado.|
+|029|035|7|Num.|Número do RO antecipado|Número do RO antecipado.|
+|036|037|2|Num.|Parcela antecipada|Número da parcela antecipada no caso de RO parcelado, se RO de venda  à vista será formatado com zeros.|
+|038|039|2|Num.|Total de parcelas|Quantidade de parcelas do RO. No caso de RO de venda à vista, será formatado com zeros.|
+|040|040|1|Alfa|Sinal do valor bruto original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
+|041|053|13|Num.|Valor bruto original do RO <sup>(1)</sup>|Valor bruto original do RO.|
+|054|054|1|Alfa|Sinal do valor líquido original do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
+|055|067|13|Num.|Valor líquido original do RO <sup>(1)</sup>|Valor líquido Original do RO.|
+|068|068|1|Num.|Sinal do valor bruto da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
+|069|081|13|Num.|Valor bruto da antecipação do RO <sup>(1)</sup>|Valor líquido original do RO, exceto se houver débitos programados para este RO.|
+|082|082|1|Alfa|Sinal do valor líquido da  antecipação do RO|“+” identifica valor positivo. “-” identifica valor negativo.|
+|083|095|13|Num.|Valor líquido da antecipação do RO <sup>(1)</sup>|Valor líquido efetivamente pago ao estabelecimento, já descontada  a taxa de desconto comercial da antecipação.|
+|096|098|3|Num.|Bandeira|Código da Bandeira – Vide Tabela VI.|
+|099|120|22|Num.|Número Único do RO|Número Único de identificação do RO formatado da seguinte forma: Primeira parte (fixa) - 15 posições fixas: identifica o resumo mantendo o seu histórico na Cielo; Segunda parte (variável) - 07 posições variáveis: para uso da Cielo.  Identifica as alterações realizadas no RO.|
 |121|250|130|Alfanum.|Uso Cielo|Reservado para Cielo.|
 
 * <sup>(1)</sup> - Devem ser consideradas 2 casas decimais, sem vírgulas, pontos ou qualquer outro caractere.
@@ -231,16 +232,16 @@ Apresenta os débitos compensados nas datas antecipadas.
 
 |Início|Fim|Tamanho|Tipo|Descrição|Edição dos dados|
 |------|---|-------|----|---------|----------------|
-|1|1|1|Num.|Tipo de registro|Constante “7” – identifica o tipo de registro que apresenta as informações de um RO que foi antecipado.|
-|2|11|10|Num.|Estabelecimento Submissor|Número do estabelecimento e/ou filial onde a venda foi realizada.|
-|12|33|22|Num.|Número Único do RO original da venda|Número único do RO original da venda.|
-|34|40|7|Num.|Número do RO antecipado|Número do RO da venda original.|
-|41|48|8|Num.|Data de pagamento do RO antecipado|AAAAMMDD – Data de Pagamento do RO Antecipado.|
-|49|49|1|Alfa|Sinal do valor do RO antecipado|“+” identifica valor positivo. “-” identifica valor negativo.|
-|50|62|13|Num.|Valor do RO antecipado|Valor do RO antecipado.|
-|63|84|22|Num.|Nº Único do RO da venda que originou o ajuste|Número único do RO da venda que originou o ajuste.|
-|85|91|7|Num.|Nº do RO de ajuste a débito|Número do RO que apresenta os valores retidos para a operação de antecipação.|
-|92|99|8|Num.|Data de pagamento do ajuste|AAAAMMDD.|
+|001|001|1|Num.|Tipo de registro|Constante “7” – identifica o tipo de registro que apresenta as informações de um RO que foi antecipado.|
+|002|011|10|Num.|Estabelecimento Submissor|Número do estabelecimento e/ou filial onde a venda foi realizada.|
+|012|033|22|Num.|Número Único do RO original da venda|Número único do RO original da venda.|
+|034|040|7|Num.|Número do RO antecipado|Número do RO da venda original.|
+|041|048|8|Num.|Data de pagamento do RO antecipado|AAAAMMDD – Data de Pagamento do RO Antecipado.|
+|049|049|1|Alfa|Sinal do valor do RO antecipado|“+” identifica valor positivo. “-” identifica valor negativo.|
+|050|062|13|Num.|Valor do RO antecipado|Valor do RO antecipado.|
+|063|084|22|Num.|Nº Único do RO da venda que originou o ajuste|Número único do RO da venda que originou o ajuste.|
+|085|091|7|Num.|Nº do RO de ajuste a débito|Número do RO que apresenta os valores retidos para a operação de antecipação.|
+|092|099|8|Num.|Data de pagamento do ajuste|AAAAMMDD.|
 |100|100|1|Alfa|Sinal do valor do ajuste a débito|“+” identifica valor positivo. “-” identifica valor negativo.|
 |101|113|13|Num.|Valor do ajuste a débito|Valor total do débito.|
 |114|114|1|Alfa|Sinal do valor compensado|“+” identifica valor positivo. “-” identifica valor negativo.|
@@ -374,15 +375,15 @@ Indica o final do arquivo.
 
 |Código|Descrição|Tipo Ajuste|
 |------|---------|-----------|
-|1|Acerto de correção monetária|Acerto|
-|2|Acerto de data de pagamento|Acerto|
-|3|Acerto de taxa de comissão|Acerto|
-|4|Acerto de valores não processados|Acerto|
-|5|Acerto de valores não recebidos|Acerto|
-|6|Acerto de valores não reconhecidos|Acerto|
-|7|Acerto de valores negociados|Acerto|
-|8|Acerto de valores processados indevidamente|Acerto|
-|9|Acerto de lançamento não compensado  em conta-corrente|Acerto|
+|01|Acerto de correção monetária|Acerto|
+|02|Acerto de data de pagamento|Acerto|
+|03|Acerto de taxa de comissão|Acerto|
+|04|Acerto de valores não processados|Acerto|
+|05|Acerto de valores não recebidos|Acerto|
+|06|Acerto de valores não reconhecidos|Acerto|
+|07|Acerto de valores negociados|Acerto|
+|08|Acerto de valores processados indevidamente|Acerto|
+|09|Acerto de lançamento não compensado  em conta-corrente|Acerto|
 |10|Acerto referente valores contestados|Acerto|
 |11|Acerto temporário de valores contestados|Acerto|
 |12|Acertos diversos|Acerto|
@@ -453,7 +454,7 @@ Indica o final do arquivo.
 |77|Programa de monitoria de chargeback|Chargeback|
 |78|Serviços Score|Cobrança|
 |79|Reagendamento do débito de antecipação|Acerto|
-|80|Cielo Promo|Cobrança|
+|80|Ajuste do débito de cessão|Cobrança/Acerto|
 |81|Cielo e-Commerce|Cobrança/Acerto|
 
 ## Tabela VI - Bandeira
@@ -480,7 +481,7 @@ Indica o final do arquivo.
 |02|PDV (Ponto de Venda) ou TEF (Transferência Eletrônica de Fundos)|
 |03|e-Commerce (Comércio Eletrônico)|
 |04|EDI (Troca Eletrônica de Dados)|
-|05|ADP/BSP (Empresa Capturadora)|
+|05|ADP/BSP (Empresa Capturadora)/Post-In (Manual)|
 |06|Manual|
 |07|URA/CVA|
 |08|Mobile|
