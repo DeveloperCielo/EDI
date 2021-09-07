@@ -12,8 +12,6 @@ toc_footers:
 
 The Eletronic Data Interchange Report (EDI) is a product offered by Cielo to customers requiring automation in conciliation. In this case, the information is transmitted in a standardized manner without manual intervention through the EDI channel, providing agility and security in the traffic information.
 
-![Fluxo](images/fluxo-edi.jpg)
-
 ## Benefits
 
 * Allows the realization of accounting and financial reconciliation in an automated way;
