@@ -63,7 +63,6 @@ Identifies the header of each Eletronic Data Interchange Report chain*.
 |036|042|7|Num.|Sequence|sequential file number. In cases of recovery this data will be sent to 9999999.|
 |043|047|5|Alpha|Company acquirer|Constant Cielo.|
 |048|049|2|Num.|Extract Option|See Table I.|
-|050|050|1|Alpha|VAN|"I" - OpenText (formerly GXS), "P" - TIVIT|.
 |051|070|20|Alpha.|Mailbox| Information obtained in the registration form in VAN|
 |071|073|3|Num.|Layout Version|Constant "001".|
 |074|250|177|Alpha|Use Cielo|Blank. Reserved for Cielo.|
@@ -581,12 +580,6 @@ credit order.
 ## VAN
 
 Access to Eletronic Data Interchange Report  will be made through a mailbox created in the VAN website (company hired by Cielo to manage the sending and receiving of extracts) or via the receiving system, according to the best option for the client. For, change or problems with the mailbox, contact the respective VAN:
-
-### TIVIT
-
-sup.neg.cielo@tivit.com.br
-Contact: (11) 3626 6666
-Help Desk: 0800 55 0769 or (11) 3246 8511
 
 ### OpenText
 
